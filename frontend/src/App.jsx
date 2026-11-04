@@ -1,28 +1,52 @@
-import { useEffect, useRef } from 'react'
-
 const LINKS = {
   behance: 'https://www.behance.net/andrevanheerden_1155',
   github: 'https://github.com/andrevanheerden-061104',
   email: 'andre.jjvanheerden@gmail.com',
 }
 
-const COMING = [
-  {
-    no: '01',
-    title: 'UX Case Studies',
-    text: 'Research, personas, flows and wireframes through to final UI.',
-  },
-  {
-    no: '02',
-    title: 'Websites & Apps',
-    text: 'Live web and mobile builds in React, React Native and Node.',
-  },
-  {
-    no: '03',
-    title: 'Process & Experiments',
-    text: 'Hackathon work, AI-assisted builds and design explorations.',
-  },
-]
+function ArrowIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M5 12h14M13 6l6 6-6 6"
+      />
+    </svg>
+  )
+}
+
+function MailIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+        d="M3.5 6.5h17v11h-17zM3.5 7l8.5 6.5L20.5 7"
+      />
+    </svg>
+  )
+}
+
+function PinIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+        d="M12 21s-6.5-6.2-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.8 12 21 12 21Z"
+      />
+      <circle cx="12" cy="9.8" r="2.3" fill="none" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  )
+}
 
 function BehanceIcon() {
   return (
@@ -46,162 +70,103 @@ function GitHubIcon() {
   )
 }
 
-function MailIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M3.5 6.5h17v11h-17zM3.5 7l8.5 6.5L20.5 7"
-      />
-    </svg>
-  )
-}
-
-function ArrowIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M7 17 17 7M9 7h8v8"
-      />
-    </svg>
-  )
-}
-
-/* Twinkling star field drawn on a canvas behind everything */
-function Stars() {
-  const ref = useRef(null)
-
-  useEffect(() => {
-    const canvas = ref.current
-    const ctx = canvas.getContext('2d')
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    let stars = []
-    let raf
-
-    const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2)
-      canvas.width = window.innerWidth * dpr
-      canvas.height = window.innerHeight * dpr
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      const count = Math.round((window.innerWidth * window.innerHeight) / 5200)
-      stars = Array.from({ length: count }, () => ({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        r: Math.random() * 1.1 + 0.2,
-        a: Math.random() * 0.6 + 0.2,
-        s: Math.random() * 0.02 + 0.004,
-        p: Math.random() * Math.PI * 2,
-      }))
-    }
-
-    const draw = (t = 0) => {
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
-      for (const st of stars) {
-        const tw = reduce ? 1 : 0.6 + 0.4 * Math.sin(st.p + t * st.s * 0.06)
-        ctx.globalAlpha = st.a * tw
-        ctx.fillStyle = '#dfe6ff'
-        ctx.beginPath()
-        ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2)
-        ctx.fill()
-      }
-      if (!reduce) raf = requestAnimationFrame(draw)
-    }
-
-    resize()
-    draw()
-    window.addEventListener('resize', resize)
-    return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('resize', resize)
-    }
-  }, [])
-
-  return <canvas ref={ref} className="stars" aria-hidden="true" />
-}
+const INFO = [
+  { label: 'Email', value: LINKS.email, href: `mailto:${LINKS.email}`, Icon: MailIcon },
+  { label: 'Based in', value: 'Pretoria, South Africa', Icon: PinIcon },
+  { label: 'Case studies', value: 'behance.net/andrevanheerden_1155', href: LINKS.behance, Icon: BehanceIcon },
+  { label: 'Code', value: 'github.com/andrevanheerden-061104', href: LINKS.github, Icon: GitHubIcon },
+]
 
 export default function App() {
   return (
     <div className="page">
-      <Stars />
-      <div className="vignette" aria-hidden="true" />
-
       <header className="top">
-        <a className="brand" href="/" aria-label="Andre van Heerden — home">
-          <span className="brand-mark" aria-hidden="true" />
-          <span className="brand-name">Andre van Heerden</span>
+        <p className="top-left">
+          Designing &amp; building
+          <br />
+          digital experiences
+        </p>
+
+        <a className="monogram" href="/" aria-label="Andre van Heerden — home">
+          <span>A</span>
+          <i aria-hidden="true" />
+          <span>VH</span>
         </a>
-        <p className="top-meta">
-          <span className="dot" aria-hidden="true" />
-          Pretoria, South Africa
+
+        <p className="top-right">
+          Portfolio
+          <br />
+          {new Date().getFullYear()}
         </p>
       </header>
 
       <main className="hero">
-        <div className="eclipse" aria-hidden="true">
-          <div className="corona" />
-          <div className="moon" />
-        </div>
-
         <div className="hero-copy">
-          <p className="kicker">Portfolio under construction</p>
-          <h1 className="title" aria-label="Coming soon">
-            <span>Coming</span> <span>Soon</span>
+          <p className="status">
+            <span className="status-dot" aria-hidden="true" />
+            Portfolio coming soon
+          </p>
+
+          <h1 className="name">
+            <span>Andre</span>
+            <span>van Heerden</span>
           </h1>
+
+          <p className="role">UX/UI Designer &amp; Developer</p>
+
           <p className="lede">
-            A new home for my work as a <strong>UX/UI designer &amp; developer</strong>.
-            Case studies, live websites and app builds, all in one place,
-            from first research to final interface.
+            My full portfolio is on its way: UX case studies, live websites and
+            app builds, from first research to final interface. Until it launches,
+            you can find my work here.
           </p>
 
           <div className="ctas">
-            <a className="btn btn-primary" href={LINKS.behance} target="_blank" rel="noreferrer">
-              View case studies on Behance <ArrowIcon />
+            <a className="btn btn-solid" href={LINKS.behance} target="_blank" rel="noreferrer">
+              View Behance <ArrowIcon />
             </a>
-            <a className="btn btn-ghost" href={LINKS.github} target="_blank" rel="noreferrer">
-              Code on GitHub <ArrowIcon />
+            <a className="btn btn-line" href={LINKS.github} target="_blank" rel="noreferrer">
+              View GitHub <ArrowIcon />
             </a>
           </div>
         </div>
+
+        <div className="portrait">
+          <div className="circle" aria-hidden="true" />
+          <img src="/andre.webp" alt="Portrait of Andre van Heerden" width="547" height="783" />
+          <span className="badge" aria-hidden="true">
+            Coming
+            <br />
+            soon
+          </span>
+        </div>
       </main>
 
-      <section className="coming" aria-label="What's coming">
-        {COMING.map((c) => (
-          <article className="card" key={c.no}>
-            <span className="card-no">{c.no}</span>
-            <h2>{c.title}</h2>
-            <p>{c.text}</p>
-          </article>
-        ))}
-      </section>
-
-      <nav className="rail" aria-label="Find me elsewhere">
-        <span className="rail-label">Find me</span>
-        <span className="rail-line" aria-hidden="true" />
-        <a href={LINKS.behance} target="_blank" rel="noreferrer" aria-label="Behance" title="Behance">
-          <BehanceIcon />
-        </a>
-        <a href={LINKS.github} target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub">
-          <GitHubIcon />
-        </a>
-        <a href={`mailto:${LINKS.email}`} aria-label="Email" title="Email">
-          <MailIcon />
-        </a>
-      </nav>
-
-      <footer className="bottom">
-        <a className="mail" href={`mailto:${LINKS.email}`}>
-          {LINKS.email}
-        </a>
-        <p>© {new Date().getFullYear()} Andre van Heerden</p>
+      <footer className="info">
+        {INFO.map(({ label, value, href, Icon }) => {
+          const body = (
+            <>
+              <Icon />
+              <span className="info-text">
+                <span className="info-label">{label}</span>
+                <span className="info-value">{value}</span>
+              </span>
+            </>
+          )
+          return href ? (
+            <a
+              key={label}
+              className="info-item"
+              href={href}
+              {...(href.startsWith('http') ? { target: '_blank', rel: 'noreferrer' } : {})}
+            >
+              {body}
+            </a>
+          ) : (
+            <div key={label} className="info-item">
+              {body}
+            </div>
+          )
+        })}
       </footer>
     </div>
   )
