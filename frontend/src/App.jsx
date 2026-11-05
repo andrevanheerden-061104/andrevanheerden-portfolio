@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { usePath } from './router.jsx'
 import Nav from './components/Nav.jsx'
+import ProjectNav from './components/ProjectNav.jsx'
 import Footer from './components/Footer.jsx'
 import Home from './pages/Home.jsx'
 import ProjectPage from './pages/ProjectPage.jsx'
@@ -25,8 +26,8 @@ export default function App() {
   }, [])
 
   return (
-    <div className="sheet">
-      <Nav active={workMatch ? 'work' : 'home'} />
+    <div className={`sheet ${workMatch ? 'is-project' : ''}`}>
+      {workMatch ? <ProjectNav current={workMatch[1]} /> : <Nav active="home" />}
       <main>{workMatch ? <ProjectPage slug={workMatch[1]} /> : <Home track={track} />}</main>
       <Footer />
     </div>

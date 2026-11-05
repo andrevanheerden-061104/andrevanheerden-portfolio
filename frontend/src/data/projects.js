@@ -32,9 +32,9 @@ export const projects = [
     featured: true,
     year: '2026',
     tags: ['AI hints', 'CAPS-aligned', 'Dyscalculia-friendly', 'Built & deployed'],
-    theme: { bg: '#1d1533', ink: '#fdfaf5', accent: '#f2ea79' },
-    card: '/work/toa-card.jpg',
+    theme: { bg: '#4c33a6', ink: '#ffffff', accent: '#f2ea79' },
     hero: '/work/toa-hero.jpg',
+    screens: ['/screens/toa-cast.jpg', '/screens/toa-home.jpg', '/screens/toa-draw.jpg'],
     live: 'https://tower-of-arithmetic.vercel.app',
   },
   {
@@ -49,8 +49,7 @@ export const projects = [
     year: '2026',
     tags: ['Dyspraxia-friendly', 'Self-paced', 'Speech-to-text'],
     theme: { bg: '#11a06a', ink: '#05231a', accent: '#05231a' },
-    card: '/work/nl-card.jpg',
-    hero: '/work/nl-hero.jpg',
+    screens: ['/screens/nl-dash.jpg', '/screens/nl-splash.jpg', '/screens/nl-workout.jpg'],
   },
   {
     slug: 'herd-link',
@@ -64,8 +63,7 @@ export const projects = [
     year: '2026',
     tags: ['AI health alerts', 'Smart collar', 'Offline-ready'],
     theme: { bg: '#f2c230', ink: '#1a1708', accent: '#1a1708' },
-    card: '/work/herd-card.jpg',
-    hero: '/work/herd-hero.jpg',
+    screens: ['/screens/herd-herd.jpg', '/screens/herd-login.jpg', '/screens/herd-map.jpg'],
   },
   {
     slug: 'ford-relay',
@@ -80,8 +78,7 @@ export const projects = [
     group: true,
     tags: ['Service blueprint', 'HMI console', 'Mobile app'],
     theme: { bg: '#2350d8', ink: '#ffffff', accent: '#ffffff' },
-    card: '/work/ford-card.jpg',
-    hero: '/work/ford-hero.jpg',
+    screens: ['/screens/ford-home.jpg', '/screens/ford-active.jpg', '/screens/ford-evidence.jpg'],
   },
 ]
 

@@ -1,8 +1,10 @@
 import { useEffect } from 'react'
 import { Link } from '../router.jsx'
-import { projects, getProject, trackLabel, LINKS } from '../data/projects.js'
+import { getProject, trackLabel, LINKS } from '../data/projects.js'
 import { caseStudies } from '../data/caseStudies.js'
-import { Arrow, ArrowLeft } from '../components/Icons.jsx'
+import { Arrow } from '../components/Icons.jsx'
+import PhoneSpread from '../components/Phones.jsx'
+import WireFlow from '../components/WireFlow.jsx'
 
 function SectionHead({ kicker, title }) {
   return (
@@ -16,32 +18,26 @@ function SectionHead({ kicker, title }) {
 function Hero({ p }) {
   return (
     <section className="cs-hero" style={{ '--bg': p.theme.bg, '--ink': p.theme.ink, '--accent': p.theme.accent }}>
-      <Link to="/#work" className="cs-back">
-        <ArrowLeft /> All projects
-      </Link>
-      <div className="cs-folder">
-        <div className="folder-tab cs-tab">
-          <span aria-hidden="true">✦</span> {trackLabel(p)} · {p.kind}
-        </div>
-        <div className="cs-folder-body">
-          <img src={p.hero} alt={`${p.title} cover`} />
-        </div>
+      <div className="cs-hero-copy">
+        <p className="cs-kind">
+          <span className="cs-kind-dot" aria-hidden="true" /> {trackLabel(p)} · {p.kind}
+        </p>
+        <h1 className="pixel cs-name">{p.title.toUpperCase()}</h1>
+        <p className="cs-tagline">{p.tagline}</p>
+        <p className="cs-summary">{p.summary}</p>
+        <ul className="cs-tags">
+          {p.tags.map((t) => (
+            <li key={t}>{t}</li>
+          ))}
+        </ul>
+        <p className="folder-meta cs-meta">
+          <span className="dot" aria-hidden="true" /> {p.year} · {p.sector}
+          {p.group ? ' · Group project' : ''}
+        </p>
       </div>
-      <div className="cs-intro">
-        <div>
-          <p className="folder-meta cs-meta">
-            <span className="dot" aria-hidden="true" /> {p.year} · {p.sector}
-            {p.group ? ' · Group project' : ''}
-          </p>
-          <h1 className="pixel cs-name">{p.title.toUpperCase()}</h1>
-          <p className="cs-tagline">{p.tagline}</p>
-          <p className="cs-summary">{p.summary}</p>
-          <ul className="cs-tags">
-            {p.tags.map((t) => (
-              <li key={t}>{t}</li>
-            ))}
-          </ul>
-        </div>
+      <div className="cs-hero-phones">
+        <span className="cs-blob" aria-hidden="true" />
+        <PhoneSpread screens={p.screens} variant="hero" label={`${p.title} app screens`} />
       </div>
     </section>
   )
@@ -190,20 +186,18 @@ function TowerCaseStudy({ cs, p }) {
 
       <section className="cs-section">
         <SectionHead kicker="ideate · experience planning" title="Wire flow" />
-        <p className="cs-lead narrow">Every route through the app, from opening it for the first time to beating the boss. Scroll sideways to follow it.</p>
-        <div className="scroll-x" tabIndex={0} aria-label="Wire flow diagram, scroll horizontally">
-          <img src={cs.wireflow} alt="Wire flow diagram showing every route through Tower of Arithmetic" />
-        </div>
+        <p className="cs-lead narrow">Every route through the app, from opening it for the first time to beating the boss. Each lane is one part of the journey: read it left to right.</p>
+        <WireFlow />
       </section>
 
       <section className="cs-section">
         <SectionHead kicker="plan" title="Wireframes first" />
         <div className="cs-two">
-          <figure className="framed">
-            <span className="tape tape-l" />
-            <span className="tape tape-r" />
-            <img src={cs.wireframes} alt="Greyscale wireframes of the sign-up, grade picker and battle screens" />
-          </figure>
+          <PhoneSpread
+            screens={cs.wireframes}
+            variant="quad"
+            label="Greyscale wireframes: sign up, choose grade, combat and tower map"
+          />
           <div>
             <p className="cs-lead">Key flows were planned as 45+ wireframes to check structure, interactions and content before any colour went on, giving one base template for all three grade modes.</p>
             <div className="style-block">
@@ -236,9 +230,13 @@ function TowerCaseStudy({ cs, p }) {
         <div className="features">
           {cs.features.map((f, i) => (
             <article key={f.title} className={`feature-row ${i % 2 ? 'is-flipped' : ''}`}>
-              <figure className="feature-shot">
-                <img src={`/work/toa-feature-${String(i + 1).padStart(2, '0')}.jpg`} alt={`${f.title} screens`} loading="lazy" />
-              </figure>
+              <div className="feature-shot">
+                <PhoneSpread
+                  screens={[1, 2, 3].map((k) => `/screens/f${String(i + 1).padStart(2, '0')}-${k}.jpg`)}
+                  variant={i % 2 ? 'trio-r' : 'trio'}
+                  label={`${f.title} screens`}
+                />
+              </div>
               <div className="feature-text">
                 <span className="feature-no pixel">{String(i + 1).padStart(2, '0')}</span>
                 <h3>{f.title}</h3>
@@ -350,19 +348,12 @@ export default function ProjectPage({ slug }) {
   }
 
   const cs = caseStudies[slug]
-  const idx = projects.findIndex((x) => x.slug === slug)
-  const next = projects[(idx + 1) % projects.length]
 
   return (
     <article className="cs">
       <Hero p={p} />
       <Overview items={cs.overview} />
       {slug === 'tower-of-arithmetic' ? <TowerCaseStudy cs={cs} p={p} /> : <ShortCaseStudy cs={cs} />}
-      <Link to={`/work/${next.slug}`} className="next-project" style={{ '--bg': next.theme.bg, '--ink': next.theme.ink }}>
-        <span className="hand">next project</span>
-        <span className="pixel">{next.title.toUpperCase()}</span>
-        <Arrow />
-      </Link>
     </article>
   )
 }

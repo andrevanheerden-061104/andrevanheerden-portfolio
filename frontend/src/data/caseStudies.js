@@ -63,8 +63,7 @@ export const caseStudies = {
       'High school maths students suffer from high levels of maths anxiety (71.5% of 21 students) and freeze during practice. The breakdown isn’t understanding the theory but procedural execution: 57.1% struggle to turn formulas into working on paper.',
     hmw:
       'How might we design a pressure-free, replayable fantasy RPG that turns maths practice into the gameplay itself, with real-time guidance when stuck, so learners can build confidence without anxiety and want to come back again and again?',
-    wireflow: '/work/toa-wireflow.jpg',
-    wireframes: '/work/toa-wireframes.jpg',
+    wireframes: ['/screens/wf-signup.jpg', '/screens/wf-grade.jpg', '/screens/wf-combat.jpg', '/screens/wf-path.jpg'],
     style: {
       colors: [
         { hex: '#0D0D0D', name: 'Obsidian void' },

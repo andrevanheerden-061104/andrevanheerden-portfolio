@@ -1,137 +1,153 @@
 import { Link } from '../router.jsx'
-import { LINKS, TRACKS, getProject, byTrack, trackLabel } from '../data/projects.js'
+import { LINKS, TRACKS, getProject, byTrack, trackLabel, projects } from '../data/projects.js'
 import ProjectStack, { TrackFilter } from '../components/ProjectStack.jsx'
-import { Arrow, Target, Flower, Mail } from '../components/Icons.jsx'
-
-const SKILLS = [
-  { label: 'UX Research', color: 'yellow', icon: '🔍' },
-  { label: 'UI Design', color: 'green', icon: '🎨' },
-  { label: 'Prototyping', color: 'pink', icon: '🧩' },
-  { label: 'Front-end Dev', color: 'blue', icon: '💻' },
-  { label: 'Accessibility', color: 'green', icon: '♿' },
-  { label: 'Service Design', color: 'yellow', icon: '🗺️' },
-]
+import PhoneSpread from '../components/Phones.jsx'
+import Skills, { HERO_ICONS } from '../components/Skills.jsx'
+import { Arrow, Mail } from '../components/Icons.jsx'
 
 const PRINCIPLES = [
   {
     no: '01',
     title: 'User value drives success',
     text: 'A product has to solve a real problem first. Trust and retention build a business; short-term exploitation burns it.',
-    color: 'yellow',
   },
   {
     no: '02',
     title: 'Build with users, not assumptions',
     text: 'Users are co-designers. Surveys, testing and their lived experience shape every stage.',
-    color: 'green',
   },
   {
     no: '03',
     title: 'Profit is fine. Dark patterns aren’t.',
     text: 'Subscriptions and targets are valid when the product delivers real value and respects privacy.',
-    color: 'pink',
   },
   {
     no: '04',
     title: 'Accessible by default',
     text: 'Dyscalculia modes, read-aloud, calm screens: access is designed in from the start, never bolted on.',
-    color: 'blue',
   },
 ]
+
+/* "// label" + big heading used by every section */
+export function SectionTitle({ label, children, center = false }) {
+  return (
+    <header className={`sec-title ${center ? 'is-center' : ''}`}>
+      <p className="sec-label">
+        <span className="tag">&lt;h2&gt;</span> {label}
+      </p>
+      <h2 className="pixel">{children}</h2>
+    </header>
+  )
+}
 
 function Hero() {
   return (
     <section className="hero" id="top">
-      <img className="avatar avatar-l" src="/me/avatar-1.jpg" alt="" />
-      <img className="avatar avatar-r" src="/me/avatar-2.jpg" alt="" />
-
-      <div className="name-wrap">
-        <p className="hand my-name">
-          my name is
-          <svg viewBox="0 0 60 10" aria-hidden="true">
-            <path d="M2 4c10-3 20 3 30 0s18-2 26 1M8 8c10-2 22 2 40 0" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-          </svg>
+      <div className="hero-grid-bg" aria-hidden="true" />
+      <div className="hero-copy">
+        <p className="hero-status">
+          <span className="live-dot" aria-hidden="true" /> Open to junior UX/UI &amp; front-end roles
         </p>
-        <span className="sticky-pill pill-mint pill-tl">User first</span>
-        <span className="sticky-pill pill-cream pill-tr">Business smart</span>
-
-        <h1 className="name-box">
-          <span className="handle h1" />
-          <span className="handle h2" />
-          <span className="handle h3" />
-          <span className="handle h4" />
-          <span className="pixel">ANDRE</span>
-          <span className="sr-only"> van Heerden, UX/UI designer and developer</span>
+        <h1 className="hero-title">
+          <span className="hero-hi">Hi, I’m</span> <span className="accent-text">Andre</span>
+          <span className="hero-role">UX/UI designer &amp; developer</span>
         </h1>
-
-        <span className="sticky-note note-yellow note-bl">UX/UI Designer &amp; Dev</span>
-        <span className="sticky-note note-mint note-br">Pretoria, ZA</span>
-        <svg className="arrow-doodle arrow-bl" viewBox="0 0 40 30" aria-hidden="true">
-          <path d="M4 26C12 20 22 12 34 5M34 5l-8 1M34 5l-2 8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-        </svg>
-        <svg className="arrow-doodle arrow-br" viewBox="0 0 40 30" aria-hidden="true">
-          <path d="M36 26C28 20 18 12 6 5M6 5l8 1M6 5l2 8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-        </svg>
-        <p className="status">
-          <span className="dot" aria-hidden="true" /> Andre van Heerden · open to new work &amp; good problems
+        <p className="hero-lede">
+          I design software that benefits <em>both</em> the user and the company, then I build it in
+          React and React Native.
         </p>
+        <div className="hero-ctas">
+          <Link className="btn btn-primary" to="/#work">
+            View my work <Arrow />
+          </Link>
+          <a className="btn btn-outline" href={`mailto:${LINKS.email}`}>
+            <Mail /> Get in touch
+          </a>
+        </div>
+        <div className="hero-stack">
+          <p className="mono-label">// tools I work with</p>
+          <ul>
+            {HERO_ICONS.map(({ Icon, key }) => (
+              <li key={key}>
+                <Icon aria-hidden="true" />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
-      <h2 className="headline">
-        I design software that benefits <span className="nowrap">both user <span className="doodle"><Target /></span></span>{' '}
-        <span className="nowrap">and company. <span className="doodle"><Flower /></span></span>
-      </h2>
-
-      <div className="hero-ctas">
-        <a className="btn-dark" href={`mailto:${LINKS.email}`}>
-          <span className="btn-ico"><Mail /></span> Contact me
-        </a>
-        <Link className="btn-paper" to="/#work">
-          See my work <Arrow />
-        </Link>
+      <div className="hero-visual">
+        <span className="hero-ring" aria-hidden="true" />
+        <span className="hero-dots" aria-hidden="true" />
+        <img className="hero-photo" src="/me/andre.webp" alt="Andre van Heerden" width="543" height="789" />
+        <div className="code-card" aria-hidden="true">
+          <div className="code-bar">
+            <span>&lt;/&gt; andre.js</span>
+            <i />
+          </div>
+          <pre>
+            <code>
+              <span className="k">const</span> andre = {'{'}
+              {'\n'}  role: <span className="s">"UX/UI + Dev"</span>,
+              {'\n'}  based: <span className="s">"Pretoria, ZA"</span>,
+              {'\n'}  stack: [<span className="s">"Figma"</span>, <span className="s">"React"</span>],
+              {'\n'}  loves: [<span className="s">"games"</span>, <span className="s">"anime"</span>],
+              {'\n'}  goal: <span className="s">"user + business"</span>,
+              {'\n'}{'}'};
+            </code>
+          </pre>
+        </div>
       </div>
     </section>
   )
 }
 
 function About() {
+  const stats = [
+    { value: '4', label: 'Case studies', sub: 'UX, AI, service design' },
+    { value: '1', label: 'App built & live', sub: 'Tower of Arithmetic' },
+    { value: '2nd', label: 'ABSA Hackathon 2026', sub: 'Gauteng universities' },
+    { value: '6 mo', label: 'UX & AI internship', sub: 'Sand Dollar Design' },
+  ]
   return (
-    <section className="about" id="about">
-      <svg className="divider" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0 58C300 6 900 6 1200 58" fill="none" stroke="#bdbab2" strokeWidth="1.2" />
-      </svg>
-      <p className="hand side-label">about me!</p>
-
-      <figure className="polaroid pol-l">
-        <span className="tape tape-blue" />
-        <span className="tape tape-yellow" />
-        <img src="/me/andre-mountains.jpg" alt="Andre in a suit at golden hour, mountains behind him" />
-        <figcaption className="hand">that’s me! · 2026</figcaption>
-      </figure>
-      <figure className="polaroid pol-r">
-        <span className="tape tape-blue" />
-        <span className="tape tape-yellow" />
-        <img src="/me/andre-dog.jpg" alt="Andre holding a dachshund" />
-        <figcaption className="hand">my best co-worker</figcaption>
-      </figure>
-
-      <h2 className="boxed">what’s up</h2>
-      <p className="hand about-text">
-        I’m a UX/UI designer and front-end developer in my final year at Open Window, Pretoria. I
-        believe good products work for both sides: when the user genuinely benefits, the business
-        does too, no dark patterns needed. ✨ I design <em>with</em> users, not from assumptions, and
-        then I build what I design in React and React Native. 2nd place at the 2026 ABSA hackathon
-        (Gauteng universities), plus a 6-month UX/AI internship at Sand Dollar Design. 🎨
-      </p>
-
-      <ul className="skills" aria-label="Skills">
-        {SKILLS.map((s) => (
-          <li key={s.label} className="skill-row">
-            <span className={`skill skill-${s.color}`}>{s.label}</span>
-            <span className={`skill-ico skill-${s.color}`} aria-hidden="true">{s.icon}</span>
-          </li>
+    <section className="section about" id="about">
+      <div className="about-copy">
+        <SectionTitle label="about me">WHO I AM</SectionTitle>
+        <p>
+          I am a UX/UI designer and front-end developer completing my final year at Open Window in
+          Pretoria. My approach is <strong>symbiotic design</strong>: a product succeeds when real value
+          for the user and the goals of the business reinforce each other, without dark patterns.
+        </p>
+        <p>
+          I research <em>with</em> users rather than designing from assumptions, and I build what I
+          design. Outside of work you’ll find me gaming and watching anime, which is where projects like
+          a maths RPG come from.
+        </p>
+      </div>
+      <dl className="stats">
+        {stats.map((s) => (
+          <div key={s.label} className="stat">
+            <dt className="pixel">{s.value}</dt>
+            <dd>
+              <b>{s.label}</b>
+              <span>{s.sub}</span>
+            </dd>
+          </div>
         ))}
-      </ul>
+      </dl>
+    </section>
+  )
+}
+
+function SkillsSection() {
+  return (
+    <section className="section" id="skills">
+      <SectionTitle label="skills">MY TOOLKIT</SectionTitle>
+      <p className="sec-intro">
+        Design and development under one roof: I can research and design an experience, then build and
+        ship it.
+      </p>
+      <Skills />
     </section>
   )
 }
@@ -139,26 +155,18 @@ function About() {
 function Featured() {
   const p = getProject('tower-of-arithmetic')
   return (
-    <section className="featured" id="featured">
-      <p className="hand side-note">explore my best work!</p>
-      <h2 className="pixel section-pixel">FEATURED WORK</h2>
-
-      <article className="feature-card" style={{ '--bg': p.theme.bg, '--accent': p.theme.accent }}>
-        <div className="feature-tab">
-          <span className="dot" aria-hidden="true" /> {p.year} · {p.sector} · {trackLabel(p)}
-        </div>
-        <Link to={`/work/${p.slug}`} className="feature-media" aria-label={`${p.title} case study`}>
-          <span className="tape tape-l" />
-          <span className="tape tape-r" />
-          <img src={p.hero} alt="Tower of Arithmetic app screens: home, title screen and a boss battle" />
-        </Link>
+    <section className="section" id="featured">
+      <SectionTitle label="featured work">FEATURED</SectionTitle>
+      <article className="feature" style={{ '--pc': p.theme.bg, '--pa': p.theme.accent }}>
         <div className="feature-copy">
-          <div>
-            <p className="feature-kind">{p.kind}</p>
-            <h3>{p.title}</h3>
-            <p className="feature-tagline">{p.tagline}</p>
-            <p className="feature-summary">{p.summary}</p>
-          </div>
+          <p className="chip-row">
+            <span className="chip chip-solid">{trackLabel(p)}</span>
+            <span className="chip">{p.kind}</span>
+            <span className="chip">{p.year}</span>
+          </p>
+          <h3>{p.title}</h3>
+          <p className="feature-tagline">{p.tagline}</p>
+          <p className="feature-summary">{p.summary}</p>
           <dl className="feature-stats">
             <div><dt>21</dt><dd>learners surveyed</dd></div>
             <div><dt>74</dt><dd>final UI screens</dd></div>
@@ -166,14 +174,17 @@ function Featured() {
             <div><dt>Live</dt><dd>deployed build</dd></div>
           </dl>
           <div className="feature-ctas">
-            <Link to={`/work/${p.slug}`} className="btn-accent">
+            <Link to={`/work/${p.slug}`} className="btn btn-primary">
               Read the case study <Arrow />
             </Link>
-            <a href={p.live} target="_blank" rel="noreferrer" className="btn-ghost-light">
+            <a href={p.live} target="_blank" rel="noreferrer" className="btn btn-outline">
               Play it live <Arrow />
             </a>
           </div>
         </div>
+        <Link to={`/work/${p.slug}`} className="feature-phones" aria-label={`${p.title} case study`}>
+          <PhoneSpread screens={p.screens} variant="hero" label={`${p.title} app screens`} />
+        </Link>
       </article>
     </section>
   )
@@ -182,16 +193,13 @@ function Featured() {
 function Work({ track }) {
   const count = byTrack(track).length
   return (
-    <section className="work" id="work">
+    <section className="section work" id="work">
       <div className="work-head">
-        <div>
-          <p className="hand side-note">every project, card by card</p>
-          <h2 className="pixel section-pixel">ALL PROJECTS</h2>
-        </div>
+        <SectionTitle label="projects">ALL PROJECTS</SectionTitle>
         <div className="work-filter">
           <TrackFilter track={track} />
-          <p className="work-count">
-            Showing {count} {count === 1 ? 'project' : 'projects'} · {TRACKS[track].label}
+          <p className="mono-label">
+            // showing {count} of {projects.length} · {TRACKS[track].label}
           </p>
         </div>
       </div>
@@ -202,17 +210,18 @@ function Work({ track }) {
 
 function Manifesto() {
   return (
-    <section className="manifesto" id="manifesto">
-      <p className="hand side-note">how I design</p>
-      <h2 className="pixel section-pixel">SYMBIOTIC DESIGN</h2>
+    <section className="section manifesto" id="manifesto">
+      <SectionTitle label="manifesto" center>
+        SYMBIOTIC DESIGN
+      </SectionTitle>
       <p className="manifesto-quote">
-        True user advocacy isn’t about ignoring business viability. It’s a balance where company goals
-        and user value reinforce each other.
+        “True user advocacy isn’t about ignoring business viability. It’s a balance where company goals
+        and user value reinforce each other.”
       </p>
-      <div className="notes">
+      <div className="principles">
         {PRINCIPLES.map((pr) => (
-          <article key={pr.no} className={`note note-${pr.color}`}>
-            <span className="note-no">{pr.no}</span>
+          <article key={pr.no} className="principle">
+            <span className="principle-no pixel">{pr.no}</span>
             <h3>{pr.title}</h3>
             <p>{pr.text}</p>
           </article>
@@ -227,6 +236,7 @@ export default function Home({ track }) {
     <>
       <Hero />
       <About />
+      <SkillsSection />
       <Featured />
       <Work track={track} />
       <Manifesto />
