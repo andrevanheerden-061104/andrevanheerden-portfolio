@@ -10,7 +10,7 @@ export const LINKS = {
   email: 'andre.jjvanheerden@gmail.com',
   behance: 'https://www.behance.net/andrevanheerden_1155',
   github: 'https://github.com/andrevanheerden-061104',
-  linkedin: 'https://www.linkedin.com/in/andrevanheerden-8692853b5',
+  linkedin: 'https://www.linkedin.com/in/andre-vanheerden-8692853b5',
 }
 
 export const TRACKS = {
@@ -32,7 +32,7 @@ export const projects = [
     featured: true,
     year: '2026',
     tags: ['AI hints', 'CAPS-aligned', 'Dyscalculia-friendly', 'Built & deployed'],
-    theme: { bg: '#4c33a6', ink: '#ffffff', accent: '#f2ea79' },
+    theme: { bg: '#4c33a6', ink: '#ffffff', accent: '#f2ea79', hi: '#a78bfa' },
     hero: '/work/toa-hero.jpg',
     screens: ['/screens/toa-cast.jpg', '/screens/toa-home.jpg', '/screens/toa-draw.jpg'],
     live: 'https://tower-of-arithmetic.vercel.app',
@@ -48,7 +48,7 @@ export const projects = [
     tracks: ['ux'],
     year: '2026',
     tags: ['Dyspraxia-friendly', 'Self-paced', 'Speech-to-text'],
-    theme: { bg: '#11a06a', ink: '#05231a', accent: '#05231a' },
+    theme: { bg: '#11a06a', ink: '#05231a', accent: '#05231a', hi: '#34d399' },
     screens: ['/screens/nl-dash.jpg', '/screens/nl-splash.jpg', '/screens/nl-workout.jpg'],
   },
   {
@@ -62,7 +62,7 @@ export const projects = [
     tracks: ['ux'],
     year: '2026',
     tags: ['AI health alerts', 'Smart collar', 'Offline-ready'],
-    theme: { bg: '#f2c230', ink: '#1a1708', accent: '#1a1708' },
+    theme: { bg: '#f2c230', ink: '#1a1708', accent: '#1a1708', hi: '#f2c230' },
     screens: ['/screens/herd-herd.jpg', '/screens/herd-login.jpg', '/screens/herd-map.jpg'],
   },
   {
@@ -77,7 +77,7 @@ export const projects = [
     year: '2026',
     group: true,
     tags: ['Service blueprint', 'HMI console', 'Mobile app'],
-    theme: { bg: '#2350d8', ink: '#ffffff', accent: '#ffffff' },
+    theme: { bg: '#2350d8', ink: '#ffffff', accent: '#ffffff', hi: '#7aa2ff' },
     screens: ['/screens/ford-home.jpg', '/screens/ford-active.jpg', '/screens/ford-evidence.jpg'],
   },
 ]

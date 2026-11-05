@@ -5,6 +5,7 @@ import { Behance, GitHub, LinkedIn, Arrow } from './Icons.jsx'
 const ITEMS = [
   { label: 'Home', to: '/#top' },
   { label: 'About', to: '/#about' },
+  { label: 'Experience', to: '/#experience' },
   { label: 'Skills', to: '/#skills' },
   { label: 'Work', to: '/#work' },
   { label: 'Manifesto', to: '/#manifesto' },

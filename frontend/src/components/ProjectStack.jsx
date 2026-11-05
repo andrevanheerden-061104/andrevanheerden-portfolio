@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { Link, navigate } from '../router.jsx'
-import { TRACKS, byTrack, trackLabel } from '../data/projects.js'
+import { TRACKS, byTrack, trackLabel, projects } from '../data/projects.js'
 import PhoneSpread from './Phones.jsx'
 import { Arrow } from './Icons.jsx'
 
@@ -22,51 +22,64 @@ export function TrackFilter({ track }) {
   )
 }
 
-/* Folder-style project cards. Each card is position: sticky, so as you
-   scroll the next folder slides up over the previous one and every
-   folder's tab stays visible along the top.
-   The gaps between cards are separate spacer divs (not margins): a sticky
-   element's margin counts against its container, which made the stack
-   start scrolling away before the last card had arrived. */
+/* Folder-style project cards that stack as you scroll (position: sticky).
+   Gaps are spacer divs, not margins: a sticky element's margin counts
+   against its container and made the stack leave too early. */
 export default function ProjectStack({ track }) {
   const list = byTrack(track)
+  const total = String(projects.length).padStart(2, '0')
   return (
     <div className="stack" style={{ '--count': list.length }}>
-      {list.map((p, i) => (
-        <Fragment key={p.slug}>
-          {i > 0 && <div className="stack-gap" aria-hidden="true" />}
-          <article
-            className="folder"
-            style={{ '--i': i, '--bg': p.theme.bg, '--ink': p.theme.ink, '--accent': p.theme.accent }}
-          >
-            <div className="folder-tab">
-              <span aria-hidden="true">✦</span> Project {String(i + 1).padStart(2, '0')}
-            </div>
-            <div className="folder-body">
-              <div className="folder-copy">
-                <p className="folder-meta">
-                  <span className="dot" aria-hidden="true" />
-                  {p.year} · {p.sector}
-                  {p.group ? ' · Group project' : ''}
-                </p>
-                <h3 className="folder-title">{p.title}</h3>
-                <p className="folder-tagline">{p.tagline}</p>
-                <p className="folder-summary">{p.summary}</p>
-                <Link to={`/work/${p.slug}`} className="folder-link">
-                  View project <Arrow />
-                </Link>
-                <div className="folder-chips">
-                  <span className="chip chip-track">{trackLabel(p)}</span>
-                  <span className="chip">{p.kind}</span>
+      {list.map((p, i) => {
+        const no = String(projects.indexOf(p) + 1).padStart(2, '0')
+        return (
+          <Fragment key={p.slug}>
+            {i > 0 && <div className="stack-gap" aria-hidden="true" />}
+            <article
+              className="folder"
+              style={{ '--i': i, '--bg': p.theme.bg, '--ink': p.theme.ink, '--hi': p.theme.hi }}
+            >
+              <div className="folder-tab">
+                <span className="folder-tab-no">{no}</span> {p.slug}
+              </div>
+              <div className="folder-body">
+                <div className="folder-bar">
+                  <span className="dots" aria-hidden="true"><i /><i /><i /></span>
+                  <span className="folder-path">
+                    ~/projects/<b>{p.slug}</b>
+                  </span>
+                  <span className="folder-index">
+                    {no} / {total}
+                  </span>
+                </div>
+                <div className="folder-main">
+                  <div className="folder-copy">
+                    <p className="folder-kind">
+                      <span className="folder-track">{trackLabel(p)}</span>
+                      {p.kind}
+                    </p>
+                    <h3 className="folder-title">{p.title}</h3>
+                    <p className="folder-tagline">// {p.tagline}</p>
+                    <p className="folder-summary">{p.summary}</p>
+                    <dl className="folder-meta">
+                      <div><dt>sector</dt><dd>{p.sector}</dd></div>
+                      <div><dt>year</dt><dd>{p.year}</dd></div>
+                      <div><dt>team</dt><dd>{p.group ? 'Group' : 'Solo'}</dd></div>
+                    </dl>
+                    <Link to={`/work/${p.slug}`} className="folder-link">
+                      Open case study <Arrow />
+                    </Link>
+                  </div>
+                  <Link to={`/work/${p.slug}`} className="folder-media" tabIndex={-1} aria-hidden="true">
+                    <span className="folder-media-label">preview.app</span>
+                    <PhoneSpread screens={p.screens} variant="trio" interactive={false} />
+                  </Link>
                 </div>
               </div>
-              <Link to={`/work/${p.slug}`} className="folder-media" tabIndex={-1} aria-hidden="true">
-                <PhoneSpread screens={p.screens} variant="trio" />
-              </Link>
-            </div>
-          </article>
-        </Fragment>
-      ))}
+            </article>
+          </Fragment>
+        )
+      })}
       <div className="stack-hold" aria-hidden="true" />
     </div>
   )

@@ -3,6 +3,8 @@ import { LINKS, TRACKS, getProject, byTrack, trackLabel, projects } from '../dat
 import ProjectStack, { TrackFilter } from '../components/ProjectStack.jsx'
 import PhoneSpread from '../components/Phones.jsx'
 import Skills, { HERO_ICONS } from '../components/Skills.jsx'
+import Experience from '../components/Experience.jsx'
+import Words from '../components/Words.jsx'
 import { Arrow, Mail } from '../components/Icons.jsx'
 
 const PRINCIPLES = [
@@ -53,8 +55,8 @@ function Hero() {
           <span className="hero-role">UX/UI designer &amp; developer</span>
         </h1>
         <p className="hero-lede">
-          I design software that benefits <em>both</em> the user and the company, then I build it in
-          React and React Native.
+          <Words>I design software that benefits</Words> <em>both</em>{' '}
+          <Words>the user and the company, then I build it in React and React Native.</Words>
         </p>
         <div className="hero-ctas">
           <Link className="btn btn-primary" to="/#work">
@@ -114,14 +116,13 @@ function About() {
       <div className="about-copy">
         <SectionTitle label="about me">WHO I AM</SectionTitle>
         <p>
-          I am a UX/UI designer and front-end developer completing my final year at Open Window in
-          Pretoria. My approach is <strong>symbiotic design</strong>: a product succeeds when real value
-          for the user and the goals of the business reinforce each other, without dark patterns.
+          <Words>I am a UX/UI designer and front-end developer completing my final year at Open Window in Pretoria. My approach is</Words>{' '}
+          <strong><Words>symbiotic design:</Words></strong>{' '}
+          <Words>a product succeeds when real value for the user and the goals of the business reinforce each other, without dark patterns.</Words>
         </p>
         <p>
-          I research <em>with</em> users rather than designing from assumptions, and I build what I
-          design. Outside of work you’ll find me gaming and watching anime, which is where projects like
-          a maths RPG come from.
+          <Words>I research</Words> <em>with</em>{' '}
+          <Words>users rather than designing from assumptions, and I build what I design. Outside of work you’ll find me gaming and watching anime, which is where projects like a maths RPG come from.</Words>
         </p>
       </div>
       <dl className="stats">
@@ -139,13 +140,21 @@ function About() {
   )
 }
 
+function ExperienceSection() {
+  return (
+    <section className="section" id="experience">
+      <SectionTitle label="experience">WORK EXPERIENCE</SectionTitle>
+      <Experience />
+    </section>
+  )
+}
+
 function SkillsSection() {
   return (
     <section className="section" id="skills">
       <SectionTitle label="skills">MY TOOLKIT</SectionTitle>
       <p className="sec-intro">
-        Design and development under one roof: I can research and design an experience, then build and
-        ship it.
+        <Words>Design and development under one roof: I can research and design an experience, then build and ship it. The tools are connected, so hover one to see what it works with.</Words>
       </p>
       <Skills />
     </section>
@@ -165,8 +174,8 @@ function Featured() {
             <span className="chip">{p.year}</span>
           </p>
           <h3>{p.title}</h3>
-          <p className="feature-tagline">{p.tagline}</p>
-          <p className="feature-summary">{p.summary}</p>
+          <p className="feature-tagline">// {p.tagline}</p>
+          <p className="feature-summary"><Words>{p.summary}</Words></p>
           <dl className="feature-stats">
             <div><dt>21</dt><dd>learners surveyed</dd></div>
             <div><dt>74</dt><dd>final UI screens</dd></div>
@@ -215,15 +224,14 @@ function Manifesto() {
         SYMBIOTIC DESIGN
       </SectionTitle>
       <p className="manifesto-quote">
-        “True user advocacy isn’t about ignoring business viability. It’s a balance where company goals
-        and user value reinforce each other.”
+        <Words>“True user advocacy isn’t about ignoring business viability. It’s a balance where company goals and user value reinforce each other.”</Words>
       </p>
       <div className="principles">
         {PRINCIPLES.map((pr) => (
           <article key={pr.no} className="principle">
             <span className="principle-no pixel">{pr.no}</span>
             <h3>{pr.title}</h3>
-            <p>{pr.text}</p>
+            <p><Words>{pr.text}</Words></p>
           </article>
         ))}
       </div>
@@ -236,6 +244,7 @@ export default function Home({ track }) {
     <>
       <Hero />
       <About />
+      <ExperienceSection />
       <SkillsSection />
       <Featured />
       <Work track={track} />

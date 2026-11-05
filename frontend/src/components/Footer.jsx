@@ -1,5 +1,6 @@
 import { LINKS } from '../data/projects.js'
 import { Arrow, Mail, Behance, GitHub, LinkedIn } from './Icons.jsx'
+import Words from './Words.jsx'
 
 export default function Footer() {
   return (
@@ -11,8 +12,7 @@ export default function Footer() {
           </p>
           <h2 className="pixel footer-title">HAVE A PROJECT IN MIND?</h2>
           <p className="footer-text">
-            I’m open to junior UX/UI and front-end roles, internships and freelance work. Let’s build
-            something both your users and your business will love.
+            <Words>I’m open to junior UX/UI and front-end roles, internships and freelance work. Let’s build something both your users and your business will love.</Words>
           </p>
           <a className="btn btn-primary" href={`mailto:${LINKS.email}`}>
             Say hello <Arrow />

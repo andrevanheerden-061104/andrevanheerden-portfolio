@@ -14,9 +14,9 @@ export function Phone({ src, alt = '', tape = false }) {
   )
 }
 
-export default function PhoneSpread({ screens, variant = 'trio', label, tape = false }) {
+export default function PhoneSpread({ screens, variant = 'trio', label, tape = false, interactive = true }) {
   return (
-    <div className={`spread spread-${variant}`} role={label ? 'img' : undefined} aria-label={label}>
+    <div className={`spread spread-${variant} ${interactive ? 'is-interactive' : ''}`} role={label ? 'img' : undefined} aria-label={label}>
       {screens.map((s, i) => (
         <Phone key={s} src={s} tape={tape && i === Math.floor(screens.length / 2)} />
       ))}

@@ -4,7 +4,7 @@ import { getProject, trackLabel, LINKS } from '../data/projects.js'
 import { caseStudies } from '../data/caseStudies.js'
 import { Arrow } from '../components/Icons.jsx'
 import PhoneSpread from '../components/Phones.jsx'
-import WireFlow from '../components/WireFlow.jsx'
+import Words from '../components/Words.jsx'
 
 function SectionHead({ kicker, title }) {
   return (
@@ -23,8 +23,8 @@ function Hero({ p }) {
           <span className="cs-kind-dot" aria-hidden="true" /> {trackLabel(p)} · {p.kind}
         </p>
         <h1 className="pixel cs-name">{p.title.toUpperCase()}</h1>
-        <p className="cs-tagline">{p.tagline}</p>
-        <p className="cs-summary">{p.summary}</p>
+        <p className="cs-tagline">// {p.tagline}</p>
+        <p className="cs-summary"><Words>{p.summary}</Words></p>
         <ul className="cs-tags">
           {p.tags.map((t) => (
             <li key={t}>{t}</li>
@@ -59,8 +59,8 @@ function Overview({ items }) {
 function Why({ children, label = 'Why this choice' }) {
   return (
     <aside className="why-note">
-      <span className="hand why-label">{label}</span>
-      <p>{children}</p>
+      <span className="why-label">// {label}</span>
+      <p><Words>{children}</Words></p>
     </aside>
   )
 }
@@ -71,7 +71,7 @@ function TowerCaseStudy({ cs, p }) {
       <section className="cs-section">
         <SectionHead kicker="the story behind the problem" title={cs.story.title} />
         <div className="cs-two">
-          <p className="cs-lead">{cs.story.text}</p>
+          <p className="cs-lead"><Words>{cs.story.text}</Words></p>
           <div className="stat-stack">
             {cs.story.stats.map((s, i) => (
               <article key={s.title} className={`stat-card tilt-${i}`}>
@@ -104,7 +104,7 @@ function TowerCaseStudy({ cs, p }) {
         <div className="cs-two">
           <div>
             <p className="big-number pixel">21</p>
-            <p className="cs-lead">{cs.survey.intro}</p>
+            <p className="cs-lead"><Words>{cs.survey.intro}</Words></p>
             <Why label="why a survey?">{cs.survey.why}</Why>
           </div>
           <div className="bars">
@@ -160,7 +160,7 @@ function TowerCaseStudy({ cs, p }) {
             </figcaption>
           </figure>
           <div className="persona-body">
-            <blockquote className="persona-quote">“{cs.persona.quote}”</blockquote>
+            <blockquote className="persona-quote"><Words>{`“${cs.persona.quote}”`}</Words></blockquote>
             <div className="persona-lists">
               <div>
                 <h3>Goals</h3>
@@ -177,17 +177,24 @@ function TowerCaseStudy({ cs, p }) {
 
       <section className="cs-section">
         <SectionHead kicker="define" title="The problem" />
-        <p className="cs-lead narrow">{cs.problem}</p>
+        <p className="cs-lead narrow"><Words>{cs.problem}</Words></p>
         <div className="hmw">
-          <span className="hand hmw-label">How might we…</span>
-          <p>{cs.hmw}</p>
+          <span className="hmw-label">How might we…</span>
+          <p><Words>{cs.hmw}</Words></p>
         </div>
       </section>
 
       <section className="cs-section">
         <SectionHead kicker="ideate · experience planning" title="Wire flow" />
-        <p className="cs-lead narrow">Every route through the app, from opening it for the first time to beating the boss. Each lane is one part of the journey: read it left to right.</p>
-        <WireFlow />
+        <p className="cs-lead narrow">
+          <Words>Every route through the app, from opening it for the first time to beating the boss. The colours show each part of the journey; the key at the top explains the symbols.</Words>
+        </p>
+        <figure className="wireflow-fig">
+          <img src="/work/toa-wireflow.webp" alt="Full wire flow of Tower of Arithmetic, from splash screen to boss battle" loading="lazy" />
+          <a className="wireflow-open" href="/work/toa-wireflow.webp" target="_blank" rel="noreferrer">
+            Open full size <Arrow />
+          </a>
+        </figure>
       </section>
 
       <section className="cs-section">
@@ -195,11 +202,11 @@ function TowerCaseStudy({ cs, p }) {
         <div className="cs-two">
           <PhoneSpread
             screens={cs.wireframes}
-            variant="quad"
+            variant="iso"
             label="Greyscale wireframes: sign up, choose grade, combat and tower map"
           />
           <div>
-            <p className="cs-lead">Key flows were planned as 45+ wireframes to check structure, interactions and content before any colour went on, giving one base template for all three grade modes.</p>
+            <p className="cs-lead"><Words>Key flows were planned as 45+ wireframes to check structure, interactions and content before any colour went on, giving one base template for all three grade modes.</Words></p>
             <div className="style-block">
               <p className="hand cs-kicker">style overview</p>
               <ul className="swatches">
@@ -240,10 +247,10 @@ function TowerCaseStudy({ cs, p }) {
               <div className="feature-text">
                 <span className="feature-no pixel">{String(i + 1).padStart(2, '0')}</span>
                 <h3>{f.title}</h3>
-                <p className="feature-desc">{f.text}</p>
+                <p className="feature-desc">// {f.text}</p>
                 <ul>
                   {f.why.map((w) => (
-                    <li key={w}>{w}</li>
+                    <li key={w}><Words>{w}</Words></li>
                   ))}
                 </ul>
               </div>
@@ -254,7 +261,7 @@ function TowerCaseStudy({ cs, p }) {
 
       <section className="cs-section dev-section">
         <SectionHead kicker="DV · how I built it" title="From Figma to a live app" />
-        <p className="cs-lead narrow">{cs.dev.intro}</p>
+        <p className="cs-lead narrow"><Words>{cs.dev.intro}</Words></p>
         <ul className="stack-list">
           {cs.dev.stack.map((s) => (
             <li key={s.name}>
@@ -267,7 +274,7 @@ function TowerCaseStudy({ cs, p }) {
 
       <section className="cs-section">
         <SectionHead kicker="the summit" title="Tower cleared" />
-        <p className="cs-lead narrow">{cs.conclusion}</p>
+        <p className="cs-lead narrow"><Words>{cs.conclusion}</Words></p>
         <div className="reflect">
           <div className="note note-green">
             <h3>What I learned</h3>
@@ -280,7 +287,7 @@ function TowerCaseStudy({ cs, p }) {
         </div>
         <div className="play-cta" style={{ '--bg': p.theme.bg, '--accent': p.theme.accent }}>
           <div>
-            <p className="hand">try it yourself!</p>
+            <p className="hand">// try it yourself</p>
             <h3>Play the live prototype</h3>
             <p>Works in any browser on Android, iPhone or desktop. Sign up or play as a guest.</p>
           </div>
@@ -298,24 +305,24 @@ function ShortCaseStudy({ cs }) {
     <>
       <section className="cs-section">
         <SectionHead kicker="the design challenge" title="What needed solving" />
-        <p className="cs-lead narrow">{cs.challenge}</p>
+        <p className="cs-lead narrow"><Words>{cs.challenge}</Words></p>
         {cs.hmw && (
           <div className="hmw">
-            <span className="hand hmw-label">How might we…</span>
-            <p>{cs.hmw}</p>
+            <span className="hmw-label">How might we…</span>
+            <p><Words>{cs.hmw}</Words></p>
           </div>
         )}
       </section>
       <section className="cs-section">
         <SectionHead kicker="the solution" title="What I designed" />
-        <p className="cs-lead narrow">{cs.solution}</p>
+        <p className="cs-lead narrow"><Words>{cs.solution}</Words></p>
       </section>
       <section className="cs-section">
         <SectionHead kicker="looking back" title="Conclusion" />
-        <p className="cs-lead narrow">{cs.conclusion}</p>
+        <p className="cs-lead narrow"><Words>{cs.conclusion}</Words></p>
         <div className="play-cta soon">
           <div>
-            <p className="hand">full case study coming to this site soon</p>
+            <p className="hand">// full case study coming soon</p>
             <h3>Read the full case study on Behance</h3>
             <p>Research, blueprints, wireframes and every final screen.</p>
           </div>
