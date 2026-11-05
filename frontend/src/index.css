@@ -4882,3 +4882,107 @@ button.folder-tab:focus-visible {
 .sheet.is-project .footer {
   padding-top: clamp(48px, 6vw, 72px);
 }
+
+/* ---------- Index v2: left side, grouped, stronger title ---------- */
+.cindex {
+  left: 18px;
+  right: auto;
+  width: 50px;
+  padding: 12px 8px 10px;
+}
+
+.cindex:hover,
+.cindex:has(:focus-visible) {
+  width: 236px;
+}
+
+.cindex-title {
+  position: relative;
+  align-items: center;
+  height: 24px;
+  margin: 0 2px 6px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line-2);
+  box-sizing: content-box;
+}
+
+.cindex-title .cindex-name {
+  font-family: var(--pixel);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: var(--text);
+}
+
+.cindex-title b {
+  left: 0;
+  width: 34px;
+  font-size: 0.66rem;
+  color: var(--accent-3);
+}
+
+.cindex:hover .cindex-title b,
+.cindex:has(:focus-visible) .cindex-title b {
+  left: calc(100% - 38px);
+}
+
+.cindex-group {
+  padding-top: 6px;
+}
+
+.cindex-group + .cindex-group {
+  margin-top: 6px;
+  border-top: 1px dashed var(--line-2);
+}
+
+.cindex-group-name {
+  height: 0;
+  margin: 0 4px;
+  overflow: hidden;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--soft);
+  opacity: 0;
+  transition: height 0.25s ease, opacity 0.2s ease, margin 0.25s ease;
+}
+
+.cindex:hover .cindex-group-name,
+.cindex:has(:focus-visible) .cindex-group-name {
+  height: 14px;
+  margin-bottom: 4px;
+  opacity: 1;
+}
+
+.cindex-group.is-current .cindex-group-name {
+  color: var(--accent-2);
+}
+
+.cindex-no {
+  width: 26px;
+  height: 22px;
+}
+
+/* ---------- Process cards: equal height ---------- */
+.process {
+  align-items: stretch;
+}
+
+.process-step {
+  height: 100%;
+}
+
+.process-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* only show the index where there's room beside the content */
+@media (max-width: 1339px) {
+  .cindex {
+    display: none;
+  }
+}

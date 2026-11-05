@@ -29,17 +29,40 @@ const STACK_ICONS = {
 }
 
 const TOWER_INDEX = [
-  { id: 'story', label: 'The story' },
-  { id: 'process', label: 'Process' },
-  { id: 'survey', label: 'Survey' },
-  { id: 'research', label: 'Research' },
-  { id: 'persona', label: 'Persona' },
-  { id: 'problem', label: 'Problem & HMW' },
-  { id: 'wireflow', label: 'Wire flow' },
-  { id: 'wireframes', label: 'Wireframes & style' },
-  { id: 'features', label: 'Features' },
-  { id: 'build', label: 'How I built it' },
-  { id: 'conclusion', label: 'Conclusion' },
+  {
+    group: 'Overview',
+    items: [
+      { id: 'story', label: 'The story' },
+      { id: 'process', label: 'Process' },
+    ],
+  },
+  {
+    group: 'Research',
+    items: [
+      { id: 'survey', label: 'Survey' },
+      { id: 'research', label: 'Literature & competitors' },
+      { id: 'persona', label: 'Persona' },
+      { id: 'problem', label: 'Problem & HMW' },
+    ],
+  },
+  {
+    group: 'Planning',
+    items: [
+      { id: 'wireflow', label: 'Wire flow' },
+      { id: 'wireframes', label: 'Wireframes & style' },
+    ],
+  },
+  {
+    group: 'Design & build',
+    items: [
+      { id: 'features', label: 'Features' },
+      { id: 'build', label: 'How I built it' },
+    ],
+  },
+  {
+    group: 'Wrap-up',
+    items: [{ id: 'conclusion', label: 'Conclusion' }],
+  },
 ]
 
 function SectionHead({ kicker, title }) {
@@ -104,7 +127,7 @@ function Why({ children, label = 'Why this choice' }) {
 function TowerCaseStudy({ cs, p }) {
   return (
     <>
-      <CaseIndex items={TOWER_INDEX} />
+      <CaseIndex groups={TOWER_INDEX} />
       <section id="story" className="cs-section">
         <SectionHead kicker="the story behind the problem" title={cs.story.title} />
         <div className="cs-two">
