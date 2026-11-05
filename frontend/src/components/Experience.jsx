@@ -13,6 +13,7 @@ const ITEMS = [
     text: 'Maths, English, Afrikaans, Arts, Geography and Engineering Graphics & Design (EGD): the mix of logic and visual design that pointed me towards UX.',
     tags: ['Maths', 'EGD', 'Arts'],
     path: 'education/matric',
+    highlight: 'Maths + Engineering Graphics & Design',
   },
   {
     type: 'edu',
@@ -24,6 +25,7 @@ const ITEMS = [
     text: 'Website, web and mobile app design and development: Figma, HTML, CSS, JavaScript, C# and React. Capstone: Tower of Arithmetic, designed and shipped as a live app.',
     tags: ['Figma', 'React', 'C#', 'UX research'],
     path: 'education/open-window',
+    highlight: 'Capstone shipped as a live app',
   },
   {
     type: 'work',
@@ -35,6 +37,7 @@ const ITEMS = [
     text: 'Conducted end-to-end UX research and interface design while critically evaluating emerging AI tools to inform design workflows and commercial decisions. Integrated AI-assisted development into my process, built and shipped live digital products, and produced two full portfolio case studies.',
     tags: ['UX research', 'UI design', 'AI tools', 'Shipped products'],
     path: 'work/sand-dollar-design',
+    highlight: 'Shipped live products · 2 case studies',
   },
   {
     type: 'award',
@@ -46,6 +49,7 @@ const ITEMS = [
     text: 'Co-designed and pitched rapid UX solutions in a five-person Open Window team to solve real-world design challenges, earning second place among university teams in the Gauteng region.',
     tags: ['Rapid UX', 'Team of 5', 'Pitching'],
     path: 'awards/absa-hackathon',
+    highlight: '2nd of all Gauteng university teams',
   },
 ]
 
@@ -140,6 +144,9 @@ export default function Experience() {
                 <h3>{it.title}</h3>
                 <p className="xp-org">
                   {it.org} <span>· {it.meta}</span>
+                </p>
+                <p className="xp-highlight">
+                  <span aria-hidden="true">▸</span> {it.highlight}
                 </p>
                 <p className="xp-text">
                   <Words>{it.text}</Words>

@@ -3976,3 +3976,190 @@ button {
     padding: 18px;
   }
 }
+
+/* Toolkit: hovered tool clearly brighter than the related ones */
+.toolkit.has-active .tk-item.is-related {
+  background: color-mix(in srgb, var(--c) 5%, transparent);
+}
+.toolkit.has-active .tk-item.is-related .tk-ico {
+  color: color-mix(in srgb, var(--c) 70%, #8a879c);
+  filter: none;
+  opacity: 0.75;
+}
+.toolkit.has-active .tk-item.is-related .tk-name {
+  color: var(--muted);
+}
+.toolkit.has-active .tk-item.is-related::after {
+  border-color: color-mix(in srgb, var(--c) 28%, transparent);
+}
+.toolkit.has-active .tk-item.is-active {
+  background: color-mix(in srgb, var(--c) 24%, transparent);
+  box-shadow: 0 0 34px -6px color-mix(in srgb, var(--c) 70%, transparent);
+}
+.toolkit.has-active .tk-item.is-active::after {
+  border: 2px solid var(--c);
+}
+.toolkit.has-active .tk-item.is-active .tk-ico {
+  color: var(--c);
+  filter: drop-shadow(0 0 14px var(--c)) brightness(1.25);
+  transform: scale(1.25);
+}
+.toolkit.has-active .tk-item.is-active .tk-name {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* =========================================================
+   Pinned section titles above stacking cards
+   ========================================================= */
+.sticky-head {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 30;
+  margin: 0 calc(-1 * var(--gutter));
+  padding: 14px var(--gutter) 16px;
+  background: linear-gradient(var(--bg) 82%, rgba(9, 9, 13, 0));
+}
+
+.sticky-head .sec-title,
+.work-head.sticky-head {
+  margin-bottom: 0;
+}
+
+.has-sticky-head .sec-title h2 {
+  font-size: clamp(2rem, 4.6vw, 3.4rem);
+}
+
+.has-sticky-head .xp2 {
+  --xp-stick: calc(var(--nav-h) + var(--head-h, 120px) + 8px);
+  margin-top: 18px;
+}
+
+.has-sticky-head .stack {
+  --stick: calc(var(--nav-h) + var(--head-h, 120px) + 4px);
+  margin-top: 18px;
+}
+
+/* folder must fit under the pinned title */
+.has-sticky-head .folder-body {
+  height: clamp(420px, calc(100vh - var(--stick) - var(--tab-h) - 24px), 580px);
+}
+
+/* =========================================================
+   Glanceable cards
+   ========================================================= */
+.glance {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 0;
+}
+
+.glance li {
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr);
+  gap: 12px;
+  align-items: baseline;
+}
+
+.glance-k {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--hi);
+}
+
+.glance-k::before {
+  content: '> ';
+  color: var(--soft);
+}
+
+.glance-v {
+  font-size: 0.93rem;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.folder dl.folder-meta {
+  grid-template-columns: repeat(4, auto);
+}
+
+.folder-meta dd.is-live {
+  color: #6ee7b7;
+}
+
+.folder-meta dd.is-live::before {
+  content: '● ';
+  font-size: 0.7em;
+  vertical-align: 1px;
+}
+
+.xp-highlight {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.xp-highlight span {
+  color: var(--accent-2);
+}
+
+.xp-card2.xp-award .xp-highlight {
+  background: rgba(242, 234, 121, 0.08);
+  border-color: rgba(242, 234, 121, 0.35);
+}
+
+.xp-card2.xp-award .xp-highlight span {
+  color: var(--gold);
+}
+
+.xp-card2.xp-edu .xp-highlight {
+  background: rgba(94, 234, 212, 0.08);
+  border-color: rgba(94, 234, 212, 0.3);
+}
+
+.xp-card2.xp-edu .xp-highlight span {
+  color: #5eead4;
+}
+
+@media (max-width: 900px) {
+  .work-head.sticky-head {
+    gap: 10px;
+  }
+  .work-head.sticky-head .mono-label {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .has-sticky-head .sec-title h2 {
+    font-size: 1.7rem;
+  }
+  .sticky-head {
+    padding: 10px var(--gutter) 10px;
+  }
+  .sticky-head .sec-label {
+    font-size: 0.7rem;
+  }
+  .has-sticky-head .xp-card2 {
+    top: calc(var(--xp-stick) + var(--i) * 10px);
+  }
+  .glance li {
+    grid-template-columns: 62px minmax(0, 1fr);
+    gap: 8px;
+  }
+  .glance-v {
+    font-size: 0.82rem;
+  }
+  .glance li:nth-child(3) {
+    display: none;
+  }
+}

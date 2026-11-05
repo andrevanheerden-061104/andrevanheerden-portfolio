@@ -60,11 +60,25 @@ export default function ProjectStack({ track }) {
                     </p>
                     <h3 className="folder-title">{p.title}</h3>
                     <p className="folder-tagline">// {p.tagline}</p>
-                    <p className="folder-summary">{p.summary}</p>
+                    <ul className="glance">
+                      <li>
+                        <span className="glance-k">problem</span>
+                        <span className="glance-v">{p.glance.problem}</span>
+                      </li>
+                      <li>
+                        <span className="glance-k">built</span>
+                        <span className="glance-v">{p.glance.built}</span>
+                      </li>
+                      <li>
+                        <span className="glance-k">my role</span>
+                        <span className="glance-v">{p.glance.role}</span>
+                      </li>
+                    </ul>
                     <dl className="folder-meta">
                       <div><dt>sector</dt><dd>{p.sector}</dd></div>
                       <div><dt>year</dt><dd>{p.year}</dd></div>
                       <div><dt>team</dt><dd>{p.group ? 'Group' : 'Solo'}</dd></div>
+                      <div><dt>status</dt><dd className={p.live ? 'is-live' : ''}>{p.glance.status}</dd></div>
                     </dl>
                     <Link to={`/work/${p.slug}`} className="folder-link">
                       Open case study <Arrow />

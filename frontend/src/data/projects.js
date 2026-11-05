@@ -22,6 +22,7 @@ export const TRACKS = {
 export const projects = [
   {
     slug: 'tower-of-arithmetic',
+    glance: { problem: 'Learners freeze when they practise maths alone', built: 'A maths RPG where every spell is a sum, with AI hints', role: 'Research, UI design & full build', status: 'Live on Vercel' },
     title: 'Tower of Arithmetic',
     tagline: 'Every spell is an equation.',
     summary:
@@ -39,6 +40,7 @@ export const projects = [
   },
   {
     slug: 'next-level',
+    glance: { problem: 'Fitness apps overwhelm users with dyspraxia', built: 'Calm, self-paced workouts with speech-to-text', role: 'UX research & UI design', status: 'Prototype' },
     title: 'Next Level',
     tagline: 'Fitness at your own pace.',
     summary:
@@ -53,6 +55,7 @@ export const projects = [
   },
   {
     slug: 'herd-link',
+    glance: { problem: 'Farmers can’t spot sick animals in huge herds', built: 'AI smart collar + high-contrast, offline-ready app', role: 'AI feature mapping & UI design', status: 'Prototype' },
     title: 'Herd Link',
     tagline: 'Every animal, at a glance.',
     summary:
@@ -67,6 +70,7 @@ export const projects = [
   },
   {
     slug: 'ford-relay',
+    glance: { problem: 'Customers hear nothing once the keys are handed over', built: 'Live service timeline fed by workshop events', role: 'Service design & UI (group)', status: 'Prototype' },
     title: 'Ford Relay',
     tagline: 'Service without the hassle.',
     summary:

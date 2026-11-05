@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { Link } from '../router.jsx'
 import { LINKS, TRACKS, getProject, byTrack, trackLabel, projects } from '../data/projects.js'
 import ProjectStack, { TrackFilter } from '../components/ProjectStack.jsx'
@@ -124,10 +125,29 @@ function About() {
   )
 }
 
+/* Keeps a section's title pinned while its cards stack underneath:
+   measures the title so the cards know where to dock. */
+function useStickyHead() {
+  const ref = useRef(null)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const set = () => el.parentElement.style.setProperty('--head-h', `${el.offsetHeight}px`)
+    set()
+    const ro = new ResizeObserver(set)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+  return ref
+}
+
 function ExperienceSection() {
+  const head = useStickyHead()
   return (
-    <section className="section" id="experience">
-      <SectionTitle label="experience">WORK EXPERIENCE</SectionTitle>
+    <section className="section has-sticky-head" id="experience">
+      <div className="sticky-head" ref={head}>
+        <SectionTitle label="experience">WORK EXPERIENCE</SectionTitle>
+      </div>
       <Experience />
     </section>
   )
@@ -185,9 +205,10 @@ function Featured() {
 
 function Work({ track }) {
   const count = byTrack(track).length
+  const head = useStickyHead()
   return (
-    <section className="section work" id="work">
-      <div className="work-head">
+    <section className="section work has-sticky-head" id="work">
+      <div className="work-head sticky-head" ref={head}>
         <SectionTitle label="projects">ALL PROJECTS</SectionTitle>
         <div className="work-filter">
           <TrackFilter track={track} />
