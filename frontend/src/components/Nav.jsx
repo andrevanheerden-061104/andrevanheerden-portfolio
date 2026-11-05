@@ -37,7 +37,7 @@ export default function Nav() {
             <LinkedIn />
           </a>
           <a className="btn btn-primary btn-sm" href={`mailto:${LINKS.email}`}>
-            Hire me <Arrow />
+            Get in touch <Arrow />
           </a>
         </div>
       </div>

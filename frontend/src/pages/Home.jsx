@@ -5,6 +5,7 @@ import PhoneSpread from '../components/Phones.jsx'
 import Skills, { HERO_ICONS } from '../components/Skills.jsx'
 import Experience from '../components/Experience.jsx'
 import Words from '../components/Words.jsx'
+import IdBadge from '../components/IdBadge.jsx'
 import { Arrow, Mail } from '../components/Icons.jsx'
 
 const PRINCIPLES = [
@@ -63,7 +64,7 @@ function Hero() {
             View my work <Arrow />
           </Link>
           <a className="btn btn-outline" href={`mailto:${LINKS.email}`}>
-            <Mail /> Get in touch
+            <Mail /> Email me
           </a>
         </div>
         <div className="hero-stack">
@@ -79,26 +80,9 @@ function Hero() {
       </div>
 
       <div className="hero-visual">
-        <span className="hero-ring" aria-hidden="true" />
+        <span className="hero-glow" aria-hidden="true" />
         <span className="hero-dots" aria-hidden="true" />
-        <img className="hero-photo" src="/me/andre.webp" alt="Andre van Heerden" width="543" height="789" />
-        <div className="code-card" aria-hidden="true">
-          <div className="code-bar">
-            <span>&lt;/&gt; andre.js</span>
-            <i />
-          </div>
-          <pre>
-            <code>
-              <span className="k">const</span> andre = {'{'}
-              {'\n'}  role: <span className="s">"UX/UI + Dev"</span>,
-              {'\n'}  based: <span className="s">"Pretoria, ZA"</span>,
-              {'\n'}  stack: [<span className="s">"Figma"</span>, <span className="s">"React"</span>],
-              {'\n'}  loves: [<span className="s">"games"</span>, <span className="s">"anime"</span>],
-              {'\n'}  goal: <span className="s">"user + business"</span>,
-              {'\n'}{'}'};
-            </code>
-          </pre>
-        </div>
+        <IdBadge />
       </div>
     </section>
   )
