@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Link } from '../router.jsx'
 import { LINKS, TRACKS, getProject, byTrack, trackLabel, projects } from '../data/projects.js'
-import ProjectStack, { TrackFilter } from '../components/ProjectStack.jsx'
+import ProjectStack, { TrackFilter, openOnClick } from '../components/ProjectStack.jsx'
 import PhoneSpread from '../components/Phones.jsx'
 import Skills, { HERO_ICONS } from '../components/Skills.jsx'
 import Experience from '../components/Experience.jsx'
@@ -169,7 +169,11 @@ function Featured() {
   return (
     <section className="section" id="featured">
       <SectionTitle label="featured work">FEATURED</SectionTitle>
-      <article className="feature" style={{ '--pc': p.theme.bg, '--pa': p.theme.accent }}>
+      <article
+        className="feature is-clickable"
+        style={{ '--pc': p.theme.bg, '--pa': p.theme.accent }}
+        onClick={openOnClick(`/work/${p.slug}`)}
+      >
         <div className="feature-copy">
           <p className="chip-row">
             <span className="chip chip-solid">{trackLabel(p)}</span>

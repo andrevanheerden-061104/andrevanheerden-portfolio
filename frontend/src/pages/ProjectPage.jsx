@@ -256,9 +256,6 @@ function TowerCaseStudy({ cs, p }) {
         </p>
         <figure className="wireflow-fig">
           <img src="/work/toa-wireflow.webp" alt="Full wire flow of Tower of Arithmetic, from splash screen to boss battle" loading="lazy" />
-          <a className="wireflow-open" href="/work/toa-wireflow.webp" target="_blank" rel="noreferrer">
-            Open full size <Arrow />
-          </a>
         </figure>
       </section>
 

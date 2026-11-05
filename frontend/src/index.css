@@ -4986,3 +4986,48 @@ button.folder-tab:focus-visible {
     display: none;
   }
 }
+
+/* Pixel numbers: regular weight so they're readable */
+.stat-value,
+.feature-stats dt,
+.tk-summary dt,
+.stat dt,
+.sec-value,
+.numbers dt,
+.big-number,
+.feature-no,
+.principle-no {
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* whole card opens the case study */
+.is-clickable {
+  cursor: pointer;
+}
+
+.feature.is-clickable {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.feature.is-clickable:hover {
+  border-color: rgba(167, 139, 250, 0.55);
+  box-shadow: 0 30px 80px -40px var(--glow);
+}
+
+.folder .folder-body.is-clickable {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.folder .folder-body.is-clickable:hover {
+  border-color: var(--bg);
+  box-shadow: 0 -24px 50px -24px rgba(0, 0, 0, 0.8), 0 30px 90px -30px color-mix(in srgb, var(--bg) 85%, transparent);
+}
+
+.folder .folder-body.is-clickable:hover .folder-link svg {
+  transform: translate(2px, -2px);
+}
+
+.folder-link svg {
+  transition: transform 0.2s ease;
+}

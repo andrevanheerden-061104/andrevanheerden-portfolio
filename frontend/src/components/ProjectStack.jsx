@@ -4,6 +4,17 @@ import { TRACKS, byTrack, trackLabel, projects } from '../data/projects.js'
 import PhoneSpread from './Phones.jsx'
 import { Arrow } from './Icons.jsx'
 
+/* click anywhere on a card to open the case study;
+   real links and buttons inside still do their own thing */
+export function openOnClick(to) {
+  return (e) => {
+    if (e.defaultPrevented || e.target.closest('a, button')) return
+    if (window.getSelection()?.toString()) return // user is selecting text
+    navigate(to)
+    window.scrollTo(0, 0)
+  }
+}
+
 export function TrackFilter({ track }) {
   return (
     <div className="track-filter" role="group" aria-label="Filter projects">
@@ -63,7 +74,7 @@ export default function ProjectStack({ track }) {
                 <span className="folder-tab-no">{no}</span>
                 <span className="folder-tab-name">{p.slug}</span>
               </button>
-              <div className="folder-body">
+              <div className="folder-body is-clickable" onClick={openOnClick(`/work/${p.slug}`)}>
                 <div className="folder-bar">
                   <span className="dots" aria-hidden="true"><i /><i /><i /></span>
                   <span className="folder-path">
