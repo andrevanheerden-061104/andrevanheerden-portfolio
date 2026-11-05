@@ -5,6 +5,42 @@ import { caseStudies } from '../data/caseStudies.js'
 import { Arrow } from '../components/Icons.jsx'
 import PhoneSpread from '../components/Phones.jsx'
 import Words from '../components/Words.jsx'
+import CaseIndex from '../components/CaseIndex.jsx'
+import { SiReact, SiNodedotjs, SiSupabase, SiVercel } from 'react-icons/si'
+
+const AiIcon = () => (
+  <svg viewBox="0 0 24 24">
+    <path
+      d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinejoin="round"
+    />
+  </svg>
+)
+
+const STACK_ICONS = {
+  'React Native + Expo': { icon: <SiReact />, color: '#61DAFB' },
+  'Node.js + Express': { icon: <SiNodedotjs />, color: '#5FA04E' },
+  'Supabase (PostgreSQL)': { icon: <SiSupabase />, color: '#3ECF8E' },
+  'Groq API · Llama 3': { icon: <AiIcon />, color: '#F55036' },
+  Vercel: { icon: <SiVercel />, color: '#ffffff' },
+}
+
+const TOWER_INDEX = [
+  { id: 'story', label: 'The story' },
+  { id: 'process', label: 'Process' },
+  { id: 'survey', label: 'Survey' },
+  { id: 'research', label: 'Research' },
+  { id: 'persona', label: 'Persona' },
+  { id: 'problem', label: 'Problem & HMW' },
+  { id: 'wireflow', label: 'Wire flow' },
+  { id: 'wireframes', label: 'Wireframes & style' },
+  { id: 'features', label: 'Features' },
+  { id: 'build', label: 'How I built it' },
+  { id: 'conclusion', label: 'Conclusion' },
+]
 
 function SectionHead({ kicker, title }) {
   return (
@@ -68,7 +104,8 @@ function Why({ children, label = 'Why this choice' }) {
 function TowerCaseStudy({ cs, p }) {
   return (
     <>
-      <section className="cs-section">
+      <CaseIndex items={TOWER_INDEX} />
+      <section id="story" className="cs-section">
         <SectionHead kicker="the story behind the problem" title={cs.story.title} />
         <div className="cs-two">
           <p className="cs-lead"><Words>{cs.story.text}</Words></p>
@@ -86,20 +123,25 @@ function TowerCaseStudy({ cs, p }) {
         </div>
       </section>
 
-      <section className="cs-section">
+      <section id="process" className="cs-section">
         <SectionHead kicker="my process" title="From first idea to deployment" />
         <ol className="process">
           {cs.process.map((s, i) => (
-            <li key={s.stage} className={`process-step ps-${i % 4}`}>
-              <span className="process-no">Stage {String(i + 1).padStart(2, '0')}</span>
-              <h3>{s.stage}</h3>
-              <p>{s.text}</p>
+            <li key={s.stage} className="process-step">
+              <span className="process-node" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <div className="process-card">
+                <span className="process-no">stage_{String(i + 1).padStart(2, '0')}</span>
+                <h3>{s.stage}</h3>
+                <p>{s.text}</p>
+              </div>
             </li>
           ))}
         </ol>
       </section>
 
-      <section className="cs-section">
+      <section id="survey" className="cs-section">
         <SectionHead kicker="discover · research 01" title="Survey insights" />
         <div className="cs-two">
           <div>
@@ -124,7 +166,7 @@ function TowerCaseStudy({ cs, p }) {
         </div>
       </section>
 
-      <section className="cs-section">
+      <section id="research" className="cs-section">
         <SectionHead kicker="research 02 & 03" title="What the literature and competitors said" />
         <div className="secondary">
           {cs.secondary.map((s) => (
@@ -147,7 +189,7 @@ function TowerCaseStudy({ cs, p }) {
         </div>
       </section>
 
-      <section className="cs-section">
+      <section id="persona" className="cs-section">
         <SectionHead kicker="define · who I designed for" title={`Meet ${cs.persona.name.split(' ')[0]}`} />
         <div className="persona">
           <figure className="polaroid persona-pol">
@@ -175,7 +217,7 @@ function TowerCaseStudy({ cs, p }) {
         </div>
       </section>
 
-      <section className="cs-section">
+      <section id="problem" className="cs-section">
         <SectionHead kicker="define" title="The problem" />
         <p className="cs-lead narrow"><Words>{cs.problem}</Words></p>
         <div className="hmw">
@@ -184,7 +226,7 @@ function TowerCaseStudy({ cs, p }) {
         </div>
       </section>
 
-      <section className="cs-section">
+      <section id="wireflow" className="cs-section">
         <SectionHead kicker="ideate · experience planning" title="Wire flow" />
         <p className="cs-lead narrow">
           <Words>Every route through the app, from opening it for the first time to beating the boss. The colours show each part of the journey; the key at the top explains the symbols.</Words>
@@ -197,7 +239,7 @@ function TowerCaseStudy({ cs, p }) {
         </figure>
       </section>
 
-      <section className="cs-section">
+      <section id="wireframes" className="cs-section">
         <SectionHead kicker="plan" title="Wireframes first" />
         <div className="cs-two">
           <PhoneSpread
@@ -224,7 +266,7 @@ function TowerCaseStudy({ cs, p }) {
         </div>
       </section>
 
-      <section className="cs-section">
+      <section id="features" className="cs-section">
         <SectionHead kicker="design · final UI" title="Features & why" />
         <dl className="numbers">
           {cs.numbers.map((n) => (
@@ -259,12 +301,15 @@ function TowerCaseStudy({ cs, p }) {
         </div>
       </section>
 
-      <section className="cs-section dev-section">
+      <section id="build" className="cs-section dev-section">
         <SectionHead kicker="DV · how I built it" title="From Figma to a live app" />
         <p className="cs-lead narrow"><Words>{cs.dev.intro}</Words></p>
         <ul className="stack-list">
           {cs.dev.stack.map((s) => (
-            <li key={s.name}>
+            <li key={s.name} style={{ '--c': STACK_ICONS[s.name]?.color || '#a78bfa' }}>
+              <span className="stack-ico" aria-hidden="true">
+                {STACK_ICONS[s.name] ? STACK_ICONS[s.name].icon : null}
+              </span>
               <b>{s.name}</b>
               <span>{s.role}</span>
             </li>
@@ -272,15 +317,17 @@ function TowerCaseStudy({ cs, p }) {
         </ul>
       </section>
 
-      <section className="cs-section">
+      <section id="conclusion" className="cs-section">
         <SectionHead kicker="the summit" title="Tower cleared" />
         <p className="cs-lead narrow"><Words>{cs.conclusion}</Words></p>
         <div className="reflect">
           <div className="note note-green">
+            <span className="note-ico" aria-hidden="true">✓</span>
             <h3>What I learned</h3>
             <ul>{cs.learned.map((l) => <li key={l}>{l}</li>)}</ul>
           </div>
           <div className="note note-yellow">
+            <span className="note-ico" aria-hidden="true">+</span>
             <h3>If I had more time</h3>
             <ul>{cs.moreTime.map((l) => <li key={l}>{l}</li>)}</ul>
           </div>
