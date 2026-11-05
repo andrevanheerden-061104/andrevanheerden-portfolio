@@ -57,8 +57,8 @@ function Hero() {
           <span className="hero-role">UX/UI designer &amp; developer</span>
         </h1>
         <p className="hero-lede">
-          <Words>I design software that benefits</Words> <em>both</em>{' '}
-          <Words>the user and the company, then I build it in React and React Native.</Words>
+          <Words>I’m passionate about user experience and, above all,</Words> <em>UI design</em>
+          <Words>, and I bring my designs to life as a front-end developer.</Words>
         </p>
         <div className="hero-ctas">
           <Link className="btn btn-primary" to="/#work">
@@ -101,13 +101,12 @@ function About() {
       <div className="about-copy">
         <SectionTitle label="about me">WHO I AM</SectionTitle>
         <p>
-          <Words>I am a UX/UI designer and front-end developer completing my final year at Open Window in Pretoria. My approach is</Words>{' '}
+          <Words>I’m a UX/UI designer and front-end developer in my final year at Open Window in Pretoria. I design by a principle I call</Words>{' '}
           <strong><Words>symbiotic design:</Words></strong>{' '}
-          <Words>a product succeeds when real value for the user and the goals of the business reinforce each other, without dark patterns.</Words>
+          <Words>when a product genuinely makes life easier for the people using it, they keep coming back, and that’s what makes it work for the business too. No dark patterns, no tricks.</Words>
         </p>
         <p>
-          <Words>I research</Words> <em>with</em>{' '}
-          <Words>users rather than designing from assumptions, and I build what I design. Outside of work you’ll find me gaming and watching anime, which is where projects like a maths RPG come from.</Words>
+          <Words>I love designing interfaces that look good and feel effortless, then building them so they work just as well in the browser as they did in Figma. Outside of work you’ll find me gaming and watching anime, which is where projects like a maths RPG come from.</Words>
         </p>
       </div>
       <dl className="stats">
@@ -229,7 +228,7 @@ function Manifesto() {
         SYMBIOTIC DESIGN
       </SectionTitle>
       <p className="manifesto-quote">
-        <Words>“True user advocacy isn’t about ignoring business viability. It’s a balance where company goals and user value reinforce each other.”</Words>
+        <Words>“I design for both sides of the screen. When people genuinely enjoy using a product, they come back, and that’s what makes a business grow.”</Words>
       </p>
       <div className="principles">
         {PRINCIPLES.map((pr) => (

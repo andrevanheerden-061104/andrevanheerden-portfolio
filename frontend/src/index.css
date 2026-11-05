@@ -4441,3 +4441,35 @@ button {
     display: inline;
   }
 }
+
+/* Lighter pixel headings: easier to read, same style */
+.pixel {
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* Clickable folder tabs */
+button.folder-tab {
+  border: 0;
+  font: inherit;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  text-align: left;
+  cursor: pointer;
+  z-index: 2;
+  transition: filter 0.2s ease, padding 0.2s ease;
+}
+
+button.folder-tab:hover {
+  filter: brightness(1.15);
+}
+
+button.folder-tab:hover .folder-tab-name {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+button.folder-tab:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -4px;
+}

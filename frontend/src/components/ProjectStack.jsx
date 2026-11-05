@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useRef } from 'react'
 import { Link, navigate } from '../router.jsx'
 import { TRACKS, byTrack, trackLabel, projects } from '../data/projects.js'
 import PhoneSpread from './Phones.jsx'
@@ -27,6 +27,20 @@ export function TrackFilter({ track }) {
    against its container and made the stack leave too early. */
 export default function ProjectStack({ track }) {
   const list = byTrack(track)
+  const folders = useRef([])
+
+  // scroll so folder i is docked at the top of the stack
+  const jump = (i) => {
+    const el = folders.current[i]
+    if (!el) return
+    const before = el.previousElementSibling
+    const natural = before
+      ? before.getBoundingClientRect().bottom + window.scrollY
+      : el.parentElement.getBoundingClientRect().top + window.scrollY
+    const stickTop = parseFloat(getComputedStyle(el).top) || 0
+    window.scrollTo({ top: natural - stickTop + 2, behavior: 'smooth' })
+  }
+
   const total = String(projects.length).padStart(2, '0')
   return (
     <div className="stack" style={{ '--count': list.length }}>
@@ -36,13 +50,19 @@ export default function ProjectStack({ track }) {
           <Fragment key={p.slug}>
             {i > 0 && <div className="stack-gap" aria-hidden="true" />}
             <article
+              ref={(el) => (folders.current[i] = el)}
               className="folder"
               style={{ '--i': i, '--bg': p.theme.bg, '--ink': p.theme.ink, '--hi': p.theme.hi }}
             >
-              <div className="folder-tab">
+              <button
+                type="button"
+                className="folder-tab"
+                onClick={() => jump(i)}
+                aria-label={`Go to ${p.title}`}
+              >
                 <span className="folder-tab-no">{no}</span>
                 <span className="folder-tab-name">{p.slug}</span>
-              </div>
+              </button>
               <div className="folder-body">
                 <div className="folder-bar">
                   <span className="dots" aria-hidden="true"><i /><i /><i /></span>
