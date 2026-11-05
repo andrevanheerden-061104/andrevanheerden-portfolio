@@ -40,7 +40,8 @@ export default function ProjectStack({ track }) {
               style={{ '--i': i, '--bg': p.theme.bg, '--ink': p.theme.ink, '--hi': p.theme.hi }}
             >
               <div className="folder-tab">
-                <span className="folder-tab-no">{no}</span> {p.slug}
+                <span className="folder-tab-no">{no}</span>
+                <span className="folder-tab-name">{p.slug}</span>
               </div>
               <div className="folder-body">
                 <div className="folder-bar">
