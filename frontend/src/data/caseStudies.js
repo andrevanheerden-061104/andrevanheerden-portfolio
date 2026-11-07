@@ -122,6 +122,121 @@ export const caseStudies = {
     ],
   },
 
+  'absa-village': {
+    overview: [
+      { label: 'Event', value: 'Absa Design Hackathon 2026 · 2nd place' },
+      { label: 'Team', value: 'Five Open Window students' },
+      { label: 'My role', value: 'UX strategy, UI screens & campaign posters' },
+      { label: 'Tools', value: 'Figma · Absa design system' },
+    ],
+    award: {
+      title: '2nd place among Gauteng university teams',
+      text: 'Absa Design Hackathon: Team Challenge 2026, hosted by the Africa Design Office on 16 September 2026.',
+    },
+    brief: [
+      {
+        label: 'The challenge',
+        text: 'Absa asked university teams to design a way to attract new customers aged 0 to 30, and keep the young customers it already has, using its brand, design system and a backwards design thinking process.',
+      },
+      {
+        label: 'Our insight',
+        text: 'Most young people bank where their parents bank, and it can take decades for someone to switch. Banks don’t really win young customers one by one: they inherit them. So the moment loyalty begins is parenthood.',
+      },
+      {
+        label: 'Our solution',
+        text: 'Reach the youth through the people they trust most. Win new and expecting parents with a Sprout account and real support, build a community around them with #ABSAVillage, and grow the child into their own TeenSprout account.',
+      },
+    ],
+    process: [
+      { stage: 'Brief', text: 'Absa challenge: attract and keep the 0–30 market' },
+      { stage: 'Research', text: 'Desk research on youth banking & competitors' },
+      { stage: 'Work backwards', text: 'Backwards design thinking to the root moment' },
+      { stage: 'Define', text: 'Persona: an expecting young family' },
+      { stage: 'Design', text: 'App screens & campaign posters in Absa’s style' },
+      { stage: 'Pitch', text: 'Live pitch to Absa’s design team · 2nd place' },
+    ],
+    research: {
+      title: 'To get to the youth, get to who they trust most',
+      intro:
+        'We started from the brief and kept asking “why?” until we hit the root. Why do young people stay with a bank? Mostly because it’s the bank their parents chose: their parents open their first account there, and by the time they’re adults they’ve grown up with that brand.',
+      cards: [
+        { value: '59%', title: 'Share their parents’ bank', text: 'of youth aged 18 to 24 bank with the same bank as their parents.' },
+        { value: '~30 yrs', title: 'Before people switch', text: 'Research suggests it can take up to three decades for someone to change banks.' },
+        { value: '0', title: 'Banks supporting parents', text: 'Banks offer products to families, but none act as a real support system through parenthood.' },
+      ],
+      why: 'Waiting until a learner is 16 means competing with years of familiarity and brand loyalty. Working backwards showed us the real starting point is before the child is even born.',
+    },
+    strategy: {
+      title: 'Attract, engage, retain',
+      intro: 'One journey that follows the family from pregnancy to the child’s first adult account.',
+      steps: [
+        { tag: 'Attract', title: 'Get the parents', text: 'New and expecting parents verify their parenting journey and unlock the Sprout account in the Absa app, with partner vouchers and discounts on the things they suddenly spend a lot on (a newborn can need around 300 nappies a month).' },
+        { tag: 'Engage', title: 'Build the trust', text: '#ABSAVillage: events and resources on pregnancy, parenting, child safety, birth support and family finances, with childcare at selected events and drives like breastmilk donation. The village grows as the family grows.' },
+        { tag: 'Retain', title: 'Inherit generations', text: 'At the right age Sprout branches into TeenSprout, a training-wheels account that teaches money skills. By 18, Absa isn’t a random bank asking them to sign up: it’s been part of their life all along.' },
+      ],
+    },
+    persona: {
+      name: 'The Dlamini family',
+      short: 'the Dlaminis',
+      meta: 'Sipho & Lerato, 32 · Teachers · Centurion',
+      img: '/work/abs-persona.jpg',
+      alt: 'Persona photo of Sipho and Lerato, a young expecting couple',
+      quote:
+        'Expecting their first child while feeling isolated from family and local support, they feel under-supported by their current bank and want a partner that helps them build long-term stability and community.',
+      quoteLabel: 'their story',
+      goals: ['Build a local support network', 'Secure their child’s financial future', 'Get trusted parenting guidance'],
+      pains: [
+        'The steep learning curve of parenthood',
+        'Rising costs of childcare, education and health cover',
+        'A bank that isn’t supporting them on this new journey',
+      ],
+    },
+    problem:
+      'Banks compete for young customers when they turn 16 or 18, but by then loyalty is already set by the bank their parents chose. At the same time, new parents face huge costs and feel alone, and no bank shows up for them as a real support system.',
+    hmw:
+      'How might we make Absa part of a family’s “village” from before the child is born, so parents feel supported today and their children grow up choosing Absa as their own bank?',
+    posters: {
+      intro:
+        '#ABSAVillage events live in the Absa app and on social. We designed event posters in Absa’s brand: the red arc frames a real moment, and every event pairs a family activity with a short, practical money talk.',
+      items: ['/screens/abs-poster-parents.jpg', '/screens/abs-poster-milk.jpg', '/screens/abs-poster-funday.jpg', '/screens/abs-poster-parkrun.jpg'],
+    },
+    style: {
+      font: 'Source Sans (Absa)',
+      colors: [
+        { hex: '#DC0037', name: 'Passion' },
+        { hex: '#B50232', name: 'Power' },
+        { hex: '#FF780F', name: 'Energy' },
+        { hex: '#131010', name: 'Enrich' },
+        { hex: '#F8F6F6', name: 'Grey 04' },
+        { hex: '#FFFFFF', name: 'Serene' },
+      ],
+      why: 'We worked inside Absa’s own design guidelines so the screens could ship in the existing app: Passion red for actions, Energy orange for warmth in the family illustrations, and AA contrast throughout. Building into an app parents already use meant no new download.',
+    },
+    numbers: [
+      { value: '2nd', label: 'place, Gauteng universities' },
+      { value: '3', label: 'stages: attract, engage, retain' },
+      { value: '4', label: 'event posters' },
+      { value: '0–30', label: 'age range covered' },
+    ],
+    features: [
+      { title: 'Open a Sprout account', text: 'A new account type in the Absa app, opened before the baby arrives.', screens: ['/screens/abs-choose.jpg', '/screens/abs-welcome.jpg', '/screens/abs-discounts.jpg'], why: ['Sprout sits next to the accounts parents already know, so there’s nothing new to download.', 'One flat monthly fee (R7,50) that stays the same at every age.'] },
+      { title: 'Benefits that grow with your child', text: 'Partner vouchers and discounts that change with each stage of childhood.', screens: ['/screens/abs-welcome.jpg', '/screens/abs-discounts.jpg', '/screens/abs-choose.jpg'], why: ['Starts with what new parents spend most on: nappies, baby essentials, pharmacy and formula.', 'A running total shows what the family has saved, so the value is visible every time they open the app.'] },
+      { title: '#ABSAVillage events', text: 'Parenting events and resources, booked from the app.', screens: ['/screens/abs-poster-parents.jpg', '/screens/abs-poster-funday.jpg', '/screens/abs-poster-milk.jpg'], why: ['Pregnancy talks, family fun days and donation drives build trust a discount can’t buy.', 'Each event pairs something for the family with a short money talk from an Absa expert.'] },
+      { title: 'TeenSprout: learn money safely', text: 'A simulated account where teens practise budgeting with Absa Bucks.', screens: ['/screens/abs-teen.jpg', '/screens/abs-budget.jpg', '/screens/abs-poster-parkrun.jpg'], why: ['Teens split their money into rent, essentials, savings and spending, then get tips to improve.', 'When they’re ready, the move to a real Absa account feels natural, not like starting over.'] },
+    ],
+    mockup: null,
+    conclusion:
+      'Absa Village reframes youth banking: don’t compete for customers at 18, be there 18 years earlier. By attracting parents when they need support most, engaging them as part of their village, and growing the child into TeenSprout, Absa builds generational, inherited trust. The idea placed second among university teams in Gauteng.',
+    learned: [
+      'Working backwards from the brief led us to a root cause no other team targeted: parents, not youth.',
+      'How to design quickly inside a real company’s design system and pitch the idea, not just the screens.',
+    ],
+    moreTime: [
+      'Test the Sprout sign-up and verification flow with real expecting parents.',
+      'Design the in-app event booking and milestone tracker, and model the partner rewards.',
+    ],
+  },
+
   'next-level': {
     overview: [
       { label: 'Role', value: 'Solo: UX research & UI design' },

@@ -13,6 +13,7 @@ const COVERS = {
   'tower-of-arithmetic': '/work/cover-toa.jpg',
   'next-level': '/work/cover-next-level.jpg',
   'herd-link': '/work/cover-herd-link.jpg',
+  'absa-village': '/work/cover-absa-village.jpg',
 }
 
 function PassCard({ p, to, external, cta, badge, index, line, tags }) {

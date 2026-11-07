@@ -39,6 +39,22 @@ export const projects = [
     live: 'https://tower-of-arithmetic.vercel.app',
   },
   {
+    slug: 'absa-village',
+    glance: { problem: 'Banks compete for young customers at 18, when loyalty is already set', built: 'Sprout family account, #ABSAVillage events and TeenSprout', role: 'UX strategy & UI (team of 5)', status: '2nd place · Absa Hackathon' },
+    title: 'Absa Village',
+    tagline: 'It takes a village.',
+    summary:
+      'Our Absa Design Hackathon solution: win the 0–30 market by reaching parents first, with a Sprout account that grows with the child, #ABSAVillage parenting events, and a TeenSprout account that teaches money skills.',
+    kind: 'Hackathon · banking strategy',
+    sector: 'FinTech',
+    tracks: ['ux'],
+    year: '2026',
+    group: true,
+    tags: ['2nd place', 'Service design', 'Banking app'],
+    theme: { bg: '#dc0037', ink: '#ffffff', accent: '#ffffff', hi: '#ff5c7f' },
+    screens: ['/screens/abs-discounts.jpg', '/screens/abs-welcome.jpg', '/screens/abs-poster-parents.jpg'],
+  },
+  {
     slug: 'next-level',
     glance: { problem: 'Fitness apps overwhelm users with dyspraxia', built: 'Calm, self-paced workouts with speech-to-text', role: 'UX research & UI design', status: 'Prototype' },
     title: 'Next Level',

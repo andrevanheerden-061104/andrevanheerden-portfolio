@@ -63,6 +63,11 @@ const THEMES = {
     '--accent-deep': '#ca8a04', '--accent-deeper': '#854d0e',
     '--acc-rgb': '234, 179, 8', '--acc2-rgb': '242, 194, 48', '--on-accent': '#1a1708',
   },
+  'absa-village': {
+    '--site-accent': '#dc0037', '--accent-2': '#ff4d6d', '--accent-3': '#ff9aae',
+    '--accent-deep': '#b50232', '--accent-deeper': '#77021e',
+    '--acc-rgb': '220, 0, 55', '--acc2-rgb': '255, 77, 109',
+  },
   'ford-relay': {
     '--site-accent': '#3b6cf0', '--accent-2': '#7aa2ff', '--accent-3': '#bfd0ff',
     '--accent-deep': '#2350d8', '--accent-deeper': '#142f8a',
@@ -94,22 +99,25 @@ function uxIndex(cs) {
   const research = []
   if (cs.survey) research.push({ id: 'survey', label: 'Survey' })
   research.push({ id: 'research', label: cs.secondary ? 'Literature & competitors' : 'Research' })
+  if (cs.strategy) research.push({ id: 'strategy', label: 'Strategy' })
   if (cs.featureMap) research.push({ id: 'featuremap', label: 'Feature mapping' })
   if (cs.ai) research.push({ id: 'ai', label: 'AI functionality' })
   research.push({ id: 'persona', label: 'Persona' }, { id: 'problem', label: 'Problem & HMW' })
   g.push({ group: 'Research', items: research })
   const plan = []
   if (cs.wireflow) plan.push({ id: 'wireflow', label: 'Wire flow' })
-  plan.push({ id: 'wireframes', label: 'Wireframes & style' })
-  g.push({ group: 'Planning', items: plan })
-  g.push({ group: 'Design', items: [{ id: 'features', label: 'Features' }] })
+  if (cs.wireframes) plan.push({ id: 'wireframes', label: 'Wireframes & style' })
+  if (cs.posters) plan.push({ id: 'posters', label: 'Campaign posters' })
+  if (!cs.wireframes && cs.style) plan.push({ id: 'style', label: 'Style' })
+  if (plan.length) g.push({ group: cs.posters ? 'Design' : 'Planning', items: plan })
+  g.push({ group: cs.posters ? 'Solution' : 'Design', items: [{ id: 'features', label: 'Features' }] })
   g.push({ group: 'Wrap-up', items: [{ id: 'conclusion', label: 'Conclusion' }] })
   return g
 }
 
 function UxCaseStudy({ cs, p, slug, onSwitch }) {
   const index = useMemo(() => uxIndex(cs), [cs])
-  const first = cs.persona.name.split(' ')[0]
+  const first = cs.persona.short || cs.persona.name.split(' ')[0]
   return (
     <>
       <CaseIndex groups={index} />
@@ -135,6 +143,15 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
       ) : (
         <section id="brief" className="cs-section">
           <SectionHead kicker="the brief" title="Challenge, problem, solution" />
+          {cs.award && (
+            <div className="award-banner">
+              <span className="award-medal pixel" aria-hidden="true">2</span>
+              <div>
+                <b>{cs.award.title}</b>
+                <p>{cs.award.text}</p>
+              </div>
+            </div>
+          )}
           <div className="brief-grid">
             {cs.brief.map((b, i) => (
               <article key={b.label} className="comp-card brief-card">
@@ -239,6 +256,22 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
         </section>
       )}
 
+      {cs.strategy && (
+        <section id="strategy" className="cs-section">
+          <SectionHead kicker="ideate · the solution" title={cs.strategy.title} />
+          <p className="cs-lead narrow"><Words>{cs.strategy.intro}</Words></p>
+          <ol className="strategy">
+            {cs.strategy.steps.map((st, i) => (
+              <li key={st.tag} className="comp-card">
+                <span className="strategy-tag">0{i + 1} · {st.tag}</span>
+                <h3>{st.title}</h3>
+                <p><Words>{st.text}</Words></p>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
       {cs.featureMap && (
         <section id="featuremap" className="cs-section">
           <SectionHead kicker="ideate · features & functions" title="Feature mapping" />
@@ -337,28 +370,62 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
         </section>
       )}
 
-      <section id="wireframes" className="cs-section">
-        <SectionHead kicker="plan" title="Wireframes first" />
-        <div className="cs-two">
-          <PhoneSpread screens={cs.wireframes} variant="iso" label={`Greyscale wireframes of ${p.title}`} />
-          <div>
-            <p className="cs-lead"><Words>{cs.wireframesText}</Words></p>
-            <div className="style-block">
-              <p className="hand cs-kicker">style overview{cs.style.font ? ` · ${cs.style.font}` : ''}</p>
-              <ul className="swatches">
-                {cs.style.colors.map((c) => (
-                  <li key={c.hex}>
-                    <span className="swatch" style={{ background: c.hex }} />
-                    <b>{c.name}</b>
-                    <small>{c.hex}</small>
-                  </li>
-                ))}
-              </ul>
-              <Why label="why these styles?">{cs.style.why}</Why>
+      {cs.wireframes && (
+        <section id="wireframes" className="cs-section">
+          <SectionHead kicker="plan" title="Wireframes first" />
+          <div className="cs-two">
+            <PhoneSpread screens={cs.wireframes} variant="iso" label={`Greyscale wireframes of ${p.title}`} />
+            <div>
+              <p className="cs-lead"><Words>{cs.wireframesText}</Words></p>
+              <div className="style-block">
+                <p className="hand cs-kicker">style overview{cs.style.font ? ` · ${cs.style.font}` : ''}</p>
+                <ul className="swatches">
+                  {cs.style.colors.map((c) => (
+                    <li key={c.hex}>
+                      <span className="swatch" style={{ background: c.hex }} />
+                      <b>{c.name}</b>
+                      <small>{c.hex}</small>
+                    </li>
+                  ))}
+                </ul>
+                <Why label="why these styles?">{cs.style.why}</Why>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
+      {cs.posters && (
+        <section id="posters" className="cs-section">
+          <SectionHead kicker="design · #ABSAVillage" title="Campaign posters" />
+          <p className="cs-lead narrow"><Words>{cs.posters.intro}</Words></p>
+          <div className="poster-row">
+            {cs.posters.items.map((src) => (
+              <figure key={src} className="poster-card">
+                <img src={src} alt="#ABSAVillage event poster" loading="lazy" />
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {!cs.wireframes && cs.style && (
+        <section id="style" className="cs-section">
+          <SectionHead kicker={`style · ${cs.style.font}`} title="Designed in Absa’s system" />
+          <div className="cs-two">
+            <ul className="swatches">
+              {cs.style.colors.map((c) => (
+                <li key={c.hex}>
+                  <span className="swatch" style={{ background: c.hex }} />
+                  <b>{c.name}</b>
+                  <small>{c.hex}</small>
+                </li>
+              ))}
+            </ul>
+            <Why label="why these styles?">{cs.style.why}</Why>
+          </div>
+        </section>
+      )}
 
       <section id="features" className="cs-section">
         <SectionHead kicker="design · final UI" title="Features & why" />
