@@ -7441,3 +7441,51 @@ html[data-theme='herd-link'] .nav-contact {
 .btn-ghost svg {
   flex: none;
 }
+
+/* hero tools: brand colour on hover */
+.hero-stack li:hover {
+  color: var(--c, var(--accent-3));
+  border-color: color-mix(in srgb, var(--c, var(--accent)) 55%, transparent);
+  background: color-mix(in srgb, var(--c, var(--accent)) 10%, var(--surface));
+  box-shadow: 0 0 18px -4px color-mix(in srgb, var(--c, var(--accent)) 60%, transparent);
+}
+
+.hero-stack li {
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+/* projects header: title left, filter right (stacks on small screens) */
+.work-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 32px;
+  margin-bottom: clamp(30px, 4vw, 44px);
+}
+
+.work-top .sec-title {
+  margin-bottom: 0;
+}
+
+.work-grid .work-top .work-filter {
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 8px;
+  margin: 0 0 6px;
+}
+
+.work-grid .work-top .work-filter .track-filter {
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .work-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .work-grid .work-top .work-filter {
+    align-items: flex-start;
+  }
+}

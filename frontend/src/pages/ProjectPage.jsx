@@ -519,9 +519,21 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
               <h3>Play the live prototype</h3>
               <p>Works in any browser on Android, iPhone or desktop. Want to see how it’s built? <button type="button" className="text-link" onClick={onSwitch}>Switch to the DV view</button>.</p>
             </div>
-            <a className="btn-accent" href={p.live} target="_blank" rel="noreferrer">
-              {p.live.replace('https://', '')} <Arrow />
-            </a>
+            <div className="cta-stack">
+              <a className="btn-accent" href={p.live} target="_blank" rel="noreferrer">
+                {p.live.replace('https://', '')} <Arrow />
+              </a>
+              {cs.links?.behance && (
+                <a className="btn-ghost" href={cs.links.behance} target="_blank" rel="noreferrer">
+                  Case study on Behance <Arrow />
+                </a>
+              )}
+              {cs.links?.github && (
+                <a className="btn-ghost" href={cs.links.github} target="_blank" rel="noreferrer">
+                  Code on GitHub <Arrow />
+                </a>
+              )}
+            </div>
           </div>
         ) : cs.noCta ? null : (
           <div className="play-cta soon">

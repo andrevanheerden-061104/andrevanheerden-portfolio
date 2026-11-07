@@ -85,15 +85,46 @@ export default function Experience() {
     }
   }, [])
 
-  const jump = (i) => {
+  // scroll position where card i has just docked
+  const dockY = (i) => {
     const el = cards.current[i]
-    if (!el) return
-    // scroll to where this card has just docked
-    const spacer = el.previousElementSibling
-    const target = spacer ? spacer.getBoundingClientRect().bottom + window.scrollY : el.offsetTop
+    if (!el) return null
+    const spacer = i > 0 ? el.previousElementSibling : null
+    const start = spacer
+      ? spacer.getBoundingClientRect().bottom
+      : el.parentElement.getBoundingClientRect().top // first card: top of the stack
     const stickTop = parseFloat(getComputedStyle(el).top) || 0
-    window.scrollTo({ top: target - stickTop + 4, behavior: 'smooth' })
+    return Math.round(start + window.scrollY - stickTop + 4)
   }
+
+  const jump = (i) => {
+    const y = dockY(i)
+    if (y != null) window.scrollTo({ top: y, behavior: 'smooth' })
+  }
+
+  // when scrolling stops between two cards, glide to the nearest one
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+    let t = 0
+    const settle = () => {
+      const docks = ITEMS.map((_, i) => dockY(i))
+      if (docks.some((d) => d == null)) return
+      const y = window.scrollY
+      // only inside the stacking range; entering or leaving the section stays free
+      if (y < docks[0] || y > docks[docks.length - 1]) return
+      const nearest = docks.reduce((a, b) => (Math.abs(b - y) < Math.abs(a - y) ? b : a))
+      if (Math.abs(nearest - y) > 6) window.scrollTo({ top: nearest, behavior: 'smooth' })
+    }
+    const onScroll = () => {
+      clearTimeout(t)
+      t = setTimeout(settle, 220)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      clearTimeout(t)
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, [])
 
   return (
     <div className="xp2" style={{ '--n': ITEMS.length }}>

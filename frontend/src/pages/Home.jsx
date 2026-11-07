@@ -76,8 +76,8 @@ function Hero() {
         <div className="hero-stack">
           <p className="mono-label">// tools I work with</p>
           <ul>
-            {HERO_ICONS.map(({ Icon, key }) => (
-              <li key={key}>
+            {HERO_ICONS.map(({ Icon, key, name, color }) => (
+              <li key={key} style={{ '--c': color }} title={name}>
                 <Icon aria-hidden="true" />
               </li>
             ))}
@@ -228,6 +228,7 @@ function WorkGrid({ track }) {
   }, [track])
   return (
     <section className="section work work-grid" id="work">
+      <div className="work-top">
       <SectionTitle label="projects">ALL PROJECTS</SectionTitle>
       <div className="work-filter">
         <div className="track-filter" role="group" aria-label="Filter projects">
@@ -244,6 +245,7 @@ function WorkGrid({ track }) {
           ))}
         </div>
         <p className="mono-label">// showing {countFor(filter)} projects</p>
+      </div>
       </div>
       <ProjectGrid filter={filter} />
     </section>

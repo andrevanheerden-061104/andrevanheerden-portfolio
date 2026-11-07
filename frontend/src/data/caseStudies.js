@@ -65,6 +65,10 @@ export const caseStudies = {
     hmw:
       'How might we design a pressure-free, replayable fantasy RPG that turns maths practice into the gameplay itself, with real-time guidance when stuck, so learners can build confidence without anxiety and want to come back again and again?',
     wireflow: '/work/toa-wireflow.webp',
+    links: {
+      behance: 'https://www.behance.net/andrevanheerden_1155',
+      github: 'https://github.com/andrevanheerden-061104/Tower-of-Arithmetic',
+    },
     wireframesText:
       'Key flows were planned as 45+ wireframes to check structure, interactions and content before any colour went on, giving one base template for all three grade modes.',
     wireframes: ['/screens/wf-signup.jpg', '/screens/wf-grade.jpg', '/screens/wf-combat.jpg', '/screens/wf-path.jpg'],

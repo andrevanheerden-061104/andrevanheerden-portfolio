@@ -83,9 +83,17 @@ const SKILLS = [
 
 const related = (a, b) => a.id !== b.id && a.groups.some((g) => b.groups.includes(g))
 
-export const HERO_ICONS = [SiFigma, SiHtml5, SiCss, SiJavascript, SiReact, SiNodedotjs, SiSupabase, SiGit].map(
-  (Icon, i) => ({ Icon, key: i })
-)
+/* brand colours show on hover in the hero */
+export const HERO_ICONS = [
+  [SiFigma, 'Figma', '#F24E1E'],
+  [SiHtml5, 'HTML', '#E34F26'],
+  [SiCss, 'CSS', '#2F8BE6'],
+  [SiJavascript, 'JavaScript', '#F7DF1E'],
+  [SiReact, 'React', '#61DAFB'],
+  [SiNodedotjs, 'Node.js', '#5FA04E'],
+  [SiSupabase, 'Supabase', '#3ECF8E'],
+  [SiGit, 'Git', '#F05032'],
+].map(([Icon, name, color], i) => ({ Icon, name, color, key: i }))
 
 export default function Skills() {
   const [activeId, setActiveId] = useState(null)
