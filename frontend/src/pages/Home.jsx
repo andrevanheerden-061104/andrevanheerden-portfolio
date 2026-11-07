@@ -1,7 +1,12 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from '../router.jsx'
 import { LINKS, TRACKS, getProject, byTrack, trackLabel, projects } from '../data/projects.js'
 import ProjectStack, { TrackFilter, openOnClick } from '../components/ProjectStack.jsx'
+import ProjectGrid, { countFor } from '../components/ProjectGrid.jsx'
+
+/* 'grid' = two sections (UX design / Development) of folder cards.
+   'stack' = the old sticky stacking folders. Flip this to switch back. */
+const WORK_LAYOUT = 'grid'
 import PhoneSpread from '../components/Phones.jsx'
 import Skills, { HERO_ICONS } from '../components/Skills.jsx'
 import Experience from '../components/Experience.jsx'
@@ -206,7 +211,51 @@ function Featured() {
   )
 }
 
+const FILTERS = [
+  { id: 'all', label: 'All projects' },
+  { id: 'ux', label: 'UX projects' },
+  { id: 'dv', label: 'DV projects' },
+]
+
+function WorkGrid({ track }) {
+  const [filter, setFilter] = useState(track || 'all')
+  useEffect(() => {
+    // /ux and /dv links land on the work section with that filter on
+    if (track === 'ux' || track === 'dv') {
+      setFilter(track)
+      requestAnimationFrame(() => document.getElementById('work')?.scrollIntoView({ block: 'start' }))
+    }
+  }, [track])
+  return (
+    <section className="section work work-grid" id="work">
+      <SectionTitle label="projects">ALL PROJECTS</SectionTitle>
+      <div className="work-filter">
+        <div className="track-filter" role="group" aria-label="Filter projects">
+          {FILTERS.map((f) => (
+            <button
+              key={f.id}
+              type="button"
+              className={`track-btn ${filter === f.id ? 'is-on' : ''}`}
+              aria-pressed={filter === f.id}
+              onClick={() => setFilter(f.id)}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+        <p className="mono-label">// showing {countFor(filter)} projects</p>
+      </div>
+      <ProjectGrid filter={filter} />
+    </section>
+  )
+}
+
 function Work({ track }) {
+  if (WORK_LAYOUT === 'grid') return <WorkGrid track={track} />
+  return <WorkStack track={track} />
+}
+
+function WorkStack({ track }) {
   const count = byTrack(track).length
   const head = useStickyHead()
   return (

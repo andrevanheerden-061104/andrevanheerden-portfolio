@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { LINKS } from '../data/projects.js'
 
 /* Decorative barcode: bar widths come from the text, so it's stable */
-function Barcode({ text, height = 34 }) {
+export function Barcode({ text, height = 34 }) {
   const bars = []
   let x = 0
   for (let i = 0; i < text.length * 3; i++) {

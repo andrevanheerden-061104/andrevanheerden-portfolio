@@ -93,3 +93,34 @@ export const byTrack = (track) =>
   track === 'all' ? projects : projects.filter((p) => p.tracks.includes(track))
 
 export const getProject = (slug) => projects.find((p) => p.slug === slug)
+
+/* Development-only projects (no case study page yet): they open their repo. */
+export const devProjects = [
+  {
+    slug: 'aquastainable',
+    title: 'Aquastainable',
+    tagline: 'Aquarium care, in one place.',
+    summary:
+      'A freshwater aquarium-care app: manage tanks, log water tests, check fish compatibility, and ask an AI assistant when something goes wrong.',
+    kind: 'Mobile app · AI assistant',
+    year: '2026',
+    tags: ['React Native', 'TypeScript', 'Express', 'Firebase', 'Groq AI'],
+    theme: { bg: '#2f6f86', ink: '#ffffff', hi: '#7cc4d8' },
+    cover: '/work/aqua-cover.jpg',
+    repo: 'https://github.com/andrevanheerden/Aquastainable',
+  },
+  {
+    slug: 'artifax',
+    title: 'Artifax',
+    tagline: 'Inventory without the chaos.',
+    summary:
+      'A desktop inventory system for warehouses: stock across locations, a crafting queue, low-stock alerts and role-based access. Built as a team.',
+    kind: 'Desktop app',
+    year: '2026',
+    tags: ['React', '.NET', 'PostgreSQL', 'Docker', 'Electron'],
+    theme: { bg: '#2a4a7f', ink: '#ffffff', hi: '#8fb0e8' },
+    cover: '/work/artifax-cover.jpg',
+    repo: 'https://github.com/andrevanheerden-061104/Artifax',
+    group: true,
+  },
+]
