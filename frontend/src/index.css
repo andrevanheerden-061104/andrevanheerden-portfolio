@@ -7489,3 +7489,88 @@ html[data-theme='herd-link'] .nav-contact {
     align-items: flex-start;
   }
 }
+
+/* projects filter v3: centred with the title, count blocks like the pass numbers */
+.work-top {
+  align-items: center;
+}
+
+.work-grid .work-top .work-filter {
+  margin: 0;
+}
+
+.work-top .track-filter {
+  gap: 4px;
+  padding: 5px;
+}
+
+.work-top .track-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 8px 7px 14px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.work-top .track-btn:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.work-top .track-btn.is-on {
+  background: rgba(var(--acc-rgb), 0.16);
+  border-color: rgba(var(--acc-rgb), 0.45);
+  color: #fff;
+  box-shadow: 0 0 18px -6px var(--glow);
+}
+
+.track-count {
+  display: grid;
+  place-items: center;
+  min-width: 26px;
+  height: 24px;
+  padding: 0 5px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line-2);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--soft);
+  transition: all 0.2s ease;
+}
+
+.track-btn:hover .track-count {
+  color: var(--muted);
+  border-color: rgba(var(--acc-rgb), 0.3);
+}
+
+.track-btn.is-on .track-count {
+  background: rgba(var(--acc-rgb), 0.22);
+  border-color: rgba(var(--acc-rgb), 0.55);
+  color: var(--accent-3);
+}
+
+@media (max-width: 480px) {
+  .work-top .track-btn {
+    gap: 6px;
+    padding: 6px 6px 6px 10px;
+    font-size: 0.76rem;
+  }
+}
+
+.work-top .track-btn {
+  white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+  .track-label-rest {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .work-top {
+    align-items: flex-start;
+  }
+}

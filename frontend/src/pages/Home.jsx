@@ -240,11 +240,14 @@ function WorkGrid({ track }) {
               aria-pressed={filter === f.id}
               onClick={() => setFilter(f.id)}
             >
-              {f.label}
+              <span className="track-label">
+                {f.label.split(' ')[0]}
+                <span className="track-label-rest"> projects</span>
+              </span>
+              <span className="track-count">{String(countFor(f.id)).padStart(2, '0')}</span>
             </button>
           ))}
         </div>
-        <p className="mono-label">// showing {countFor(filter)} projects</p>
       </div>
       </div>
       <ProjectGrid filter={filter} />
