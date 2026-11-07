@@ -81,7 +81,7 @@ export const projects = [
     tracks: ['ux'],
     year: '2026',
     tags: ['AI health alerts', 'Smart collar', 'Offline-ready'],
-    theme: { bg: '#f2c230', ink: '#1a1708', accent: '#1a1708', hi: '#f2c230' },
+    theme: { bg: '#bfe93f', ink: '#141a05', accent: '#141a05', hi: '#bfe93f' },
     screens: ['/screens/herd-herd.jpg', '/screens/herd-login.jpg', '/screens/herd-map.jpg'],
   },
   {

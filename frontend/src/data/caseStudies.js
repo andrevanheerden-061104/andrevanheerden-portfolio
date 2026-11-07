@@ -166,6 +166,14 @@ export const caseStudies = {
       ],
       why: 'Waiting until a learner is 16 means competing with years of familiarity and brand loyalty. Working backwards showed us the real starting point is before the child is even born.',
     },
+    team: {
+      label: 'Open Window team',
+      names: ['Andre', 'Danae', 'Emma', 'Caden', 'Melissa'],
+      photos: [
+        { src: '/work/abs-team-board.jpg', alt: 'The team holding the Attract, Engage, Retain board covered in sticky notes', caption: 'Mapping attract → engage → retain on the day' },
+        { src: '/work/abs-team-win.jpg', alt: 'The team celebrating with their second-place prizes', caption: 'Prize giving: 2nd place' },
+      ],
+    },
     strategy: {
       title: 'Attract, engage, retain',
       intro: 'One journey that follows the family from pregnancy to the child’s first adult account.',
@@ -225,6 +233,7 @@ export const caseStudies = {
       { title: 'TeenSprout: learn money safely', text: 'A simulated account where teens practise budgeting with Absa Bucks.', screens: ['/screens/abs-teen.jpg', '/screens/abs-budget.jpg', '/screens/abs-poster-parkrun.jpg'], why: ['Teens split their money into rent, essentials, savings and spending, then get tips to improve.', 'When they’re ready, the move to a real Absa account feels natural, not like starting over.'] },
     ],
     mockup: null,
+    noCta: true,
     conclusion:
       'Absa Village reframes youth banking: don’t compete for customers at 18, be there 18 years earlier. By attracting parents when they need support most, engaging them as part of their village, and growing the child into TeenSprout, Absa builds generational, inherited trust. The idea placed second among university teams in Gauteng.',
     learned: [
@@ -349,6 +358,10 @@ export const caseStudies = {
       { title: 'Progress, not pressure', text: 'A gamified rank, level and streak heatmap, plus editable personal data.', screens: ['/screens/nl-profile.jpg', '/screens/nl-userdata.jpg', '/screens/nl-home.jpg'], why: ['Rank and XP reward showing up, keeping motivation high without competition.', 'Users can change their goal, weight or weekly target at any time.'] },
     ],
     mockup: '/work/nl-mock.jpg',
+    links: {
+      behance: 'https://www.behance.net/gallery/250895233/Next-Level-Term-1-Assignment-Accessible-Workout-App',
+      prototype: 'https://www.figma.com/proto/eEEdDgwRSovwDP1xC0xOOU/Andre-van-Heerden-241155-Research-Handover---Sensemaking?node-id=171-643&starting-point-node-id=171%3A631&scaling=scale-down&content-scaling=fixed&page-id=171%3A171',
+    },
     conclusion:
       'Next Level helps users with dyspraxia manage their daily workouts by giving them a predictable, calm and structured digital space. A minimalist UI reduces cognitive load, and persistent navigation with clear task segmentation builds the confidence needed for long-term independence.',
     learned: [
@@ -473,7 +486,7 @@ export const caseStudies = {
       { value: '10', label: 'mapped features' },
       { value: '4', label: 'alert urgency levels' },
       { value: '3', label: 'nav bar positions' },
-      { value: '0', label: 'bars of signal needed' },
+      { value: 'Offline', label: 'works without signal' },
     ],
     features: [
       { title: 'Set up & connect', text: 'Sign up, add your farm, then pair a collar by tapping it with your phone.', screens: ['/screens/hl-signup.jpg', '/screens/hl-farm.jpg', '/screens/hl-collar.jpg'], why: ['Farm name and location calibrate local tracking and POI alerts from day one.', 'Tap-to-pair replaces fiddly sync menus when your hands are full of mud.'] },
@@ -486,6 +499,10 @@ export const caseStudies = {
       { title: 'Navigation your way', text: 'Put the nav bar at the bottom, left or right.', screens: ['/screens/hl-navswitch.jpg', '/screens/hl-sidenav.jpg', '/screens/hl-map.jpg'], why: ['One-handed use while working in the yard or driving machinery.', 'Left- and right-handed layouts respect how each farmer holds a phone.'] },
     ],
     mockup: '/work/hl-mock.jpg',
+    links: {
+      behance: 'https://www.behance.net/gallery/250895821/Herd-Link-Term-2-Assignment-Livestock-Monitoring',
+      prototype: 'https://www.figma.com/proto/MxgHyJU8zFwg5sKUeluY2x/AI-Assisted-Wearable-Technology?node-id=216-311&starting-point-node-id=216%3A311&scaling=scale-down&content-scaling=fixed&page-id=216%3A310',
+    },
     conclusion:
       'Herd Link tackles monitoring hundreds of animals in harsh, low-connectivity conditions. Pairing a smart collar with a high-contrast app filters out normal behaviour and shows only the animals and infrastructure that need attention, so farmers can make quick, confident decisions in the field.',
     learned: [

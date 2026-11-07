@@ -59,10 +59,11 @@ const THEMES = {
     '--acc-rgb': '16, 185, 129', '--acc2-rgb': '52, 211, 153',
   },
   'herd-link': {
-    '--site-accent': '#eab308', '--accent-2': '#f2c230', '--accent-3': '#fde68a',
-    '--accent-deep': '#ca8a04', '--accent-deeper': '#854d0e',
-    '--acc-rgb': '234, 179, 8', '--acc2-rgb': '242, 194, 48', '--on-accent': '#1a1708',
+    '--site-accent': '#a6d22e', '--accent-2': '#bfe93f', '--accent-3': '#d9f58a',
+    '--accent-deep': '#7fa31c', '--accent-deeper': '#4d6410',
+    '--acc-rgb': '166, 210, 46', '--acc2-rgb': '191, 233, 63', '--on-accent': '#141a05',
   },
+
   'absa-village': {
     '--site-accent': '#dc0037', '--accent-2': '#ff4d6d', '--accent-3': '#ff9aae',
     '--accent-deep': '#b50232', '--accent-deeper': '#77021e',
@@ -94,7 +95,11 @@ function uxIndex(cs) {
   const g = []
   g.push({
     group: 'Overview',
-    items: [cs.story ? { id: 'story', label: 'The story' } : { id: 'brief', label: 'The brief' }, { id: 'process', label: 'Process' }],
+    items: [
+      cs.story ? { id: 'story', label: 'The story' } : { id: 'brief', label: 'The brief' },
+      ...(cs.team ? [{ id: 'team', label: 'The team' }] : []),
+      { id: 'process', label: 'Process' },
+    ],
   })
   const research = []
   if (cs.survey) research.push({ id: 'survey', label: 'Survey' })
@@ -160,6 +165,31 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
                 <p><Words>{b.text}</Words></p>
               </article>
             ))}
+          </div>
+        </section>
+      )}
+
+      {cs.team && (
+        <section id="team" className="cs-section">
+          <SectionHead kicker="the people" title="The team" />
+          <div className="team-photos">
+            {cs.team.photos.map((ph) => (
+              <figure key={ph.src} className="team-photo">
+                <img src={ph.src} alt={ph.alt} loading="lazy" />
+                <figcaption>// {ph.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+          <div className="team-names">
+            <span className="team-label">{cs.team.label}</span>
+            <ul>
+              {cs.team.names.map((n) => (
+                <li key={n} className={n === 'Andre' ? 'is-me' : ''}>
+                  {n}
+                  {n === 'Andre' && <small> (me)</small>}
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
       )}
@@ -493,16 +523,23 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
               {p.live.replace('https://', '')} <Arrow />
             </a>
           </div>
-        ) : (
+        ) : cs.noCta ? null : (
           <div className="play-cta soon">
             <div>
               <p className="hand">// see more</p>
               <h3>Every screen and the clickable prototype</h3>
-              <p>The full Figma presentation, prototype and mock-ups are on my Behance.</p>
+              <p>Try the prototype yourself, or see the full presentation and mock-ups on Behance.</p>
             </div>
-            <a className="btn-accent" href={LINKS.behance} target="_blank" rel="noreferrer">
-              Open Behance <Arrow />
-            </a>
+            <div className="cta-stack">
+              <a className="btn-accent" href={cs.links?.behance || LINKS.behance} target="_blank" rel="noreferrer">
+                View on Behance <Arrow />
+              </a>
+              {cs.links?.prototype && (
+                <a className="btn-ghost" href={cs.links.prototype} target="_blank" rel="noreferrer">
+                  Prototype link <Arrow />
+                </a>
+              )}
+            </div>
           </div>
         )}
       </section>

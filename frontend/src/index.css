@@ -7333,3 +7333,111 @@ html[data-theme='herd-link'] .nav-contact {
   .strategy li::after { display: none; }
   .poster-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+/* ---------- team section ---------- */
+.team-photos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.team-photo {
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line-2);
+  background: var(--surface);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-photo:hover {
+  transform: translateY(-4px);
+  border-color: rgba(var(--acc-rgb), 0.55);
+  box-shadow: 0 20px 50px -24px var(--glow);
+}
+
+.team-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.team-photo figcaption {
+  padding: 12px 16px;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.team-names {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 18px;
+  margin-top: 18px;
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.team-label {
+  font: 400 0.8rem var(--pixel);
+  letter-spacing: 0.04em;
+  color: var(--accent-3);
+}
+
+.team-names ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.team-names li {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line-2);
+  font-size: 0.9rem;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.team-names li.is-me {
+  border-color: rgba(var(--acc-rgb), 0.55);
+  background: rgba(var(--acc-rgb), 0.12);
+}
+
+.team-names li small {
+  color: var(--soft);
+}
+
+.team-names li:hover {
+  color: #fff;
+  background: rgba(var(--acc-rgb), 0.22);
+  border-color: var(--accent-2);
+  box-shadow: 0 0 0 3px rgba(var(--acc-rgb), 0.12), 0 0 16px -2px var(--glow);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 700px) {
+  .team-photos { grid-template-columns: 1fr; }
+}
+
+.cta-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  flex: none;
+}
+
+.cta-stack .btn-ghost {
+  justify-content: center;
+}
+
+.btn-ghost svg {
+  flex: none;
+}
