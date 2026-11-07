@@ -12,8 +12,11 @@ export default function ProjectNav({ current }) {
   const cur = projects.find((p) => p.slug === current)
 
   useEffect(() => {
-    const el = listRef.current?.querySelector('.is-active')
-    el?.scrollIntoView({ inline: 'center', block: 'nearest' })
+    // centre the active tab by scrolling the tab bar only
+    // (scrollIntoView would also scroll the whole page)
+    const list = listRef.current
+    const el = list?.querySelector('.is-active')
+    if (list && el) list.scrollLeft = el.offsetLeft - (list.clientWidth - el.offsetWidth) / 2
     setOpen(false)
   }, [current])
 
@@ -31,7 +34,7 @@ export default function ProjectNav({ current }) {
   return (
     <>
       <header className="nav pnav">
-        <Link to="/#work" className="pnav-back" aria-label="Back to all projects">
+        <Link to="/" className="pnav-back" aria-label="Back to all projects">
           <ArrowLeft />
           <span>All projects</span>
         </Link>
@@ -109,7 +112,7 @@ export default function ProjectNav({ current }) {
             </li>
           ))}
         </ul>
-        <Link to="/#work" className="drawer-all" onClick={() => setOpen(false)} tabIndex={open ? 0 : -1}>
+        <Link to="/" className="drawer-all" onClick={() => setOpen(false)} tabIndex={open ? 0 : -1}>
           <ArrowLeft /> Back to all projects
         </Link>
       </aside>

@@ -5,8 +5,40 @@ import { useEffect, useState } from 'react'
 
 const listeners = new Set()
 
+/* Remember how far down the homepage was, so coming back lands there again. */
+const HOME_KEY = 'home-scroll'
+export const isHomePath = (p) => p === '/' || p === '/ux' || p === '/dv'
+
+if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+  window.history.scrollRestoration = 'manual'
+}
+
+export function rememberHomeScroll() {
+  if (isHomePath(window.location.pathname)) {
+    try {
+      sessionStorage.setItem(HOME_KEY, String(window.scrollY))
+    } catch {
+      /* storage can be blocked; not worth breaking navigation over */
+    }
+  }
+}
+
+export function savedHomeScroll() {
+  try {
+    return Number(sessionStorage.getItem(HOME_KEY)) || 0
+  } catch {
+    return 0
+  }
+}
+
+/* Jump without the smooth scroll set on <html>. */
+export function jumpTo(y) {
+  window.scrollTo({ top: y, left: 0, behavior: 'instant' })
+}
+
 export function navigate(to) {
   if (to === window.location.pathname + window.location.search) return
+  rememberHomeScroll()
   window.history.pushState({}, '', to)
   listeners.forEach((fn) => fn())
 }
@@ -37,8 +69,6 @@ export function Link({ to, children, onClick, ...rest }) {
       requestAnimationFrame(() =>
         document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
       )
-    } else if (!samePage) {
-      window.scrollTo(0, 0)
     }
   }
   return (

@@ -11,7 +11,6 @@ export function openOnClick(to) {
     if (e.defaultPrevented || e.target.closest('a, button')) return
     if (window.getSelection()?.toString()) return // user is selecting text
     navigate(to)
-    window.scrollTo(0, 0)
   }
 }
 

@@ -6948,3 +6948,265 @@ html[data-theme='herd-link'] .nav-contact {
 .pass:has(.pass-foot:hover) .pass-shine {
   opacity: 0;
 }
+
+/* =========================================================
+   Work experience: rotating year wheel (replaces the rail)
+   ========================================================= */
+.xp2,
+.has-sticky-head .xp2 {
+  --xp-zone: calc(var(--nav-h) + var(--head-h, 120px));
+  /* card + wheel sit centred in the space under the pinned title */
+  --xp-stick: max(calc(var(--xp-zone) + 8px), calc((var(--xp-zone) + 100vh) / 2 - 180px));
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: clamp(16px, 3vw, 40px);
+}
+
+.xp-wheel {
+  --R: 300px;
+  position: sticky;
+  top: calc(var(--xp-stick) - 30px);
+  height: 420px;
+}
+
+.xp-wheel-dial {
+  position: absolute;
+  left: calc(170px - var(--R));
+  top: 210px;
+  width: 0;
+  height: 0;
+}
+
+.xp-wheel-circle {
+  position: absolute;
+  left: calc(var(--R) * -1);
+  top: calc(var(--R) * -1);
+  width: calc(var(--R) * 2);
+  height: calc(var(--R) * 2);
+  border-radius: 50%;
+  border: 1px solid var(--line-2);
+  pointer-events: none;
+  -webkit-mask: linear-gradient(90deg, transparent 55%, #000 80%);
+  mask: linear-gradient(90deg, transparent 55%, #000 80%);
+}
+
+.xp-wi {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 6px 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  transform-origin: 0 50%;
+  transform: translateY(-50%) rotate(calc(var(--a) + var(--rot))) translateX(calc(var(--R) - 6px));
+  transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.5s ease;
+}
+
+.xp-wi-dot {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--line-2);
+  transition: all 0.4s ease;
+}
+
+.xp-wi.is-done .xp-wi-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.xp-wi.is-active .xp-wi-dot {
+  background: var(--accent-2);
+  border-color: var(--accent-2);
+  box-shadow: 0 0 0 6px rgba(var(--acc-rgb), 0.2), 0 0 18px var(--glow);
+}
+
+.xp-wi.xp-award.is-active .xp-wi-dot { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 0 6px rgba(242, 234, 121, 0.18), 0 0 18px rgba(242, 234, 121, 0.4); }
+.xp-wi.xp-edu.is-active .xp-wi-dot { background: #5eead4; border-color: #5eead4; box-shadow: 0 0 0 6px rgba(94, 234, 212, 0.18), 0 0 18px rgba(94, 234, 212, 0.4); }
+
+.xp-wi-label {
+  display: grid;
+  text-align: left;
+}
+
+.xp-wi-short,
+.xp-wi-big {
+  grid-area: 1 / 1;
+  transition: opacity 0.35s ease, transform 0.45s ease;
+}
+
+.xp-wi-short {
+  font-size: 1.5rem;
+  color: var(--soft);
+  opacity: 0.55;
+  white-space: nowrap;
+}
+
+.xp-wi:hover .xp-wi-short {
+  opacity: 1;
+  color: var(--muted);
+}
+
+.xp-wi-big {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0;
+  transform: translateX(-8px);
+  pointer-events: none;
+}
+
+.xp-wi-big b {
+  font-size: clamp(1.4rem, 1.9vw, 1.75rem);
+  font-weight: 400;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.xp-wi-big small {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  color: var(--accent-2);
+}
+
+.xp-wi.xp-award .xp-wi-big small { color: var(--gold); }
+.xp-wi.xp-edu .xp-wi-big small { color: #5eead4; }
+
+.xp-wi.is-active .xp-wi-short {
+  opacity: 0;
+}
+
+.xp-wi.is-active .xp-wi-big {
+  opacity: 1;
+  transform: none;
+}
+
+.xp-wheel .xp-rail-count {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 0;
+}
+
+@media (max-width: 1100px) {
+  .xp2,
+  .has-sticky-head .xp2 {
+    grid-template-columns: 300px minmax(0, 1fr);
+  }
+  .xp-wheel {
+    --R: 260px;
+  }
+  .xp-wheel-dial {
+    left: calc(140px - var(--R));
+  }
+  .xp-wi-big b {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .xp2,
+  .has-sticky-head .xp2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .xp-wheel {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xp-wi { transition: none; }
+}
+
+/* =========================================================
+   Pills light up on hover (everywhere)
+   ========================================================= */
+.xp-tags li,
+.cs-tags li,
+.pass-tags li,
+.pcard-tags li,
+.sec-tags li,
+.tags li,
+.chip,
+.folder-tags li,
+.feature-text .chips li {
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.xp-tags li:hover,
+.cs-tags li:hover,
+.pass-tags li:hover,
+.pcard-tags li:hover,
+.sec-tags li:hover,
+.tags li:hover,
+.chip:hover,
+.folder-tags li:hover,
+.idtags li:hover,
+.cs-kind:hover {
+  color: #fff;
+  background: rgba(var(--acc-rgb), 0.22);
+  border-color: var(--accent-2);
+  box-shadow: 0 0 0 3px rgba(var(--acc-rgb), 0.12), 0 0 16px -2px var(--glow);
+  transform: translateY(-1px);
+}
+
+/* inside a project pass, glow in the project's colour */
+.pass .pass-tags li:hover {
+  color: #fff;
+  background: color-mix(in srgb, var(--pc) 30%, transparent);
+  border-color: var(--pc);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pc) 18%, transparent), 0 0 16px -2px color-mix(in srgb, var(--pc) 70%, transparent);
+}
+
+/* work experience pills follow the card type */
+.xp-card2.xp-edu .xp-tags li:hover {
+  background: rgba(94, 234, 212, 0.16);
+  border-color: #5eead4;
+  box-shadow: 0 0 0 3px rgba(94, 234, 212, 0.1), 0 0 16px -2px rgba(94, 234, 212, 0.5);
+}
+
+.xp-card2.xp-award .xp-tags li:hover {
+  background: rgba(242, 234, 121, 0.14);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(242, 234, 121, 0.1), 0 0 16px -2px rgba(242, 234, 121, 0.45);
+}
+
+.xp2,
+.has-sticky-head .xp2 {
+  grid-template-columns: 400px minmax(0, 1fr);
+}
+
+.xp-wheel-dial {
+  left: calc(140px - var(--R));
+}
+
+.xp-wi-big b {
+  font-size: clamp(1.25rem, 1.7vw, 1.55rem);
+}
+
+@media (max-width: 1100px) {
+  .xp2,
+  .has-sticky-head .xp2 {
+    grid-template-columns: 320px minmax(0, 1fr);
+  }
+  .xp-wheel-dial {
+    left: calc(110px - var(--R));
+  }
+  .xp-wi-big b {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .xp2,
+  .has-sticky-head .xp2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

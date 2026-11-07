@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
-import { usePath } from './router.jsx'
+import { useEffect, useLayoutEffect, useRef } from 'react'
+import { usePath, isHomePath, savedHomeScroll, rememberHomeScroll, jumpTo } from './router.jsx'
 import Nav from './components/Nav.jsx'
 import ProjectNav from './components/ProjectNav.jsx'
 import Footer from './components/Footer.jsx'
@@ -17,6 +17,37 @@ export default function App() {
   const path = usePath().replace(/\/+$/, '') || '/'
   const workMatch = path.match(/^\/work\/([\w-]+)$/)
   const track = path === '/ux' ? 'ux' : path === '/dv' ? 'dv' : 'all'
+
+  // Case studies always open at the top; going back home returns to where you were.
+  const first = useRef(true)
+  useLayoutEffect(() => {
+    if (first.current) {
+      first.current = false
+      return
+    }
+    if (window.location.hash) return
+    if (workMatch) {
+      jumpTo(0)
+    } else {
+      const y = savedHomeScroll()
+      // wait a frame so the homepage has its full height before scrolling
+      requestAnimationFrame(() => jumpTo(y))
+    }
+  }, [path])
+
+  // browser back/forward: save the homepage position before leaving it
+  useEffect(() => {
+    const onScroll = () => {
+      if (isHomePath(window.location.pathname)) rememberHomeScroll()
+    }
+    let t = 0
+    const throttled = () => {
+      clearTimeout(t)
+      t = setTimeout(onScroll, 120)
+    }
+    window.addEventListener('scroll', throttled, { passive: true })
+    return () => window.removeEventListener('scroll', throttled)
+  }, [])
 
   useEffect(() => {
     if (window.location.hash) {

@@ -5,8 +5,8 @@ import Words from './Words.jsx'
 const ITEMS = [
   {
     type: 'edu',
-    year: '2021',
-    date: '2018 – 2021',
+    year: '2018',
+    date: '2018 – 2022',
     title: 'National Senior Certificate',
     org: 'High school, Hartbeespoort',
     meta: 'Matric',
@@ -17,7 +17,7 @@ const ITEMS = [
   {
     type: 'edu',
     year: '2023',
-    date: '2023 – Present',
+    date: '2023 – Now',
     title: 'BA: User Experience Design & Interactive Development',
     org: 'Open Window Institute, Pretoria',
     meta: 'Final year',
@@ -27,7 +27,7 @@ const ITEMS = [
   },
   {
     type: 'work',
-    year: 'Apr 2026',
+    year: 'Apr 26',
     date: 'Apr – Oct 2026',
     title: 'UX / AI Generalist Intern',
     org: 'Sand Dollar Design',
@@ -38,7 +38,7 @@ const ITEMS = [
   },
   {
     type: 'award',
-    year: 'Sep 2026',
+    year: 'Sep 26',
     date: '16 Sep 2026',
     title: '2nd place · ABSA Hackathon',
     org: 'ABSA South Africa',
@@ -48,6 +48,9 @@ const ITEMS = [
     path: 'awards/absa-hackathon',
   },
 ]
+
+/* degrees between entries on the wheel */
+const STEP = 32
 
 const LABEL = { work: 'WORK', award: 'AWARD', edu: 'EDUCATION' }
 
@@ -92,30 +95,32 @@ export default function Experience() {
     window.scrollTo({ top: target - stickTop + 4, behavior: 'smooth' })
   }
 
-  const progress = ITEMS.length > 1 ? active / (ITEMS.length - 1) : 1
-
   return (
     <div className="xp2" style={{ '--n': ITEMS.length }}>
-      <nav className="xp-rail" aria-label="Experience timeline">
-        <div className="xp-rail-line" aria-hidden="true">
-          <span style={{ height: `${progress * 100}%` }} />
-        </div>
-        <ol>
+      <nav className="xp-wheel" aria-label="Experience timeline">
+        <div className="xp-wheel-dial" style={{ '--rot': `${-active * STEP}deg` }}>
+          <span className="xp-wheel-circle" aria-hidden="true" />
           {ITEMS.map((it, i) => (
-            <li key={it.title}>
-              <button
-                type="button"
-                className={`xp-step xp-${it.type} ${i === active ? 'is-active' : ''} ${i < active ? 'is-done' : ''}`}
-                onClick={() => jump(i)}
-                aria-current={i === active ? 'step' : undefined}
-              >
-                <span className="xp-dot" aria-hidden="true" />
-                <span className="xp-step-year">{it.year}</span>
-                <span className="xp-step-type">[{LABEL[it.type]}]</span>
-              </button>
-            </li>
+            <button
+              key={it.title}
+              type="button"
+              className={`xp-wi xp-${it.type} ${i === active ? 'is-active' : ''} ${i < active ? 'is-done' : ''}`}
+              style={{ '--a': `${i * STEP}deg` }}
+              onClick={() => jump(i)}
+              aria-current={i === active ? 'step' : undefined}
+              aria-label={`${it.date}: ${it.title}`}
+            >
+              <span className="xp-wi-dot" aria-hidden="true" />
+              <span className="xp-wi-label" aria-hidden="true">
+                <span className="xp-wi-short pixel">{it.year}</span>
+                <span className="xp-wi-big">
+                  <b className="pixel">{it.date}</b>
+                  <small>[{LABEL[it.type]}]</small>
+                </span>
+              </span>
+            </button>
           ))}
-        </ol>
+        </div>
         <p className="xp-rail-count">
           {String(active + 1).padStart(2, '0')} / {String(ITEMS.length).padStart(2, '0')}
         </p>
