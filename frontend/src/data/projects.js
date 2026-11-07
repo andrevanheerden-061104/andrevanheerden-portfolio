@@ -51,7 +51,7 @@ export const projects = [
     year: '2026',
     tags: ['Dyspraxia-friendly', 'Self-paced', 'Speech-to-text'],
     theme: { bg: '#11a06a', ink: '#05231a', accent: '#05231a', hi: '#34d399' },
-    screens: ['/screens/nl-dash.jpg', '/screens/nl-splash.jpg', '/screens/nl-workout.jpg'],
+    screens: ['/screens/nl-home.jpg', '/screens/nl-splash.jpg', '/screens/nl-workout.jpg'],
   },
   {
     slug: 'herd-link',

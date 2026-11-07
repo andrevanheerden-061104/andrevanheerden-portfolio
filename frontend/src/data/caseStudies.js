@@ -54,6 +54,7 @@ export const caseStudies = {
       name: 'Liam Naidoo, 16',
       meta: 'Grade 10 · Pure Maths · Gamer',
       img: '/work/toa-persona.jpg',
+      alt: 'Persona photo of Liam, a Grade 10 learner',
       quote:
         'I know the formulas when the teacher explains them, but as soon as I sit down to do sums on my own, my mind goes completely blank and I freeze up.',
       goals: ['Apply formulas step by step without freezing', 'Practise at his own pace, with no timers', 'Get a hint right when he gets stuck'],
@@ -63,6 +64,9 @@ export const caseStudies = {
       'High school maths students suffer from high levels of maths anxiety (71.5% of 21 students) and freeze during practice. The breakdown isn’t understanding the theory but procedural execution: 57.1% struggle to turn formulas into working on paper.',
     hmw:
       'How might we design a pressure-free, replayable fantasy RPG that turns maths practice into the gameplay itself, with real-time guidance when stuck, so learners can build confidence without anxiety and want to come back again and again?',
+    wireflow: '/work/toa-wireflow.webp',
+    wireframesText:
+      'Key flows were planned as 45+ wireframes to check structure, interactions and content before any colour went on, giving one base template for all three grade modes.',
     wireframes: ['/screens/wf-signup.jpg', '/screens/wf-grade.jpg', '/screens/wf-combat.jpg', '/screens/wf-path.jpg'],
     style: {
       colors: [
@@ -120,32 +124,263 @@ export const caseStudies = {
 
   'next-level': {
     overview: [
-      { label: 'Role', value: 'UX research & UI design' },
+      { label: 'Role', value: 'Solo: UX research & UI design' },
       { label: 'Focus', value: 'Users with dyspraxia (DCD) & physical disabilities' },
-      { label: 'Platform', value: 'Mobile app' },
-      { label: 'Tools', value: 'Figma' },
+      { label: 'Platform', value: 'Mobile app (iPhone 17 frame)' },
+      { label: 'Tools', value: 'Figma · Quicksand · interactive prototype' },
     ],
-    challenge:
-      'Standard fitness apps rely on fast-paced timers and cluttered layouts that trigger anxiety and cognitive exhaustion. The challenge was a clean, predictable interface that breaks workout tracking into bite-sized steps and adapts to diverse accessibility needs.',
-    solution:
-      'Next Level is a highly structured, minimalist platform where users complete routines entirely at their own pace. Single-focus exercise screens reduce cognitive load, and large touch targets with clear visual guidance account for fine-motor challenges.',
+    brief: [
+      {
+        label: 'Design challenge',
+        text: 'Standard fitness apps rely on fast-paced timers and cluttered layouts that trigger anxiety and cognitive exhaustion. The challenge was a clean, predictable interface that breaks workout tracking into bite-sized steps and adapts to diverse accessibility needs.',
+      },
+      {
+        label: 'The problem',
+        text: 'Systems that demand rapid responses, complex planning and precise motor skills put severe strain on users with dyspraxia, especially when context is hidden or layouts shift. That lack of flexibility strips away the independence needed to keep a fitness routine.',
+      },
+      {
+        label: 'The solution',
+        text: 'A structured, minimalist app where routines are completed entirely at the user’s own pace. Single-focus exercise screens lower cognitive load, and big touch targets with clear visual guidance account for fine-motor challenges.',
+      },
+    ],
+    process: [
+      { stage: 'Discover', text: 'Secondary research on dyspraxia & digital platforms' },
+      { stage: 'Define', text: 'Persona, pain points, problem & HMW' },
+      { stage: 'Ideate', text: 'Feature mapping against user needs' },
+      { stage: 'Plan', text: 'Mid-fi wireframes & linear wire flow' },
+      { stage: 'Design', text: 'AA style guide & final UI screens' },
+      { stage: 'Prototype', text: 'Clickable Figma prototype of every flow' },
+    ],
+    research: {
+      title: 'Designing for dyspraxia',
+      intro:
+        'The secondary research looked at how people living with dyspraxia navigate digital platforms day to day. Cluttered layouts, hidden navigation and countdown timers directly trigger cognitive fatigue and anxiety, while calm, predictable layouts with single-focus tasks and larger touch targets dramatically reduce the strain.',
+      cards: [
+        { value: '01', title: 'Clutter overloads', text: 'Busy dashboards with sets, reps, weights and graphs on one screen overwhelm users on the gym floor.' },
+        { value: '02', title: 'Timers cause panic', text: 'Rigid countdowns cause mental exhaustion and physical clumsiness mid-set.' },
+        { value: '03', title: 'Hidden context gets lost', text: 'Hidden menus and shifting layouts make users lose their place in a routine.' },
+      ],
+      why: 'Flexible, inclusive design keeps users safe and in control of their own routine. The research gave me concrete rules: one task per screen, nothing hidden, no clocks, and big targets.',
+    },
+    featureMap: {
+      intro:
+        'Every feature started from a real pain point. By filtering out high-risk movements and turning exercises into clear, single-focus steps, the interface prevents cognitive overload and sensory fatigue.',
+      rows: [
+        { need: 'Busy tracking dashboards cause sensory overload on the gym floor.', feature: 'Single-focus exercise layouts', fn: 'One gym movement per screen before moving forward.', access: 'Lowers cognitive load and keeps the user calm.' },
+        { need: 'Hidden data or menus make users lose their place.', feature: 'Unhidden visual anchors', fn: 'All instructions, sets and weights stay openly on screen.', access: 'Prevents working-memory fatigue mid-workout.' },
+        { need: 'Rigid countdown timers trigger anxiety and coordination mistakes.', feature: 'Self-paced training', fn: 'A manual “Complete” button logs each set, with no clocks.', access: 'Removes time pressure so reps are done safely.' },
+        { need: 'Long profile setup and medical forms cause mental fatigue.', feature: 'Linear onboarding', fn: 'One question per screen: gender, age, weight, disability…', access: 'Never asks the user to remember past answers.' },
+      ],
+    },
+    persona: {
+      name: 'Mike Smith, 28',
+      meta: 'Employed part-time · Free State',
+      img: '/work/nl-persona.jpg',
+      alt: 'Persona photo of Mike, a 28-year-old gym-goer',
+      quote:
+        'A calm, self-paced fitness platform that adapts routines around his coordination limits and removes the cognitive fatigue from his gym routine.',
+      quoteLabel: 'core need',
+      goals: [
+        'Structured, predictable routines without unsafe multi-step moves',
+        'Log progress at his own pace, never rushed by a timer',
+        'Get through a workout start to finish on his own',
+      ],
+      pains: [
+        'Forgets the order and form of complex movements',
+        'Panics and gets clumsy when a countdown starts',
+        'Loses track of the plan on a busy gym floor',
+        'Overwhelmed by dashboards showing everything at once',
+      ],
+      extra: {
+        label: 'coping strategies & desired tech',
+        items: [
+          'Pre-workout checklists so the water bottle, keys and towel are packed',
+          'Clean screens that isolate one exercise step at a time',
+          'Massive touch targets and speech-to-text for motor slips',
+        ],
+      },
+    },
+    problem:
+      'Mike loves the gym, but his dyspraxia brings coordination and organisational barriers. Fitness apps built on fast timers, cluttered metrics and complex multi-step exercises trigger anxiety and spatial confusion, so simple workouts become overwhelming and he abandons his routine.',
+    hmw:
+      'How might we design an adaptive fitness interface that uses calm, single-focus steps to accommodate diverse disabilities, particularly dyspraxia, so users can manage physical routines independently without cognitive or physical exhaustion?',
+    wireframes: ['/screens/nlwf-signin.jpg', '/screens/nlwf-mic.jpg', '/screens/nlwf-home.jpg', '/screens/nlwf-reminders.jpg'],
+    wireframesText:
+      'The mid-fidelity wireframes map a strictly linear, low-stress journey: screen-by-screen onboarding that opens into a clean, single-focus workout view, with big touch targets, visible anchors and optional speech-to-text pop-ups.',
+    style: {
+      font: 'Quicksand',
+      colors: [
+        { hex: '#03624C', name: 'Primary green' },
+        { hex: '#05231A', name: 'Deep forest' },
+        { hex: '#E4E7EC', name: 'Soft off-white' },
+        { hex: '#2F80ED', name: 'Info' },
+        { hex: '#27AE60', name: 'Success' },
+        { hex: '#FFB01F', name: 'Warning' },
+      ],
+      why: 'Muted sage greens on dark backgrounds reduce the “visual vibration” that causes sensory overload, while white headings on dark green keep an AA contrast rating. Quicksand is friendly and rounded with generous line spacing, and every icon has a text label.',
+    },
+    numbers: [
+      { value: '6', label: 'linear onboarding steps' },
+      { value: '0', label: 'countdown timers' },
+      { value: 'AA', label: 'contrast rating' },
+      { value: '1', label: 'task per screen' },
+    ],
+    features: [
+      { title: 'Sign in, hands-free', text: 'A calm brand splash, then sign in by typing or by voice.', screens: ['/screens/nl-splash.jpg', '/screens/nl-signin.jpg', '/screens/nl-mic.jpg'], why: ['Every field has a mic button, so fine-motor slips never block someone from logging in.', 'The speech pop-up shows it’s listening, then fills the field for the user to check.'] },
+      { title: 'One question at a time', text: 'Onboarding asks for gender, age, weight, disability and workout type, one screen each.', screens: ['/screens/nl-gender.jpg', '/screens/nl-disability.jpg', '/screens/nl-type.jpg'], why: ['Isolated questions with large text and huge buttons remove the overload of a long form.', 'The disability step filters as you type and explains each condition, so workouts adapt safely.'] },
+      { title: 'Today at a glance', text: 'The home screen shows rank, today’s routine and a gentle nudge if a workout is unfinished.', screens: ['/screens/nl-calendar.jpg', '/screens/nl-home.jpg', '/screens/nl-reminder.jpg'], why: ['Warm-up and main sets are grouped and always visible, so users never lose their place.', 'The calendar shows training days and consistency without punishing missed ones.'] },
+      { title: 'Single-focus workouts', text: 'One exercise at a time, with clear sets, written steps and a short video.', screens: ['/screens/nl-workout.jpg', '/screens/nl-exercise.jpg', '/screens/nl-calendar.jpg'], why: ['Finished moves turn green and upcoming ones fade back, so the next step is obvious.', 'Sets are logged with a “Finished” button, never a stopwatch.'] },
+      { title: 'Pack-the-bag checklist', text: 'A reminder time and an editable checklist for gym essentials.', screens: ['/screens/nl-reminder.jpg', '/screens/nl-home.jpg', '/screens/nl-userdata.jpg'], why: ['Based on a coping strategy from the research: checklists offload memory before leaving home.', 'Items can be ticked, edited, deleted or added with big, clearly labelled controls.'] },
+      { title: 'Progress, not pressure', text: 'A gamified rank, level and streak heatmap, plus editable personal data.', screens: ['/screens/nl-profile.jpg', '/screens/nl-userdata.jpg', '/screens/nl-home.jpg'], why: ['Rank and XP reward showing up, keeping motivation high without competition.', 'Users can change their goal, weight or weekly target at any time.'] },
+    ],
+    mockup: '/work/nl-mock.jpg',
     conclusion:
-      'Users with dyspraxia are held back by sensory overload and too many choices at once, not a lack of motivation. Every decision, from the calm palette to clearly labelled icons, was made to keep the experience predictable and accessible.',
+      'Next Level helps users with dyspraxia manage their daily workouts by giving them a predictable, calm and structured digital space. A minimalist UI reduces cognitive load, and persistent navigation with clear task segmentation builds the confidence needed for long-term independence.',
+    learned: [
+      'Users with dyspraxia are held back by sensory overload and too many choices, not a lack of motivation.',
+      'How to turn neurodiversity research into practical design rules, from colour to icon labels.',
+    ],
+    moreTime: [
+      'User testing with neurodivergent people to validate the task-segmentation flow.',
+      'Haptic feedback and audio cues for users with motor coordination challenges.',
+    ],
   },
 
   'herd-link': {
     overview: [
-      { label: 'Role', value: 'UX research, AI feature mapping & UI design' },
+      { label: 'Role', value: 'Solo: UX research, AI feature mapping & UI design' },
       { label: 'Focus', value: 'Livestock farmers in low-signal areas' },
       { label: 'Platform', value: 'Smart collar + mobile app' },
-      { label: 'Tools', value: 'Figma' },
+      { label: 'Tools', value: 'Figma · Inter · interactive prototype' },
     ],
-    challenge:
-      'Livestock farmers need to monitor the health and location of hundreds of animals at once, outdoors, in harsh light and with poor reception. The interface had to turn complex animal data into clear actions without causing alert fatigue.',
-    solution:
-      'A smart collar paired with a high-contrast app. AI tracks movement and eating habits to find early signs of illness, the app hides normal data and highlights only the animals that need care, and it keeps working offline.',
+    brief: [
+      {
+        label: 'Design challenge',
+        text: 'Farmers need to monitor the health and location of hundreds of animals at once, outdoors and in harsh conditions. The challenge was an easy interface for the Herd Link wearable that turns complex animal data into clear actions without causing alert fatigue.',
+      },
+      {
+        label: 'The problem',
+        text: 'A sick animal or a broken water trough is hard to spot in a massive herd before it becomes a crisis. Physical checks take too long, and typical farm software fails in remote fields with poor reception and bright sunlight.',
+      },
+      {
+        label: 'The solution',
+        text: 'A smart collar paired with a high-contrast app. AI tracks movement and eating habits to find early signs of illness, the app hides normal data and highlights only the animals that need care, and it keeps working without internet.',
+      },
+    ],
+    process: [
+      { stage: 'Discover', text: 'Wearables & agri-tech secondary research' },
+      { stage: 'Define', text: 'Persona, pain points, problem & HMW' },
+      { stage: 'Ideate', text: 'Feature mapping & AI logic mapping' },
+      { stage: 'Plan', text: 'User flows & mid-fi wireframes' },
+      { stage: 'Design', text: 'High-contrast style guide & final UI' },
+      { stage: 'Prototype', text: 'Clickable Figma prototype & mock-ups' },
+    ],
+    research: {
+      title: 'What the wearables taught me',
+      intro:
+        'I studied leading consumer and medical wearables, then existing agricultural ones, to see how AI turns biometric data into insights a person can act on, and what breaks when you take that into a field.',
+      cards: [
+        { value: '01', title: 'Consumer & medical', text: 'Oura Ring, WHOOP 4.0, Ray-Ban Meta and Neuralink: personal baselines, colour-coded status and quiet audio cues guide behaviour without overload.', tags: ['Oura', 'WHOOP 4.0', 'Ray-Ban Meta', 'Neuralink'] },
+        { value: '02', title: 'Agricultural', text: 'Halter, Allflex SenseHub and Moocall: the system must work in total signal dead zones and harsh weather.', tags: ['Halter', 'SenseHub', 'Moocall'] },
+        { value: '03', title: 'Manage by exception', text: 'The big insight: hide normal behaviour and surface only critical anomalies, so busy farmers aren’t buried in alerts.', tags: ['Alert fatigue', 'Offline'] },
+      ],
+      why: 'Secondary research let me learn from products that already process millions of data points, and the agri-tech review showed the real constraints of a farm: no signal, mud, glare and no time.',
+    },
+    featureMap: {
+      intro:
+        'Herd Link’s features translate complex biological and environmental data into simple, scannable farm actions. Each one answers a specific pain point.',
+      rows: [
+        { need: 'Track operations and each animal’s biometrics effortlessly.', feature: 'Farm, herd & cow monitoring', fn: 'Live heart rate, respiration, temperature, rumination, activity and sleep.' },
+        { need: 'Overwhelmed by data when searching for sick animals.', feature: 'Filtered data alerts', fn: 'A prioritised list of what is wrong with which cow, hiding healthy data.' },
+        { need: 'Can’t confidently diagnose without medical expertise.', feature: 'AI diagnosis & confidence', fn: 'A probable diagnosis with a clear percentage confidence rating.' },
+        { need: 'Hard to find animals or issues across huge pastures.', feature: 'Live map tracking', fn: 'Herds, points of interest and live alerts on a satellite map.' },
+        { need: 'Holding a phone one-handed during manual labour.', feature: '3-way navigation', fn: 'Move the nav bar to the bottom, left or right of the screen.' },
+        { need: 'Syncing hardware in the mud is fiddly.', feature: 'Easy connect tap', fn: 'Tap the phone to a collar to pair it and load its profile.' },
+        { need: 'False alarms from the AI misreading normal movement.', feature: 'Resolve AI learning', fn: 'Feedback on resolved alerts corrects and trains the model.' },
+        { need: 'Unnoticed water or food shortages.', feature: 'POI anomaly detection', fn: 'Cows clustered at a trough with zero drinking vibrations fires an alert.' },
+        { need: 'Slow reaction to regional disease outbreaks.', feature: 'Location-based sensitivity', fn: 'Local disease news raises the AI’s sensitivity to matching symptoms.' },
+        { need: 'Animals escaping or wandering into danger.', feature: 'Virtual fencing', fn: 'Draw digital camp fences; a breach triggers a high-priority alarm.' },
+      ],
+    },
+    ai: {
+      title: 'How the AI watches the herd',
+      text: 'The collar streams movement, jaw vibrations and body temperature. The AI compares each animal against its own history and against the rest of the herd, so it can spot early illness or distress. When it finds an anomaly it filters out the normal background data and sends one direct, prioritised alert to the farmer’s phone.',
+      steps: ['Collar senses', 'Compare to baseline & herd', 'Detect anomaly', 'Prioritised alert', 'Farmer resolves → AI learns'],
+    },
+    persona: {
+      name: 'Pieter Botha, 40',
+      meta: 'Livestock farmer · Free State',
+      img: '/work/hl-persona.jpg',
+      alt: 'Persona photo of Pieter, a livestock farmer crouching in a field with cattle',
+      quote: 'Early identification of herd illnesses and camp supply issues.',
+      quoteLabel: 'core need',
+      goals: [
+        'Spot illness days before physical symptoms appear',
+        'Catch broken water troughs and supply issues instantly',
+        'Only be alerted when a cow genuinely needs care',
+        'A system that works in signal dead zones',
+      ],
+      pains: [
+        'Finding a sick cow or empty trough too late',
+        'Hundreds of unorganised graphs instead of clear actions',
+        'Frequent false alarms that cry wolf',
+        'Fiddly pairing setups out in the mud',
+      ],
+      extra: {
+        label: 'assistive technology',
+        items: [
+          'Private LoRa radio towers keep tracking and alerts syncing with no internet',
+          'High-contrast dark layouts that fight outdoor glare',
+          'Left- or right-handed side navigation for one-handed use',
+        ],
+      },
+    },
+    problem:
+      'Pieter works remote fields under harsh sun where standard software fails without a signal. He is exhausted from manual labour and can’t detect the early, subtle signs of disease or empty water troughs across thousands of hectares.',
+    hmw:
+      'How might we design a livestock management interface that translates massive amounts of animal behavioural data into clear, prioritised alerts, enabling a busy farmer to make rapid health decisions in harsh, low-connectivity outdoor environments?',
+    wireframes: ['/screens/hlwf-signup.jpg', '/screens/hlwf-signin.jpg', '/screens/hlwf-home.jpg', '/screens/hlwf-map.jpg'],
+    wireframesText:
+      'Black-and-white wireframes set the layout and logic before any styling: the onboarding path, the main farm dashboard and the interactive camp map, making sure health alerts were prioritised from the very start.',
+    style: {
+      font: 'Inter',
+      colors: [
+        { hex: '#1A1A1A', name: 'Primary' },
+        { hex: '#FEFFF9', name: 'Secondary' },
+        { hex: '#BFE93F', name: 'Success' },
+        { hex: '#00C0FE', name: 'Info' },
+        { hex: '#F56E0F', name: 'Warning' },
+        { hex: '#E30022', name: 'Error' },
+      ],
+      why: 'A high-contrast dark theme counters harsh outdoor glare, and bright status colours make urgency readable at a glance: red is an emergency, orange is imminent, blue is lower priority. Inter keeps numbers and labels sharp, with a 2-column grid and 30px margins.',
+    },
+    numbers: [
+      { value: '10', label: 'mapped features' },
+      { value: '4', label: 'alert urgency levels' },
+      { value: '3', label: 'nav bar positions' },
+      { value: '0', label: 'bars of signal needed' },
+    ],
+    features: [
+      { title: 'Set up & connect', text: 'Sign up, add your farm, then pair a collar by tapping it with your phone.', screens: ['/screens/hl-signup.jpg', '/screens/hl-farm.jpg', '/screens/hl-collar.jpg'], why: ['Farm name and location calibrate local tracking and POI alerts from day one.', 'Tap-to-pair replaces fiddly sync menus when your hands are full of mud.'] },
+      { title: 'The farm at a glance', text: 'A mini-map, live biometrics, herd activity and alerts on one dashboard.', screens: ['/screens/hl-alerts.jpg', '/screens/hl-home.jpg', '/screens/hl-cow.jpg'], why: ['Regional news and POI issues are visible without changing screens.', 'Herd activity sets a baseline so anomalies stand out before they spread.'] },
+      { title: 'Alerts by urgency', text: 'Every alert is colour-coded, with an AI summary and confidence rating.', screens: ['/screens/hl-alertfilter.jpg', '/screens/hl-alerts.jpg', '/screens/hl-poi.jpg'], why: ['Management by exception: healthy animals stay out of the list.', 'Red, orange and blue glow tells urgency apart even in bright sun.'] },
+      { title: 'Search & filter', text: 'Quick-filter chips for cattle, herds, POIs and alerts.', screens: ['/screens/hl-herds.jpg', '/screens/hl-alertfilter.jpg', '/screens/hl-poi.jpg'], why: ['Narrow hundreds of animals down to the one you need in seconds.', 'Herd cards show camp, head count and active alerts before you tap in.'] },
+      { title: 'Every cow’s vitals', text: 'Sleep, heart rate, respiration, temperature, rumination and posture.', screens: ['/screens/hl-home.jpg', '/screens/hl-cow.jpg', '/screens/hl-resolve.jpg'], why: ['Metric cards turn orange on dangerous spikes and stay green when stable.', 'Regional disease radar adds context right next to the animal.'] },
+      { title: 'Live map & POIs', text: 'A satellite view of camps, herds, water points and alerts.', screens: ['/screens/hl-map.jpg', '/screens/hl-mappoi.jpg', '/screens/hl-resolve.jpg'], why: ['Tapping a POI shows the alert in place, with resolve one tap away.', 'Camps show grazing levels; virtual fences flag breaches immediately.'] },
+      { title: 'Resolve & teach the AI', text: 'Log what really happened: fixed, false alarm, or more context.', screens: ['/screens/hl-poi.jpg', '/screens/hl-resolve.jpg', '/screens/hl-cow.jpg'], why: ['Every resolved alert trains the model, cutting repeat false alarms.', 'Big, clear choices make it quick to log from the field.'] },
+      { title: 'Navigation your way', text: 'Put the nav bar at the bottom, left or right.', screens: ['/screens/hl-navswitch.jpg', '/screens/hl-sidenav.jpg', '/screens/hl-map.jpg'], why: ['One-handed use while working in the yard or driving machinery.', 'Left- and right-handed layouts respect how each farmer holds a phone.'] },
+    ],
+    mockup: '/work/hl-mock.jpg',
     conclusion:
-      'Farm software works best when it manages by exception. Prioritised, colour-coded alerts, AI diagnoses with confidence ratings and one-handed navigation turn huge amounts of biometric data into quick decisions in the field.',
+      'Herd Link tackles monitoring hundreds of animals in harsh, low-connectivity conditions. Pairing a smart collar with a high-contrast app filters out normal behaviour and shows only the animals and infrastructure that need attention, so farmers can make quick, confident decisions in the field.',
+    learned: [
+      'Farm software works best when it manages by exception: prioritised, colour-coded alerts beat graphs.',
+      'AI needs to show its confidence and learn from feedback, or farmers stop trusting it.',
+    ],
+    moreTime: [
+      'Smarter AI that predicts health trends and highlights risks even earlier.',
+      'AR overlays for field navigation, vet notifications in emergencies, and a light mode for bright sun.',
+    ],
   },
 
   'ford-relay': {
