@@ -14,6 +14,7 @@ const COVERS = {
   'next-level': '/work/cover-next-level.jpg',
   'herd-link': '/work/cover-herd-link.jpg',
   'absa-village': '/work/cover-absa-village.jpg',
+  artifax: '/work/afx-dashboard.jpg',
 }
 
 function PassCard({ p, to, external, cta, badge, index, line, tags }) {
@@ -105,21 +106,20 @@ function PassCard({ p, to, external, cta, badge, index, line, tags }) {
    straight to its DV view. */
 function cardsFor(filter) {
   const cards = []
-  const ux = projects.filter((p) => p.tracks.includes('ux'))
-  const dvTracked = projects.filter((p) => p.tracks.includes('dv'))
-  if (filter === 'dv') {
-    dvTracked.forEach((p) =>
-      cards.push({
-        p,
-        to: `/work/${p.slug}?view=dv`,
-        badge: 'LIVE',
-        line: 'Expo app, my own Node API, Groq AI and Supabase, deployed for Android and web.',
-        tags: ['React Native', 'Node.js', 'Supabase'],
-      })
-    )
-  } else {
-    ux.forEach((p) => cards.push({ p, to: `/work/${p.slug}`, badge: p.tracks.includes('dv') ? 'UX + DV' : 'UX' }))
+  const toaDv = {
+    to: '/work/tower-of-arithmetic?view=dv',
+    badge: 'LIVE',
+    line: 'Expo app, my own Node API, Groq AI and Supabase, deployed for Android and web.',
+    tags: ['React Native', 'Node.js', 'Supabase'],
   }
+  projects.forEach((p) => {
+    const ux = p.tracks.includes('ux')
+    const dv = p.tracks.includes('dv')
+    if (filter === 'ux' && !ux) return
+    if (filter === 'dv' && !dv) return
+    if (filter === 'dv' && ux) cards.push({ p, ...toaDv })
+    else cards.push({ p, to: `/work/${p.slug}`, badge: ux && dv ? 'UX + DV' : dv ? (p.live ? 'LIVE' : 'DV') : 'UX' })
+  })
   if (filter !== 'ux') {
     devProjects.forEach((p) => cards.push({ p, to: p.repo, external: true, badge: 'DV' }))
   }

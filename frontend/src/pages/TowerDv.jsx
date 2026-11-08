@@ -101,7 +101,7 @@ function Code({ file, code }) {
   )
 }
 
-function Steps({ steps }) {
+export function Steps({ steps }) {
   return (
     <ol className="dv-steps">
       {steps.map((s, i) => (

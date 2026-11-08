@@ -100,6 +100,24 @@ export const projects = [
     theme: { bg: '#2350d8', ink: '#ffffff', accent: '#ffffff', hi: '#7aa2ff' },
     screens: ['/screens/ford-home.jpg', '/screens/ford-active.jpg', '/screens/ford-evidence.jpg'],
   },
+  {
+    slug: 'artifax',
+    glance: { problem: 'Two warehouses tracking stock and crafting by hand', built: 'React + ASP.NET Core inventory & crafting web app', role: 'Frontend dev (team of 5)', status: 'Live web app' },
+    title: 'Artifax',
+    tagline: 'Craft it, track it, restock it.',
+    summary:
+      'An inventory and crafting manager for a business with two warehouses: track base materials and crafted items, run timed crafting jobs, and give admins and employees different access. Built as a team with a React frontend and an ASP.NET Core API.',
+    kind: 'Web app · .NET API',
+    sector: 'Inventory & operations',
+    tracks: ['dv'],
+    year: '2026',
+    group: true,
+    desktop: true,
+    live: 'https://artifax-tau.vercel.app',
+    tags: ['React + TypeScript', 'ASP.NET Core', 'PostgreSQL'],
+    theme: { bg: '#2563eb', ink: '#ffffff', accent: '#ffffff', hi: '#7cb4ff' },
+    screens: ['/work/afx-dashboard-light.jpg', '/work/afx-dashboard.jpg'],
+  },
 ]
 
 export const trackLabel = (p) =>
@@ -124,19 +142,5 @@ export const devProjects = [
     theme: { bg: '#2f6f86', ink: '#ffffff', hi: '#7cc4d8' },
     cover: '/work/aqua-cover.jpg',
     repo: 'https://github.com/andrevanheerden/Aquastainable',
-  },
-  {
-    slug: 'artifax',
-    title: 'Artifax',
-    tagline: 'Inventory without the chaos.',
-    summary:
-      'A desktop inventory system for warehouses: stock across locations, a crafting queue, low-stock alerts and role-based access. Built as a team.',
-    kind: 'Desktop app',
-    year: '2026',
-    tags: ['React', '.NET', 'PostgreSQL', 'Docker', 'Electron'],
-    theme: { bg: '#2a4a7f', ink: '#ffffff', hi: '#8fb0e8' },
-    cover: '/work/artifax-cover.jpg',
-    repo: 'https://github.com/andrevanheerden-061104/Artifax',
-    group: true,
   },
 ]

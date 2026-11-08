@@ -6,7 +6,9 @@ import { Arrow } from '../components/Icons.jsx'
 import PhoneSpread from '../components/Phones.jsx'
 import Words from '../components/Words.jsx'
 import CaseIndex from '../components/CaseIndex.jsx'
+import { SiFigma } from 'react-icons/si'
 import { SectionHead, Why } from '../components/CaseBits.jsx'
+import ArtifaxDv, { ARTIFAX_OVERVIEW } from './ArtifaxDv.jsx'
 import TowerDv from './TowerDv.jsx'
 
 function Hero({ p }) {
@@ -29,10 +31,21 @@ function Hero({ p }) {
           {p.group ? ' · Group project' : ''}
         </p>
       </div>
-      <div className="cs-hero-phones">
-        <span className="cs-blob" aria-hidden="true" />
-        <PhoneSpread screens={p.screens} variant="hero" label={`${p.title} app screens`} />
-      </div>
+      {p.desktop ? (
+        <div className="cs-hero-phones cs-hero-tabs">
+          <span className="cs-blob" aria-hidden="true" />
+          {p.screens.map((src, i) => (
+            <figure key={src} className={`tab-frame hero-tab hero-tab-${i}`}>
+              <img src={src} alt={`${p.title} screen`} />
+            </figure>
+          ))}
+        </div>
+      ) : (
+        <div className="cs-hero-phones">
+          <span className="cs-blob" aria-hidden="true" />
+          <PhoneSpread screens={p.screens} variant="hero" label={`${p.title} app screens`} />
+        </div>
+      )}
     </section>
   )
 }
@@ -68,6 +81,11 @@ const THEMES = {
     '--site-accent': '#dc0037', '--accent-2': '#ff4d6d', '--accent-3': '#ff9aae',
     '--accent-deep': '#b50232', '--accent-deeper': '#77021e',
     '--acc-rgb': '220, 0, 55', '--acc2-rgb': '255, 77, 109',
+  },
+  artifax: {
+    '--site-accent': '#3b82f6', '--accent-2': '#60a5fa', '--accent-3': '#a5c8ff',
+    '--accent-deep': '#2563eb', '--accent-deeper': '#1e3a8a',
+    '--acc-rgb': '59, 130, 246', '--acc2-rgb': '96, 165, 250',
   },
   'ford-relay': {
     '--site-accent': '#3b6cf0', '--accent-2': '#7aa2ff', '--accent-3': '#bfd0ff',
@@ -513,42 +531,67 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
           </div>
         </div>
         {p.live ? (
-          <div className="play-cta" style={{ '--bg': p.theme.bg, '--accent': p.theme.accent }}>
-            <div>
-              <p className="hand">// try it yourself</p>
-              <h3>Play the live prototype</h3>
-              <p>Works in any browser on Android, iPhone or desktop. Want to see how it’s built? <button type="button" className="text-link" onClick={onSwitch}>Switch to the DV view</button>.</p>
-            </div>
-            <div className="cta-stack">
+          <div className="cta-pair">
+            <div className="play-cta" style={{ '--bg': p.theme.bg, '--accent': p.theme.accent }}>
+              <div>
+                <p className="hand">// try it yourself</p>
+                <h3>Play the live prototype</h3>
+                <p>Works in any browser on Android, iPhone or desktop. Want to see how it’s built? <button type="button" className="text-link" onClick={onSwitch}>Switch to the DV view</button>.</p>
+              </div>
               <a className="btn-accent" href={p.live} target="_blank" rel="noreferrer">
                 {p.live.replace('https://', '')} <Arrow />
               </a>
-              {cs.links?.behance && (
-                <a className="btn-ghost" href={cs.links.behance} target="_blank" rel="noreferrer">
-                  Case study on Behance <Arrow />
-                </a>
-              )}
-              {cs.links?.github && (
-                <a className="btn-ghost" href={cs.links.github} target="_blank" rel="noreferrer">
-                  Code on GitHub <Arrow />
-                </a>
-              )}
+            </div>
+            <div className="play-cta soon">
+              <div>
+                <p className="hand">// see more</p>
+                <h3>The full case study and code</h3>
+                <p>See the presentation on Behance, read the code on GitHub, or open the Figma file.</p>
+              </div>
+              <div className="cta-stack">
+                {cs.links?.behance && (
+                  <a className="btn-accent" href={cs.links.behance} target="_blank" rel="noreferrer">
+                    View on Behance <Arrow />
+                  </a>
+                )}
+                {cs.links?.github && (
+                  <a className="btn-ghost" href={cs.links.github} target="_blank" rel="noreferrer">
+                    Code on GitHub <Arrow />
+                  </a>
+                )}
+                {cs.links?.figma && (
+                  <a className="btn-ghost" href={cs.links.figma} target="_blank" rel="noreferrer">
+                    <SiFigma aria-hidden="true" /> Figma file <Arrow />
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         ) : cs.noCta ? null : (
           <div className="play-cta soon">
             <div>
               <p className="hand">// see more</p>
-              <h3>Every screen and the clickable prototype</h3>
-              <p>Try the prototype yourself, or see the full presentation and mock-ups on Behance.</p>
+              <h3>{cs.links?.behance ? 'Every screen and the clickable prototype' : 'See the full design file'}</h3>
+              <p>
+                {cs.links?.behance
+                  ? 'Try the prototype yourself, see the full presentation on Behance, or open the Figma file.'
+                  : 'Research, presentation slides, style tile and every screen, in the team’s Figma file.'}
+              </p>
             </div>
             <div className="cta-stack">
-              <a className="btn-accent" href={cs.links?.behance || LINKS.behance} target="_blank" rel="noreferrer">
-                View on Behance <Arrow />
-              </a>
+              {cs.links?.behance && (
+                <a className="btn-accent" href={cs.links.behance} target="_blank" rel="noreferrer">
+                  View on Behance <Arrow />
+                </a>
+              )}
               {cs.links?.prototype && (
                 <a className="btn-ghost" href={cs.links.prototype} target="_blank" rel="noreferrer">
                   Prototype link <Arrow />
+                </a>
+              )}
+              {cs.links?.figma && (
+                <a className="btn-ghost" href={cs.links.figma} target="_blank" rel="noreferrer">
+                  <SiFigma aria-hidden="true" /> Figma file <Arrow />
                 </a>
               )}
             </div>
@@ -651,14 +694,16 @@ export default function ProjectPage({ slug }) {
     )
   }
 
-  const cs = caseStudies[slug]
+  const cs = caseStudies[slug] || {}
   const full = Boolean(cs.persona)
 
   return (
     <article className={`cs ${hasDv ? 'has-toggle' : ''}`}>
       <Hero p={p} />
-      <Overview items={cs.overview} />
-      {hasDv && view === 'dv' ? (
+      <Overview items={slug === 'artifax' ? ARTIFAX_OVERVIEW : cs.overview} />
+      {slug === 'artifax' ? (
+        <ArtifaxDv key="afx" p={p} />
+      ) : hasDv && view === 'dv' ? (
         <TowerDv key="dv" p={p} onSwitch={() => setView('ux')} />
       ) : full ? (
         <UxCaseStudy key="ux" cs={cs} p={p} slug={slug} onSwitch={() => setView('dv')} />
