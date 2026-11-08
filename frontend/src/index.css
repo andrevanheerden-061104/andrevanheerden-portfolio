@@ -8353,3 +8353,31 @@ html[data-theme='herd-link'] .nav-contact {
   .sm-bp ~ .sm-hint,
   .sm-scroll:has(.sm-bp) + .sm-hint { display: none; }
 }
+
+/* phones: the sticky row labels become a thin vertical strip so they don't cover the cells */
+@media (max-width: 700px) {
+  .sm-journey,
+  .sm-bp {
+    padding: 10px 10px 10px 0;
+    gap: 6px;
+  }
+  .sm-journey { grid-template-columns: 30px repeat(var(--cols), minmax(140px, 1fr)); min-width: 920px; }
+  .sm-bp { grid-template-columns: 30px repeat(var(--cols), minmax(128px, 1fr)); min-width: 1480px; }
+  .sm-rowlabel {
+    left: 0;
+    margin-left: 0;
+    padding: 6px 0;
+    justify-content: center;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 0.5rem;
+    letter-spacing: 0.03em;
+    line-height: 1.05;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    border-left: 1px solid var(--line);
+    box-shadow: -6px 0 10px -6px rgba(0, 0, 0, 0.8);
+  }
+  .sm-line span { left: 34px; }
+}
