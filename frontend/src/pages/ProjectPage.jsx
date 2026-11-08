@@ -9,6 +9,7 @@ import CaseIndex from '../components/CaseIndex.jsx'
 import { SiFigma } from 'react-icons/si'
 import { SectionHead, Why } from '../components/CaseBits.jsx'
 import ArtifaxDv, { ARTIFAX_OVERVIEW } from './ArtifaxDv.jsx'
+import AquaDv, { AQUA_OVERVIEW } from './AquaDv.jsx'
 import TowerDv from './TowerDv.jsx'
 
 function Hero({ p }) {
@@ -18,7 +19,7 @@ function Hero({ p }) {
         <p className="cs-kind">
           <span className="cs-kind-dot" aria-hidden="true" /> {trackLabel(p)} · {p.kind}
         </p>
-        <h1 className="pixel cs-name">{p.title.toUpperCase()}</h1>
+        <h1 className={`pixel cs-name ${p.title.length > 12 ? 'is-long' : ''}`}>{p.title.toUpperCase()}</h1>
         <p className="cs-tagline">// {p.tagline}</p>
         <p className="cs-summary"><Words>{p.summary}</Words></p>
         <ul className="cs-tags">
@@ -87,6 +88,11 @@ const THEMES = {
     '--accent-deep': '#2563eb', '--accent-deeper': '#1e3a8a',
     '--acc-rgb': '59, 130, 246', '--acc2-rgb': '96, 165, 250',
   },
+  aquastainable: {
+    '--site-accent': '#2e8ca6', '--accent-2': '#4fb3cf', '--accent-3': '#9ad8ea',
+    '--accent-deep': '#1f6a80', '--accent-deeper': '#0f3d4b',
+    '--acc-rgb': '46, 140, 166', '--acc2-rgb': '79, 179, 207',
+  },
   'ford-relay': {
     '--site-accent': '#3b6cf0', '--accent-2': '#7aa2ff', '--accent-3': '#bfd0ff',
     '--accent-deep': '#2350d8', '--accent-deeper': '#142f8a',
@@ -122,25 +128,66 @@ function uxIndex(cs) {
   const research = []
   if (cs.survey) research.push({ id: 'survey', label: 'Survey' })
   research.push({ id: 'research', label: cs.secondary ? 'Literature & competitors' : 'Research' })
+  if (cs.insights) research.push({ id: 'insights', label: 'Key insights' })
+  ;(cs.boards || []).filter((b) => b.group === 'Research').forEach((b) => research.push({ id: b.id, label: b.label }))
   if (cs.strategy) research.push({ id: 'strategy', label: 'Strategy' })
   if (cs.featureMap) research.push({ id: 'featuremap', label: 'Feature mapping' })
   if (cs.ai) research.push({ id: 'ai', label: 'AI functionality' })
-  research.push({ id: 'persona', label: 'Persona' }, { id: 'problem', label: 'Problem & HMW' })
+  if (cs.persona) research.push({ id: 'persona', label: 'Persona' })
+  research.push({ id: 'problem', label: 'Problem & HMW' })
   g.push({ group: 'Research', items: research })
-  const plan = []
+  const ideate = (cs.boards || []).filter((b) => b.group === 'Ideate').map((b) => ({ id: b.id, label: b.label }))
+  if (cs.opportunities) ideate.push({ id: 'opportunities', label: 'Opportunities' })
+  if (ideate.length) g.push({ group: 'Ideate', items: ideate })
+  const plan = (cs.boards || []).filter((b) => b.group === 'Plan').map((b) => ({ id: b.id, label: b.label }))
+  if (cs.styles) plan.push({ id: 'styles', label: 'Style guides' })
   if (cs.wireflow) plan.push({ id: 'wireflow', label: 'Wire flow' })
   if (cs.wireframes) plan.push({ id: 'wireframes', label: 'Wireframes & style' })
   if (cs.posters) plan.push({ id: 'posters', label: 'Campaign posters' })
   if (!cs.wireframes && cs.style) plan.push({ id: 'style', label: 'Style' })
   if (plan.length) g.push({ group: cs.posters ? 'Design' : 'Planning', items: plan })
-  g.push({ group: cs.posters ? 'Solution' : 'Design', items: [{ id: 'features', label: 'Features' }] })
+  g.push({
+    group: cs.posters ? 'Solution' : 'Design',
+    items: cs.featureGroups ? cs.featureGroups.map((fg) => ({ id: fg.id, label: fg.title })) : [{ id: 'features', label: 'Features' }],
+  })
   g.push({ group: 'Wrap-up', items: [{ id: 'conclusion', label: 'Conclusion' }] })
   return g
 }
 
+function Board({ b }) {
+  return (
+    <section id={b.id} className="cs-section">
+      <SectionHead kicker={b.kicker} title={b.title} />
+      <div className={b.why ? 'cs-two' : ''}>
+        <p className={`cs-lead ${b.why ? '' : 'narrow'}`}><Words>{b.text}</Words></p>
+        {b.why && <Why label="why this method?">{b.why}</Why>}
+      </div>
+      <figure className={`board-fig ${b.tall ? 'is-tall' : ''}`}>
+        <img src={b.img} alt={b.alt} loading="lazy" />
+      </figure>
+    </section>
+  )
+}
+
+function FeatureText({ f, i }) {
+  return (
+    <div className="feature-text">
+      <span className="feature-no pixel">{String(i + 1).padStart(2, '0')}</span>
+      <h3>{f.title}</h3>
+      <p className="feature-desc">// {f.text}</p>
+      <ul>
+        {f.why.map((w) => (
+          <li key={w}><Words>{w}</Words></li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
 function UxCaseStudy({ cs, p, slug, onSwitch }) {
   const index = useMemo(() => uxIndex(cs), [cs])
-  const first = cs.persona.short || cs.persona.name.split(' ')[0]
+  const first = cs.persona ? cs.persona.short || cs.persona.name.split(' ')[0] : ''
+  const boardsOf = (grp) => (cs.boards || []).filter((b) => b.group === grp).map((b) => <Board key={b.id} b={b} />)
   return (
     <>
       <CaseIndex groups={index} />
@@ -190,6 +237,27 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
       {cs.team && (
         <section id="team" className="cs-section">
           <SectionHead kicker="the people" title="The team" />
+          {cs.team.members ? (
+            <>
+              <ul className="afx-team fr-team">
+                {cs.team.members.map((m) => (
+                  <li key={m.name} className={`comp-card ${m.me ? 'is-me' : ''}`}>
+                    <span className="afx-avatar">{m.initials}</span>
+                    <div>
+                      <h3>
+                        {m.name}
+                        {m.me && <small> (me)</small>}
+                      </h3>
+                      <p className="afx-area">// {cs.team.label} · {m.area}</p>
+                      {m.role && <p>{m.role}</p>}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              {cs.team.note && <Why label="how we worked">{cs.team.note}</Why>}
+            </>
+          ) : (
+          <>
           <div className="team-photos">
             {cs.team.photos.map((ph) => (
               <figure key={ph.src} className="team-photo">
@@ -209,6 +277,8 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
               ))}
             </ul>
           </div>
+          </>
+          )}
         </section>
       )}
 
@@ -360,6 +430,25 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
         </section>
       )}
 
+      {cs.insights && (
+        <section id="insights" className="cs-section">
+          <SectionHead kicker="define · synthesis" title={cs.insights.title} />
+          <div className="secondary fr-insights">
+            {cs.insights.items.map((c) => (
+              <article key={c.title} className="sec-card">
+                <span className="pixel sec-value">{c.value}</span>
+                <h3 className="sec-title">{c.title}</h3>
+                <p>{c.text}</p>
+              </article>
+            ))}
+          </div>
+          {cs.insights.synthesis && <Why label="the big reframe">{cs.insights.synthesis}</Why>}
+        </section>
+      )}
+
+      {boardsOf('Research')}
+
+      {cs.persona && (
       <section id="persona" className="cs-section">
         <SectionHead kicker="define · who I designed for" title={`Meet ${first}`} />
         <div className="persona">
@@ -396,6 +485,7 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
           </div>
         </div>
       </section>
+      )}
 
       <section id="problem" className="cs-section">
         <SectionHead kicker="define" title="The problem" />
@@ -405,6 +495,51 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
           <p><Words>{cs.hmw}</Words></p>
         </div>
       </section>
+
+      {boardsOf('Ideate')}
+
+      {cs.opportunities && (
+        <section id="opportunities" className="cs-section">
+          <SectionHead kicker="ideate · where to act" title="Design opportunities" />
+          <ol className="dv-ai-jobs fr-opps">
+            {cs.opportunities.map((o, i) => (
+              <li key={o.title}>
+                <span className="pixel">{String(i + 1).padStart(2, '0')}</span>
+                <h3>{o.title}</h3>
+                <p>{o.text}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      {boardsOf('Plan')}
+
+      {cs.styles && (
+        <section id="styles" className="cs-section">
+          <SectionHead kicker="design · two contexts, one system" title="Style guides" />
+          <p className="cs-lead narrow"><Words>{cs.styles.intro}</Words></p>
+          <ul className="swatches fr-swatches">
+            {cs.styles.colors.map((c) => (
+              <li key={c.hex}>
+                <span className="swatch" style={{ background: c.hex }} />
+                <b>{c.name}</b>
+                <small>{c.hex}</small>
+              </li>
+            ))}
+          </ul>
+          <div className="fr-styles">
+            {cs.styles.items.map((st) => (
+              <figure key={st.label} className="board-fig">
+                <img src={st.img} alt={`${st.label} style guide`} loading="lazy" />
+                <figcaption>
+                  <b>{st.label}</b> // {st.note}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
 
       {cs.wireflow && (
         <section id="wireflow" className="cs-section">
@@ -475,6 +610,43 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
         </section>
       )}
 
+      {cs.featureGroups ? (
+        cs.featureGroups.map((fg, gi) => (
+          <section key={fg.id} id={fg.id} className="cs-section">
+            <SectionHead kicker={fg.kicker} title={fg.title} />
+            <p className="cs-lead narrow"><Words>{fg.intro}</Words></p>
+            {gi === 0 && cs.numbers && (
+              <dl className="numbers">
+                {cs.numbers.map((n) => (
+                  <div key={n.label}>
+                    <dt className="pixel">{n.value}</dt>
+                    <dd>{n.label}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+            <div className={fg.tablet ? 'afx-features' : 'features'}>
+              {fg.features.map((f, i) =>
+                fg.tablet ? (
+                  <article key={f.title} className={`afx-feature ${i % 2 ? 'is-flipped' : ''}`}>
+                    <figure className="tab-frame">
+                      <img src={f.img} alt={`${p.title} ${f.title} screen`} loading="lazy" />
+                    </figure>
+                    <FeatureText f={f} i={i} />
+                  </article>
+                ) : (
+                  <article key={f.title} className={`feature-row ${i % 2 ? 'is-flipped' : ''}`}>
+                    <div className="feature-shot">
+                      <PhoneSpread screens={f.screens} variant={i % 2 ? 'trio-r' : 'trio'} label={`${f.title} screens`} />
+                    </div>
+                    <FeatureText f={f} i={i} />
+                  </article>
+                ),
+              )}
+            </div>
+          </section>
+        ))
+      ) : (
       <section id="features" className="cs-section">
         <SectionHead kicker="design · final UI" title="Features & why" />
         <dl className="numbers">
@@ -509,6 +681,7 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
           ))}
         </div>
       </section>
+      )}
 
       <section id="conclusion" className="cs-section">
         <SectionHead kicker={cs.story ? 'the summit' : 'looking back'} title={cs.story ? 'Tower cleared' : 'Conclusion'} />
@@ -517,6 +690,15 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
           <figure className="mockup-fig">
             <img src={cs.mockup} alt={`${p.title} final mock-up`} loading="lazy" />
           </figure>
+        )}
+        {cs.mockups && (
+          <div className="fr-mocks">
+            {cs.mockups.map((src) => (
+              <figure key={src} className="board-fig">
+                <img src={src} alt={`${p.title} mock-up`} loading="lazy" />
+              </figure>
+            ))}
+          </div>
         )}
         <div className="reflect">
           <div className="note note-green">
@@ -571,11 +753,13 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
           <div className="play-cta soon">
             <div>
               <p className="hand">// see more</p>
-              <h3>{cs.links?.behance ? 'Every screen and the clickable prototype' : 'See the full design file'}</h3>
+              <h3>{cs.links?.behance ? 'Every screen and the clickable prototype' : cs.links?.prototype2 ? 'Click through both prototypes' : 'See the full design file'}</h3>
               <p>
                 {cs.links?.behance
                   ? 'Try the prototype yourself, see the full presentation on Behance, or open the Figma file.'
-                  : 'Research, presentation slides, style tile and every screen, in the team’s Figma file.'}
+                  : cs.links?.prototype2
+                    ? 'Try the FordPass add-on and the Relay Console yourself, or open the team’s Figma file with all the research.'
+                    : 'Research, presentation slides, style tile and every screen, in the team’s Figma file.'}
               </p>
             </div>
             <div className="cta-stack">
@@ -585,8 +769,13 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
                 </a>
               )}
               {cs.links?.prototype && (
-                <a className="btn-ghost" href={cs.links.prototype} target="_blank" rel="noreferrer">
-                  Prototype link <Arrow />
+                <a className={cs.links.behance ? 'btn-ghost' : 'btn-accent'} href={cs.links.prototype} target="_blank" rel="noreferrer">
+                  {cs.links.prototype2 ? 'App prototype' : 'Prototype link'} <Arrow />
+                </a>
+              )}
+              {cs.links?.prototype2 && (
+                <a className="btn-ghost" href={cs.links.prototype2} target="_blank" rel="noreferrer">
+                  Console prototype <Arrow />
                 </a>
               )}
               {cs.links?.figma && (
@@ -695,14 +884,16 @@ export default function ProjectPage({ slug }) {
   }
 
   const cs = caseStudies[slug] || {}
-  const full = Boolean(cs.persona)
+  const full = Boolean(cs.persona || cs.featureGroups)
 
   return (
     <article className={`cs ${hasDv ? 'has-toggle' : ''}`}>
       <Hero p={p} />
-      <Overview items={slug === 'artifax' ? ARTIFAX_OVERVIEW : cs.overview} />
+      <Overview items={slug === 'artifax' ? ARTIFAX_OVERVIEW : slug === 'aquastainable' ? AQUA_OVERVIEW : cs.overview} />
       {slug === 'artifax' ? (
         <ArtifaxDv key="afx" p={p} />
+      ) : slug === 'aquastainable' ? (
+        <AquaDv key="aq" p={p} />
       ) : hasDv && view === 'dv' ? (
         <TowerDv key="dv" p={p} onSwitch={() => setView('ux')} />
       ) : full ? (

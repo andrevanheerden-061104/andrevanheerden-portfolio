@@ -7937,3 +7937,164 @@ html[data-theme='herd-link'] .nav-contact {
     transform: none;
   }
 }
+
+
+/* =========================================================
+   Ford Relay + Aquastainable
+   ========================================================= */
+/* big research boards (journey map, blueprints, storyboard) */
+.board-fig {
+  margin: 28px 0 0;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.board-fig:hover {
+  transform: translateY(-5px);
+  border-color: rgba(var(--acc-rgb), 0.55);
+  box-shadow: 0 24px 60px -28px var(--glow);
+}
+
+.board-fig img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.board-fig figcaption {
+  padding: 14px 18px;
+  font-size: 0.86rem;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+}
+
+.board-fig figcaption b {
+  color: var(--text, #fff);
+}
+
+.board-fig.is-tall {
+  max-width: 880px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* research cards: four in a row so none sit alone */
+.cs-section .research-cards:has(> :nth-child(4):last-child) {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* five insights: three on top, two below, both rows full width */
+.fr-insights {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin-bottom: 18px;
+}
+
+.fr-insights > :nth-child(-n + 3) { grid-column: span 2; }
+.fr-insights > :nth-child(n + 4) { grid-column: span 3; }
+
+.fr-team {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.fr-swatches {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin-top: 24px;
+}
+
+.fr-styles {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.fr-mocks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.fr-mocks .board-fig { margin: 0; }
+
+/* Aquastainable */
+.aq-problem {
+  margin-top: 28px;
+  max-width: none;
+}
+
+.aq-stats {
+  margin-top: 18px;
+}
+
+.aq-ai {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.aq-before {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.aq-before-fig {
+  position: relative;
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.aq-before-fig:hover {
+  transform: translateY(-5px);
+  border-color: rgba(var(--acc-rgb), 0.55);
+  box-shadow: 0 24px 60px -28px var(--glow);
+}
+
+.aq-before-fig img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.aq-before-fig figcaption {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  font: 400 0.72rem var(--pixel);
+  color: var(--accent-3);
+}
+
+@media (max-width: 1100px) {
+  .fr-team,
+  .cs-section .research-cards:has(> :nth-child(4):last-child),
+  .aq-ai { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fr-swatches { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 900px) {
+  .fr-insights { grid-template-columns: 1fr; }
+  .fr-insights > * { grid-column: auto !important; }
+  .fr-styles,
+  .fr-mocks,
+  .aq-before { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 620px) {
+  .fr-team,
+  .cs-section .research-cards:has(> :nth-child(4):last-child),
+  .aq-ai { grid-template-columns: 1fr; }
+}
+
+/* long project names (Aquastainable) stay clear of the hero phones */
+.cs-name.is-long {
+  font-size: clamp(2rem, 3.9vw, 3.4rem);
+}

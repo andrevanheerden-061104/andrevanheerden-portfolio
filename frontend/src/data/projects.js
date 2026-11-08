@@ -86,7 +86,7 @@ export const projects = [
   },
   {
     slug: 'ford-relay',
-    glance: { problem: 'Customers hear nothing once the keys are handed over', built: 'Live service timeline fed by workshop events', role: 'Service design & UI (group)', status: 'Prototype' },
+    glance: { problem: 'Customers hear nothing once the keys are handed over', built: 'Workshop console + FordPass add-on on one event spine', role: 'Service design & UI (team of 4)', status: 'Two prototypes' },
     title: 'Ford Relay',
     tagline: 'Service without the hassle.',
     summary:
@@ -96,9 +96,9 @@ export const projects = [
     tracks: ['ux'],
     year: '2026',
     group: true,
-    tags: ['Service blueprint', 'HMI console', 'Mobile app'],
+    tags: ['Service blueprint', 'HMI console', 'FordPass add-on'],
     theme: { bg: '#2350d8', ink: '#ffffff', accent: '#ffffff', hi: '#7aa2ff' },
-    screens: ['/screens/ford-home.jpg', '/screens/ford-active.jpg', '/screens/ford-evidence.jpg'],
+    screens: ['/work/ford/app-relay.jpg', '/work/ford/app-book.jpg', '/work/ford/app-finding.jpg'],
   },
   {
     slug: 'artifax',
@@ -118,6 +118,21 @@ export const projects = [
     theme: { bg: '#2563eb', ink: '#ffffff', accent: '#ffffff', hi: '#7cb4ff' },
     screens: ['/work/afx-dashboard-light.jpg', '/work/afx-dashboard.jpg'],
   },
+  {
+    slug: 'aquastainable',
+    glance: { problem: 'Beginners can’t read their tank water', built: 'Buttonless React Native app with an AI fish assistant', role: 'Solo: design & full-stack dev', status: 'Working app' },
+    title: 'Aquastainable',
+    tagline: 'Healthier tanks, happier fish.',
+    summary:
+      'A buttonless aquarium-care app: manage tanks, log water tests, check fish compatibility and ask an AI assistant when something goes wrong. Every action is a hold, a swipe or the camera.',
+    kind: 'Mobile app · AI assistant',
+    sector: 'Pets & hobbies',
+    tracks: ['dv'],
+    year: '2026',
+    tags: ['React Native + Expo', 'Express', 'Firebase', 'Groq AI'],
+    theme: { bg: '#2e8ca6', ink: '#ffffff', accent: '#ffffff', hi: '#9ad8ea' },
+    screens: ['/work/aqua/home.jpg', '/work/aqua/tank.jpg', '/work/aqua/water.jpg'],
+  },
 ]
 
 export const trackLabel = (p) =>
@@ -129,18 +144,4 @@ export const byTrack = (track) =>
 export const getProject = (slug) => projects.find((p) => p.slug === slug)
 
 /* Development-only projects (no case study page yet): they open their repo. */
-export const devProjects = [
-  {
-    slug: 'aquastainable',
-    title: 'Aquastainable',
-    tagline: 'Aquarium care, in one place.',
-    summary:
-      'A freshwater aquarium-care app: manage tanks, log water tests, check fish compatibility, and ask an AI assistant when something goes wrong.',
-    kind: 'Mobile app · AI assistant',
-    year: '2026',
-    tags: ['React Native', 'TypeScript', 'Express', 'Firebase', 'Groq AI'],
-    theme: { bg: '#2f6f86', ink: '#ffffff', hi: '#7cc4d8' },
-    cover: '/work/aqua-cover.jpg',
-    repo: 'https://github.com/andrevanheerden/Aquastainable',
-  },
-]
+export const devProjects = []

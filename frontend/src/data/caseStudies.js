@@ -2,6 +2,8 @@
    Tower of Arithmetic has the full write-up; the others have a short
    version until their full pages are built. */
 
+const F = '/work/ford/'
+
 export const caseStudies = {
   'tower-of-arithmetic': {
     overview: [
@@ -521,18 +523,206 @@ export const caseStudies = {
 
   'ford-relay': {
     overview: [
-      { label: 'Role', value: 'Group project: service design & UI' },
-      { label: 'Research', value: 'Staff interviews, 20-person survey, self-testing' },
-      { label: 'Platform', value: 'Workshop HMI console + customer app' },
-      { label: 'Tools', value: 'Figma' },
+      { label: 'Role', value: 'Group of 4: research, service design & UI' },
+      { label: 'Research', value: '2 staff interviews · 20-person survey · self-testing' },
+      { label: 'Platform', value: 'Workshop HMI console + FordPass add-on' },
+      { label: 'Tools', value: 'Figma · FigJam · Ford Antenna' },
     ],
-    challenge:
-      'Ford’s service journey starts with confidence, but the moment the keys change hands it fractures. 55% of customers get no proactive updates and 70% drop off their car without a clear cost estimate. Status updates depend on staff remembering to call.',
+    brief: [
+      {
+        label: 'Design challenge',
+        text: 'UX300 Service Design: pick a real service, find out whether the documented process matches what actually happens, and redesign it. We chose a yearly vehicle service at a South African Ford dealership, from drop-off to collection.',
+      },
+      {
+        label: 'The problem',
+        text: 'Booking feels confident, but the moment the keys change hands the experience fractures. 55% of customers get no proactive updates and 70% drop off their car without a clear cost. Updates depend on staff remembering to call.',
+      },
+      {
+        label: 'The solution',
+        text: 'Ford Relay: an event-driven service system on a shared “Event Spine” of twelve physical states. A Relay Console runs the workshop floor, and a new Service tab inside FordPass turns those same events into live, plain-language updates for the owner.',
+      },
+    ],
+    team: {
+      label: 'UX300 · Group 3',
+      members: [
+        { name: 'Andre van Heerden', initials: 'AV', me: true, area: '241155' },
+        { name: 'Tiana Kumm', initials: 'TK', area: '241150' },
+        { name: 'Bianca Binello', initials: 'BB', area: '241052', role: 'Our way in: her father is a Floor Manager at the dealership.' },
+        { name: 'Rikus Pretorius', initials: 'RP', area: '241044' },
+      ],
+      note: 'We researched, mapped and planned as one team, then designed the customer app and the workshop console on a shared style system, so both surfaces read from the same events.',
+    },
+    process: [
+      { stage: 'Discover', text: 'Interviews, survey, self-test & industry research' },
+      { stage: 'Define', text: 'Journey map & current-state blueprint' },
+      { stage: 'Ideate', text: 'Opportunities, tech curation & future blueprint' },
+      { stage: 'Plan', text: 'Storyboard & shared wireframes' },
+      { stage: 'Design', text: 'Two style guides: HMI and app' },
+      { stage: 'Prototype', text: 'Clickable app + console prototypes' },
+    ],
+    research: {
+      title: 'Does the process match the floor?',
+      intro:
+        'Bianca’s father is a Floor Manager at a Ford dealership, which gave us rare access. We tested the documented process against what staff and customers actually experience, from four angles.',
+      cards: [
+        { value: '01', title: 'Primary interviews', text: 'Semi-structured interviews with a Ford Floor Manager and a Service Advisor, covering the full yearly service from drop-off to collection.', tags: ['Floor Manager', 'Service Advisor'] },
+        { value: '02', title: 'Self-testing', text: 'We walked through Ford’s own MyFordJourney booking portal: the registration wasn’t recognised, only one dealer showed, and no time slot or cost appeared.', tags: ['MyFordJourney'] },
+        { value: '03', title: 'Customer survey', text: '20 people who had recently serviced a car rated satisfaction, communication and cost transparency. Updates during the service scored lowest: 3.2 / 5.', tags: ['20 respondents'] },
+        { value: '04', title: 'Secondary & case studies', text: 'Cox Automotive and Motify reports, plus Downey Nissan’s automated updates and Bolt On Technology’s digital inspections.', tags: ['Cox Automotive', 'Downey Nissan', 'DVI'] },
+      ],
+      why: 'Interviews told us how the floor really works, the survey put numbers on how customers feel, self-testing showed the friction first-hand, and published research proved the problem is industry-wide, not just one dealer.',
+    },
+    insights: {
+      title: 'What we found',
+      items: [
+        { value: '3.2/5', title: 'The communication vacuum', text: 'Status updates depend on staff remembering to call, not on system triggers. It was the lowest-scoring stage in our survey.' },
+        { value: '!', title: 'Evidence is the weakest link', text: 'Intake photos are thorough, but technicians skip logging findings, so trust collapses exactly when the customer is asked to pay.' },
+        { value: '70%', title: 'Opaque costs', text: 'of customers had only a vague idea, or no idea, of the cost before drop-off.' },
+        { value: '?!', title: 'The wash bay bottleneck', text: 'Not diagnosis: the wash bay is the main cause of delay, and customers are never told about the queue.' },
+        { value: '3', title: 'Backstage fragmentation', text: 'DMS, parts and warranty systems “don’t talk to each other”, so staff cross-check data by hand.' },
+      ],
+      synthesis: 'An implementation gap, not a technology gap. The dealership already owns the CRM, DMS and notification tools; they just aren’t wired to real-world events like clocking off or leaving the wash bay.',
+    },
+    boards: [
+      {
+        id: 'journey',
+        group: 'Research',
+        label: 'Journey map',
+        kicker: 'define · emotion over time',
+        title: 'The customer journey',
+        text: 'We mapped a yearly service from the dashboard warning light to collecting the car. It shows where the service feels broken from the customer’s side, even when the internal process looks fine: anxious at check-in, sceptical at payment.',
+        img: F + 'journey.jpg',
+        alt: 'Customer journey map for an annual Ford service, with actions, touchpoints, thoughts and feelings per phase',
+      },
+      {
+        id: 'blueprint',
+        group: 'Research',
+        label: 'Current blueprint',
+        kicker: 'define · how it works today',
+        title: 'Current-state service blueprint',
+        text: 'The blueprint exposes the gap between what the system claims and what actually happens. Red cells are where updates die, evidence gets skipped, or three siloed systems force workarounds.',
+        why: 'A blueprint shows the backstage too: the systems and staff the customer never sees, which is exactly where this service breaks.',
+        img: F + 'bp-current.jpg',
+        alt: 'Current-state service blueprint with red failure points across eleven stages',
+      },
+      {
+        id: 'future',
+        group: 'Ideate',
+        label: 'Future blueprint',
+        kicker: 'ideate · the same journey, rewired',
+        title: 'Future-state service blueprint',
+        text: 'The same eleven stages on the same infrastructure, but every update is fired by something physical happening. No new departments, no new DMS. Relay is an integration, not an invasion.',
+        img: F + 'bp-future.jpg',
+        alt: 'Future-state service blueprint where nearly every stage is now solved by Relay',
+      },
+      {
+        id: 'storyboard',
+        group: 'Plan',
+        label: 'Storyboard',
+        kicker: 'plan · the human moment',
+        title: 'From warning light to drive-off',
+        text: 'The journey map shows emotion and the blueprint shows architecture. The storyboard shows the human moment: a technician with dirty hands saying “Hey Relay, log a finding”, and a customer approving a quote from their phone instead of arguing in a corridor.',
+        img: F + 'storyboard.jpg',
+        alt: 'Twelve-panel illustrated storyboard of a driver going from warning light to collecting their serviced car',
+        tall: true,
+      },
+      {
+        id: 'wireframes',
+        group: 'Plan',
+        label: 'Wireframes',
+        kicker: 'plan · one backbone',
+        title: 'Shared wireframes',
+        text: 'We wireframed both surfaces together before any styling. Without one source of truth for how events become updates, the console and the app would drift into two disconnected products.',
+        img: F + 'wireframes.jpg',
+        alt: 'Greyscale wireframes of three console screens and five app screens',
+      },
+    ],
+    opportunities: [
+      { title: 'Automate the trigger', text: 'Fire updates from physical events like clocking on or entering the wash bay, not from someone remembering.' },
+      { title: 'Extend digital evidence', text: 'Require a photo at every recommendation, not just intake, and block progress until it exists.' },
+      { title: 'Bridge the backstage', text: 'Add a read layer across DMS, parts and warranty instead of replacing them.' },
+      { title: 'Surface the wash bay', text: 'Treat the wash queue as a real stage with a capacity meter that feeds honest ETAs.' },
+      { title: 'Upfront costs', text: 'Show an estimate at booking and itemised, jargon-free quotes before work begins.' },
+    ],
+    problem:
+      'Despite a DMS, tablet check-in and a CRM, the dealership runs as disconnected stages. Staff juggle siloed tools, customers sit in a communication vacuum, and trust erodes at the exact moment the business needs it most: when the customer is asked to pay.',
     hmw:
-      'How might we relay existing physical workshop events to customers automatically, so transparency is guaranteed by the system rather than dependent on staff memory?',
-    solution:
-      'An event-driven system built on a shared “Event Spine” of twelve physical states. The Relay Console lets technicians log findings with mandatory photo evidence, and the customer app turns those events into plain-language updates, itemised quotes and honest ETAs.',
+      'How might we relay existing physical workshop events to customers automatically, so that transparency is guaranteed by the system rather than dependent on staff memory?',
+    styles: {
+      intro: 'One system has to work in three places: a wall-mounted screen in a greasy workshop, a desk monitor and a phone in sunlight. Legibility and density mattered more than brand expression, so both guides share Ford’s colours and Ford Antenna, with different type scales.',
+      colors: [
+        { hex: '#1E0F4F', name: 'Ford Blue' },
+        { hex: '#211E26', name: 'Ford Grabber' },
+        { hex: '#FF8B16', name: 'Contrast' },
+        { hex: '#F3F3F3', name: 'Background' },
+        { hex: '#00E275', name: 'Success' },
+        { hex: '#FF666C', name: 'Error' },
+      ],
+      items: [
+        { label: 'HMI console', note: 'Major Third scale · 12-col grid · readable from 3 m', img: F + 'style-hmi.jpg' },
+        { label: 'FordPass app', note: 'Minor Third scale · 4-col grid · fits FordPass', img: F + 'style-app.jpg' },
+      ],
+    },
+    numbers: [
+      { value: '12', label: 'event spine states' },
+      { value: '2', label: 'surfaces, one system' },
+      { value: '14', label: 'app screens' },
+      { value: '10', label: 'console views' },
+    ],
+    featureGroups: [
+      {
+        id: 'app',
+        kicker: 'design · prototype 01',
+        title: 'The FordPass add-on',
+        intro: 'Ford Relay isn’t a new app. It extends FordPass, which owners already have, so only the new parts are designed: a Service tab, booking with real prices, a live tracker and quote approval. The home and vehicle screens stay as Ford built them.',
+        features: [
+          { title: 'Meet Relay inside FordPass', text: 'A prompt on the existing home screen opens the new Service tab.', screens: [F + 'app-home.jpg', F + 'app-popup.jpg', F + 'app-service.jpg'], why: ['Customers don’t install anything new; the feature lives where they already are.', 'The service tab shows tyre pressure and fluids next to the booking entry.'] },
+          { title: 'Book with the price up front', text: 'Find the car, pick a dealer by distance, rating and wait time, and see the estimate.', screens: [F + 'app-lookup.jpg', F + 'app-book.jpg', F + 'app-review.jpg'], why: ['Fixes the self-test pain: registration or VIN, more than one dealer, a real time slot.', 'An estimated cost range appears before confirming, closing the 70% cost gap.'] },
+          { title: 'A live tracker, not a phone call', text: 'Arrived → Diagnosis → Repair → Wash → Ready, with an honest ETA.', screens: [F + 'app-confirmed.jpg', F + 'app-relay.jpg', F + 'app-active.jpg'], why: ['Every step is fired by a workshop event, so nobody has to remember to update it.', 'The wash bay is its own stage, so the ETA includes the real bottleneck.'] },
+          { title: 'Approve findings with evidence', text: 'A finding arrives with photos, plain English and the price. Approve or decline.', screens: [F + 'app-finding.jpg', F + 'app-evidence.jpg', F + 'app-approved.jpg'], why: ['The customer sees what the technician saw, so trust holds at the payment stage.', 'The only thing the customer can change is the quote; the rest is read-only.'] },
+          { title: 'History that matches the invoice', text: 'Every past service with mileage, an itemised invoice and its photos.', screens: [F + 'app-history.jpg', F + 'app-gallery.jpg', F + 'app-relay.jpg'], why: ['Approved items carry straight to the invoice, so the final bill has no surprises.', 'Photos stay attached to the visit for the life of the car.'] },
+        ],
+      },
+      {
+        id: 'console',
+        kicker: 'design · prototype 02',
+        title: 'The Relay Console',
+        intro: 'The console is fully new: one interface for the service desk and a wall-mounted screen at every bay. Advisors run the floor from it, and technicians clock on, capture evidence and log findings by touch or voice.',
+        tablet: true,
+        features: [
+          { title: 'Live floor view', text: 'Every vehicle on site, filtered by stage and ranked by dwell time.', img: F + 'hmi-floor.jpg', why: ['Advisors see blockers at a glance instead of walking the floor.', 'Each card shows the car, its progress and the next action.'] },
+          { title: 'Digital check-in', text: 'Telemetry, the service package, the customer’s concern and damage photos in one place.', img: F + 'hmi-checkin.jpg', why: ['Photographing pre-existing damage protects the dealer and the customer.', 'The customer signs off on screen, so nothing is lost on paper.'] },
+          { title: 'Wash bay queue', text: 'Bays, queue length, live ETAs and delay flags for the real bottleneck.', img: F + 'hmi-wash.jpg', why: ['Turns the hidden wash queue into a stage with its own capacity meter.', 'Its ETAs feed straight into the customer’s tracker.'] },
+          { title: 'Exceptions board', text: 'Jobs waiting on the customer, parts or a bay, with the cost of the delay.', img: F + 'hmi-exceptions.jpg', why: ['Ranks stuck jobs by how much they cost the dealer today.', 'One tap resends a quote the customer hasn’t answered.'] },
+          { title: 'Quote composer', text: 'Build itemised quotes from findings and DMS prices, with photos required.', img: F + 'hmi-quote.jpg', why: ['A quote can’t be sent without photo evidence and a plain-English description.', 'Pulls prices from the DMS so nobody retypes them.'] },
+          { title: 'Bay job queue', text: 'Each bay’s jobs for the day, readable from three metres away.', img: F + 'hmi-queue.jpg', why: ['Big type and targets for a wall screen in a working bay.', '“Hey Relay, start job” works hands-free; every voice command has a touch version.'] },
+          { title: 'Active job with evidence gates', text: 'Checklist, findings and the photos still outstanding.', img: F + 'hmi-active.jpg', why: ['Clock-off is blocked until every required photo exists.', 'Findings and parts requests are logged without leaving the job.'] },
+          { title: 'Hey Relay', text: 'Say the finding; Relay shows what it heard before saving it.', img: F + 'hmi-listen.jpg', why: ['Technicians with greasy hands don’t have to type.', 'A finding with no photo can’t reach the customer, so capture opens next.'] },
+          { title: 'Guided capture & clock-off', text: 'Shot-by-shot photo guides, then a clock-off that only works when everything’s in.', img: F + 'hmi-capture.jpg', why: ['Each photo is tagged to its step automatically, so nothing is filed afterwards.', 'Clocking off is the physical event that moves the customer’s tracker on.'] },
+        ],
+      },
+    ],
+    mockups: [F + 'mock01.jpg', F + 'mock02.jpg', F + 'mock03.jpg', F + 'mock05.jpg'],
+    mockup: F + 'mock04.jpg',
+    links: {
+      prototype: 'https://www.figma.com/proto/9D2mwZwmg4YV3CYMjUffcz/Groupwork?node-id=764-2667&t=fn9ZYr412VpmMbZA-1&scaling=scale-down&content-scaling=fixed&page-id=764%3A2660',
+      prototype2: 'https://www.figma.com/proto/9D2mwZwmg4YV3CYMjUffcz/Groupwork?node-id=659-16009&starting-point-node-id=659%3A16009&scaling=scale-down&content-scaling=fixed&page-id=448%3A4',
+      figma: 'https://www.figma.com/design/9D2mwZwmg4YV3CYMjUffcz/Groupwork?node-id=1346-8961',
+    },
     conclusion:
-      'Ford Relay doesn’t introduce new technology; it connects Ford’s existing systems to what really happens on the workshop floor. It’s an implementation gap, not a technology gap.',
+      'Ford Relay doesn’t introduce new technology; it connects Ford’s existing systems to what really happens on the floor. Updates fire from workshop events instead of staff memory, evidence gates block a job until the photos exist, quotes are approved before work starts so the invoice always matches, and the wash bay finally has a visible queue that feeds honest ETAs.',
+    learned: [
+      'This was an implementation gap, not a technology gap: the fix was wiring, not more software.',
+      'Any status a human still has to type brings the old friction back, so events must drive updates.',
+      'Evidence gates only work if they truly block progress; a dismissible warning gets dismissed.',
+      'Designing two surfaces as a team of four only worked because we agreed on the event spine first.',
+    ],
+    moreTime: [
+      'Pilot at one dealership and measure repeat status calls against Downey Nissan’s 15% drop.',
+      'Track CSI before and after, since it’s tied to franchise retention.',
+      'Refine the voice commands from real technician use.',
+      'Use Ford telemetry to prompt a service before the warning light even appears.',
+    ],
   },
+
 }

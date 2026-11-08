@@ -15,6 +15,8 @@ const COVERS = {
   'herd-link': '/work/cover-herd-link.jpg',
   'absa-village': '/work/cover-absa-village.jpg',
   artifax: '/work/cover-artifax.jpg',
+  'ford-relay': '/work/cover-ford-relay.jpg',
+  aquastainable: '/work/cover-aquastainable.jpg',
 }
 
 function PassCard({ p, to, external, cta, badge, index, line, tags }) {
