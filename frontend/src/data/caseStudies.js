@@ -8,6 +8,7 @@ const F = '/work/ford/'
 
 export const caseStudies = {
   'tower-of-arithmetic': {
+    videos: [{ src: '/video/toa.mp4', poster: '/video/toa.jpg', title: 'Tower of Arithmetic promo', label: 'promo video', main: true }],
     overview: [
       { label: 'Role', value: 'Solo: UX research, UI design & development' },
       { label: 'Timeline', value: '6-week capstone sprint, 2026' },
@@ -255,6 +256,7 @@ export const caseStudies = {
   },
 
   'next-level': {
+    videos: [{ src: '/video/next-level.mp4', poster: '/video/next-level.jpg', title: 'Next Level promo', label: 'promo video', main: true }],
     overview: [
       { label: 'Role', value: 'Solo: UX research & UI design' },
       { label: 'Focus', value: 'Users with dyspraxia (DCD) & physical disabilities' },
@@ -383,6 +385,7 @@ export const caseStudies = {
   },
 
   'herd-link': {
+    videos: [{ src: '/video/herd-link.mp4', poster: '/video/herd-link.jpg', title: 'Herd Link promo', label: 'promo video', main: true }],
     overview: [
       { label: 'Role', value: 'Solo: UX research, AI feature mapping & UI design' },
       { label: 'Focus', value: 'Livestock farmers in low-signal areas' },
@@ -524,6 +527,11 @@ export const caseStudies = {
   },
 
   'ford-relay': {
+    videos: [
+      { src: '/video/ford-walkthrough.mp4', poster: '/video/ford-walkthrough.jpg', title: 'System walkthrough', label: 'the whole service, end to end', main: true },
+      { src: '/video/ford-relay.mp4', poster: '/video/ford-relay.jpg', title: 'Ford Relay console promo', label: 'more · the workshop console' },
+      { src: '/video/ford-pass.mp4', poster: '/video/ford-pass.jpg', title: 'FordPass add-on promo', label: 'more · the customer app' },
+    ],
     overview: [
       { label: 'Role', value: 'Group of 4: research, service design & UI' },
       { label: 'Research', value: '2 staff interviews · 20-person survey · self-testing' },

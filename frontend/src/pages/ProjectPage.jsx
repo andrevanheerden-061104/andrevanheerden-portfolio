@@ -121,6 +121,7 @@ function uxIndex(cs) {
   g.push({
     group: 'Overview',
     items: [
+      ...(cs.videos ? [{ id: 'video', label: 'Watch' }] : []),
       cs.story ? { id: 'story', label: 'The story' } : { id: 'brief', label: 'The brief' },
       ...(cs.team ? [{ id: 'team', label: 'The team' }] : []),
       { id: 'process', label: 'Process' },
@@ -156,6 +157,31 @@ function uxIndex(cs) {
   })
   g.push({ group: 'Wrap-up', items: [{ id: 'conclusion', label: 'Conclusion' }] })
   return g
+}
+
+function Videos({ videos, title }) {
+  const main = videos.find((v) => v.main) || videos[0]
+  const more = videos.filter((v) => v !== main)
+  return (
+    <section id="video" className="cs-section">
+      <SectionHead kicker={`watch · ${main.label}`} title={more.length ? 'See it in action' : `${title} in a minute`} />
+      <figure className="cs-video is-main">
+        <video src={main.src} poster={main.poster} controls playsInline preload="none" aria-label={main.title} />
+      </figure>
+      {more.length > 0 && (
+        <div className="cs-video-more">
+          {more.map((v) => (
+            <figure key={v.src} className="cs-video">
+              <video src={v.src} poster={v.poster} controls playsInline preload="none" aria-label={v.title} />
+              <figcaption>
+                <b>{v.title}</b> // {v.label}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      )}
+    </section>
+  )
 }
 
 function Board({ b }) {
@@ -195,6 +221,8 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
   return (
     <>
       <CaseIndex groups={index} />
+
+      {cs.videos && <Videos videos={cs.videos} title={p.title} />}
 
       {cs.story ? (
         <section id="story" className="cs-section">
