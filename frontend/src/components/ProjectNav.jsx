@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from '../router.jsx'
 import { projects, LINKS, trackLabel } from '../data/projects.js'
-import { ArrowLeft, Heart } from './Icons.jsx'
+import { ArrowLeft, Arrow } from './Icons.jsx'
 
 /* Nav on project pages.
    Desktop: back button + every project as a tab.
@@ -71,9 +71,8 @@ export default function ProjectNav({ current }) {
           ))}
         </nav>
 
-        <a className="nav-contact" href={`mailto:${LINKS.email}`}>
-          <Heart />
-          <span>Get in touch</span>
+        <a className="btn btn-primary btn-sm nav-contact" href={`mailto:${LINKS.email}`}>
+          <span>Get in touch</span> <Arrow />
         </a>
       </header>
 

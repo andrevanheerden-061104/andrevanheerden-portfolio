@@ -110,7 +110,7 @@ function cardsFor(filter) {
   const cards = []
   const toaDv = {
     to: '/work/tower-of-arithmetic?view=dv',
-    badge: 'LIVE',
+    badge: 'DV + LIVE',
     line: 'Expo app, my own Node API, Groq AI and Supabase, deployed for Android and web.',
     tags: ['React Native', 'Node.js', 'Supabase'],
   }
@@ -120,7 +120,7 @@ function cardsFor(filter) {
     if (filter === 'ux' && !ux) return
     if (filter === 'dv' && !dv) return
     if (filter === 'dv' && ux) cards.push({ p, ...toaDv })
-    else cards.push({ p, to: `/work/${p.slug}`, badge: ux && dv ? 'UX + DV' : dv ? (p.live ? 'LIVE' : 'DV') : 'UX' })
+    else cards.push({ p, to: `/work/${p.slug}`, badge: ux && dv ? 'UX + DV' : dv ? (p.live ? 'DV + LIVE' : 'DV') : 'UX' })
   })
   if (filter !== 'ux') {
     devProjects.forEach((p) => cards.push({ p, to: p.repo, external: true, badge: 'DV' }))

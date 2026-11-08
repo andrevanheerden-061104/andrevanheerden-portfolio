@@ -8381,3 +8381,14 @@ html[data-theme='herd-link'] .nav-contact {
   }
   .sm-line span { left: 34px; }
 }
+
+/* case-study "Get in touch" matches the homepage button, in the project colour */
+.pnav .nav-contact {
+  box-shadow: 0 8px 24px -10px var(--glow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pnav .nav-contact:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -10px var(--glow);
+}
