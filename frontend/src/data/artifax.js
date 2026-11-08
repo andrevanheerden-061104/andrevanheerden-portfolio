@@ -21,7 +21,7 @@ export const artifax = {
     { value: '5', label: 'team members, 1 repo' },
     { value: '2', label: 'warehouses, scoped by the API' },
     { value: '116', label: 'automated tests (39 Jest + 77 xUnit)' },
-    { value: '357', label: 'commits' },
+    { value: '358', label: 'commits' },
   ],
   brief:
     'Build a simple, highly reliable inventory system with a .NET API for at least two warehouses: track base materials and the items crafted from them, run timed crafting orders, and give admins and employees different access.',
@@ -35,6 +35,15 @@ export const artifax = {
   workflow:
     'Each of us worked on our own branch and merged through a PreProduction branch, so main always stayed stable and deployable.',
   features: [
+    {
+      title: 'Login & email code',
+      text: 'Password first, then a 6-digit code that Supabase emails you.',
+      img: '/work/afx-login.jpg',
+      why: [
+        'The second step is an emailed code, so nobody has to install an authenticator app.',
+        'Demo buttons let reviewers jump straight into Warehouse 1 or Warehouse 2.',
+      ],
+    },
     {
       title: 'Dashboard',
       text: 'Low-stock warnings, active crafts and the queue at a glance.',
@@ -72,12 +81,39 @@ export const artifax = {
       ],
     },
     {
+      title: 'New blueprint',
+      text: 'Create or edit a recipe: name, category, craft time, price and its materials.',
+      img: '/work/afx-new-blueprint.jpg',
+      why: [
+        'Category cards with icons set the colour the item uses everywhere in the app.',
+        'A searchable material picker and a live material cost help price the item.',
+      ],
+    },
+    {
+      title: 'Order history',
+      text: 'Every completed and cancelled order, searchable and filterable.',
+      img: '/work/afx-history.jpg',
+      why: [
+        'Filter by status and category, sort newest first, and open any order for details.',
+        'Each row shows who crafted it and in which warehouse.',
+      ],
+    },
+    {
       title: 'Analytics (admin)',
       text: 'Production activity, most-crafted items and a material forecast.',
       img: '/work/afx-analytics.jpg',
       why: [
         'KPI tiles for units crafted, output value, production time and completion rate.',
         'The material forecast shows what to reorder first, based on the last 30 days.',
+      ],
+    },
+    {
+      title: 'User management (admin)',
+      text: 'Admins add, edit and remove staff, and set their role and warehouse.',
+      img: '/work/afx-users.jpg',
+      why: [
+        'Filter by everyone, admins or employees, and search by name, email or warehouse.',
+        'A user’s warehouse decides which stock they can see and craft from.',
       ],
     },
     {
@@ -98,6 +134,39 @@ export const artifax = {
     { key: 'docker', name: 'Vercel · Render · Docker', role: 'Hosting', why: 'Frontend on Vercel, the API in a Docker container on Render.' },
     { key: 'tests', name: 'Jest · xUnit · Moq', role: 'Testing', why: 'Jest on the frontend; xUnit with Moq and an in-memory database on the API.' },
   ],
+  tools: ['TypeScript', 'C#', 'SQL', 'Tailwind CSS', 'DaisyUI', 'React Router', 'Axios', 'Chart.js', 'Entity Framework Core', 'BCrypt', 'Swagger', 'Insomnia', 'GitHub Actions', 'Electron (original build)', 'Figma'],
+  db: {
+    tables: [
+      { name: 'Branches', note: 'the warehouses', fields: [['PK', 'BranchID'], ['', 'BranchName']] },
+      { name: 'Employees', rel: 'many : 1 Branches', fields: [['PK', 'EmployeeId'], ['', 'Email · Name'], ['', 'PasswordHash (bcrypt)'], ['FK', 'BranchId'], ['', 'Level: Admin / Employee']] },
+      { name: 'Items', note: 'materials + crafted', fields: [['PK', 'ItemID'], ['', 'ItemName · Category'], ['', 'ProductionTime'], ['', 'Price']] },
+      { name: 'ItemIngredients', rel: 'the blueprint recipe', fields: [['PK', 'ItemIngredientID'], ['FK', 'ProductID → Items'], ['FK', 'IngredientID → Items'], ['', 'IngredientQuantity']] },
+      { name: 'BranchItemCapacities', rel: 'stock per warehouse', fields: [['PK', 'BranchItemCapacityID'], ['FK', 'BranchID'], ['FK', 'ItemID'], ['', 'ItemQuantity']] },
+      { name: 'Orders', rel: 'crafting jobs', fields: [['PK', 'OrderID'], ['FK', 'ItemID · EmployeeID'], ['FK', 'BranchID · SourceBranchID'], ['', 'Quantity · Status'], ['', 'TotalTime · TimeElapsed'], ['', 'OrderExpedite']] },
+      { name: 'OrderHistories', rel: 'many : 1 Orders', fields: [['PK', 'OrderHistoryID'], ['FK', 'OrderID'], ['', 'PreviousStatus → NewStatus'], ['FK', 'ChangedByEmployeeID'], ['', 'ChangeReason']] },
+    ],
+    note: 'Seven PostgreSQL tables, mapped with EF Core. A blueprint is an item that points at other items through ItemIngredients, so base materials and crafted items share one table. Stock lives per warehouse in BranchItemCapacities, and every status change is logged in OrderHistories. I added SourceBranchID on my fork so admins can craft from one warehouse into another.',
+  },
+  git: {
+    steps: [
+      { title: '358 commits, five contributors', text: 'Each of us worked on our own branch: Andre, Mario, Kai, Dee, plus Backend and Frontend.' },
+      { title: 'PreProduction before main', text: 'Work merged into PreProduction first, then into main once it was tested.' },
+      { title: 'Secrets out of Git', text: '.env is git-ignored; .env.example lists every variable to fill in.' },
+      { title: 'Original deployment', text: 'GitHub Actions built the API into a Docker image for Render; Electron packaged the frontend as a Windows app.' },
+      { title: 'My fork', text: 'The frontend on Vercel with an /api rewrite to the Docker API on Render, and the database on Supabase.' },
+    ],
+    terminal: `$ git branch -r
+  upstream/Andre
+  upstream/Backend
+  upstream/Dee
+  upstream/Frontend
+  upstream/Kai
+  upstream/Mario
+$ git rev-list --count main
+358
+$ git check-ignore Backend/.env
+Backend/.env`,
+  },
   arch: {
     app: { tag: 'Client', name: 'React app', text: 'Tablet UI. Sends the session cookie and the chosen warehouse.' },
     api: { tag: 'Backend', name: '.NET API', text: 'Checks the session and role, then scopes every query to a warehouse.' },

@@ -14,7 +14,7 @@ const COVERS = {
   'next-level': '/work/cover-next-level.jpg',
   'herd-link': '/work/cover-herd-link.jpg',
   'absa-village': '/work/cover-absa-village.jpg',
-  artifax: '/work/afx-dashboard.jpg',
+  artifax: '/work/cover-artifax.jpg',
 }
 
 function PassCard({ p, to, external, cta, badge, index, line, tags }) {

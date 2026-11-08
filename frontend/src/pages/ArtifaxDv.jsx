@@ -3,7 +3,7 @@ import { SectionHead, Why } from '../components/CaseBits.jsx'
 import CaseIndex from '../components/CaseIndex.jsx'
 import Words from '../components/Words.jsx'
 import { Arrow } from '../components/Icons.jsx'
-import { Steps } from './TowerDv.jsx'
+import { Steps, Code } from './TowerDv.jsx'
 import { SiReact, SiDotnet, SiPostgresql, SiSupabase, SiDocker, SiJest, SiGithub } from 'react-icons/si'
 
 const STACK = {
@@ -25,7 +25,9 @@ const INDEX = [
     items: [
       { id: 'afx-stack', label: 'Tech stack' },
       { id: 'afx-arch', label: 'Architecture' },
+      { id: 'afx-db', label: 'Database' },
       { id: 'afx-data', label: 'Data, security & tests' },
+      { id: 'afx-git', label: 'Git & deployment' },
     ],
   },
   {
@@ -153,6 +155,10 @@ export default function ArtifaxDv({ p }) {
             </article>
           ))}
         </div>
+        <div className="afx-tools">
+          <span className="why-label">// languages & tools</span>
+          <ul className="cs-tags">{a.tools.map((t) => <li key={t}>{t}</li>)}</ul>
+        </div>
       </section>
 
       <section id="afx-arch" className="cs-section">
@@ -167,6 +173,33 @@ export default function ArtifaxDv({ p }) {
           <Node k="db" />
         </div>
         <Why label="the key decision">{a.arch.why}</Why>
+      </section>
+
+      <section id="afx-db" className="cs-section">
+        <SectionHead kicker="data model" title="The database" />
+        <div className="erd erd-afx">
+          {a.db.tables.map((t) => (
+            <article key={t.name} className="erd-table">
+              <header>
+                <b>{t.name}</b>
+                {t.note && <small>{t.note}</small>}
+              </header>
+              <ul>
+                {t.fields.map(([k, f]) => (
+                  <li key={f}>
+                    <span className={`erd-key ${k ? 'is-key' : ''}`}>{k}</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              {t.rel && <span className="erd-rel">{t.rel}</span>}
+            </article>
+          ))}
+          <p className="erd-note">
+            <span className="why-label">// postgresql · ef core</span>
+            {a.db.note}
+          </p>
+        </div>
       </section>
 
       <section id="afx-data" className="cs-section">
@@ -192,6 +225,14 @@ export default function ArtifaxDv({ p }) {
             <h3>Stock stays correct</h3>
             <p>Creating an order deducts its materials in the API, and cancelling it refunds them. The frontend never edits stock directly, so two people crafting at once can’t push a warehouse below zero.</p>
           </article>
+        </div>
+      </section>
+
+      <section id="afx-git" className="cs-section">
+        <SectionHead kicker="workflow" title="Git & deployment" />
+        <div className="dv-qa">
+          <Steps steps={a.git.steps} />
+          <Code file="Terminal · Artifax" code={a.git.terminal} />
         </div>
       </section>
 

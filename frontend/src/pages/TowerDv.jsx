@@ -76,7 +76,7 @@ export const TOWER_DV_INDEX = [
   },
 ]
 
-function Code({ file, code }) {
+export function Code({ file, code }) {
   return (
     <figure className="code-card">
       <figcaption>
