@@ -8316,3 +8316,40 @@ html[data-theme='herd-link'] .nav-contact {
 @media (min-width: 1500px) {
   .sm-hint { display: none; }
 }
+
+/* blueprints fit on one screen: break out wider than the text column, no sideways scroll */
+@media (min-width: 1100px) {
+  .sm-scroll:has(.sm-bp) {
+    width: min(1400px, calc(100vw - 150px));
+    margin-left: 50%;
+    transform: translateX(-50%);
+    overflow: visible;
+  }
+  .sm-bp {
+    min-width: 0;
+    grid-template-columns: 92px repeat(var(--cols), minmax(0, 1fr));
+    gap: 5px;
+    padding: 14px;
+  }
+  .sm-bp .sm-rowlabel {
+    position: static;
+    margin-left: 0;
+    padding: 0 6px 0 0;
+    font-size: 0.6rem;
+  }
+  .sm-bp .sm-phase {
+    padding: 8px;
+    font-size: 0.72rem;
+  }
+  .sm-bp .sm-cell {
+    padding: 7px 8px;
+    font-size: 0.68rem;
+    line-height: 1.38;
+    border-radius: 8px;
+  }
+  .sm-bp .sm-line span { position: static; font-size: 0.58rem; }
+  .sm-bp .sm-mood { height: 104px; }
+  .sm-bp .sm-dot b { font-size: 0.54rem; }
+  .sm-bp ~ .sm-hint,
+  .sm-scroll:has(.sm-bp) + .sm-hint { display: none; }
+}

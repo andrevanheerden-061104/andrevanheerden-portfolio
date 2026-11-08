@@ -73,7 +73,7 @@ export default function ProjectNav({ current }) {
 
         <a className="nav-contact" href={`mailto:${LINKS.email}`}>
           <Heart />
-          <span>Contact</span>
+          <span>Get in touch</span>
         </a>
       </header>
 
