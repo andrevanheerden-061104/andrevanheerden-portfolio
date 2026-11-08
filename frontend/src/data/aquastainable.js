@@ -136,6 +136,121 @@ export const aquastainable = {
     { title: 'ERRORS', from: 'Warnings', to: 'Clean console', text: 'Fixed gesture crashes, deprecated APIs and route warnings on every screen.' },
   ],
   before: [S('mock1'), S('mock4')],
+  style: {
+    font: 'Montserrat',
+    colors: [
+      { name: 'Deep water', hex: '#101217' },
+      { name: 'Surface', hex: '#171A21' },
+      { name: 'Water teal', hex: '#2E8CA6' },
+      { name: 'Bright teal', hex: '#4FB3CC' },
+      { name: 'Fish orange', hex: '#E0782A' },
+      { name: 'Safe green', hex: '#4ADE80' },
+    ],
+    why: 'The palette comes straight from the logo: teal water for everything you can interact with, and the fish’s orange only for highlights. Status colours (green, amber, red) are kept for water quality, so a reading’s colour always means the same thing. Every colour lives in one palette file, so the whole app changes from one place.',
+    kit: ['Photo hero with a two-weight title', 'Spec tile grid', 'Glass photo cards', 'Quick-facts list', 'Result sheet for pop-ups', 'Hold ripple + swipe track'],
+  },
+  guardrails: [
+    { title: 'Fish topics only', items: ['The assistant answers freshwater fish, plant and water questions', 'Anything else gets one fixed, polite reply', 'Answers stay short: a paragraph, then steps'] },
+    { title: 'Animal welfare first', items: ['Ammonia, nitrite and chlorine are always treated as urgent', 'Sickness answers end with when to see a vet or fish shop', 'Compatibility can say “not in this tank” and suggest a safer one'] },
+    { title: 'Your data, kept small', items: ['Prompts are built only from your own tanks and tests', 'Photos and base64 are stripped before anything reaches the AI', 'Results are saved, so the AI isn’t asked the same thing twice'] },
+  ],
+  mvp: {
+    stats: [
+      { value: '5/6', label: 'must-haves delivered' },
+      { value: '4 wk', label: 'build, weeks 3 to 7' },
+      { value: '5', label: 'features added' },
+    ],
+    must: [
+      { t: 'Gesture-driven dashboard, no buttons', ok: true },
+      { t: 'Photo-based tank tracking', ok: true },
+      { t: 'Tank size + fish and school profiles', ok: true },
+      { t: 'AI advisor: stocking, temperature, plants, water changes', ok: true },
+      { t: 'AI consultation with photos', ok: true },
+      { t: 'Location-based water reports', ok: false },
+    ],
+    nice: [
+      { t: 'Water-change reminders (in-app, not push yet)', ok: true },
+      { t: 'Test-strip colour reading', ok: false },
+      { t: 'Community showcase feed', ok: false },
+    ],
+    changed: [
+      'Firebase Storage → Cloudinary for photos',
+      'Authenticator 2FA → 6-digit email code',
+      'Town-level water reports → reviews of your own test readings',
+    ],
+    added: [
+      'Compatibility check with a safer-tank suggestion',
+      'Individual fish profiles with a story and photo',
+      'Instant, typo-tolerant search: 50 fish + 33 plants',
+      'Fish sickness assistant with photo or video',
+      'Demo mode with a fake API',
+    ],
+  },
+  structure: [
+    {
+      title: 'App · Aquastainable/',
+      items: [
+        ['app/', 'Expo Router screens: one file per route'],
+        ['components/kit/', 'design kit: hero, spec tiles, photo cards, sheets'],
+        ['components/gestures/', 'HoldAction + SwipeToConfirm, used everywhere'],
+        ['lib/hooks/', 'every API call, one hook per resource'],
+        ['lib/data/', 'built-in fish and plant lists'],
+        ['demo/', 'fake API + auth for testing and the showcase'],
+      ],
+    },
+    {
+      title: 'API · backend/',
+      items: [
+        ['index.js', 'server, tanks and water-test routes'],
+        ['auth/', 'token guard + 6-digit email codes'],
+        ['ai/', 'prompts, Groq provider and AI routes'],
+        ['fish/ · plant/', 'catalogue search and tank routes'],
+        ['lib/quickSearch.js', 'one search engine for fish and plants'],
+        ['scripts/', 'fills catalogue photos from iNaturalist'],
+      ],
+    },
+  ],
+  dry: [
+    'One hold component and one swipe track power every action in the app.',
+    'Colours come from a single palette file; screens never hard-code a brand colour.',
+    'All prompts live in one file, so the AI’s tone is changed in one place.',
+    'The same search rules run in the app (instant) and on the server (online results).',
+  ],
+  git: {
+    steps: [
+      { title: '118 commits since 28 July', text: 'Small, regular commits through the build and the redesign after hand-in.' },
+      { title: 'main + pre-production', text: 'New work went to a pre-production branch first, then into main once it ran on my phone.' },
+      { title: 'Secrets out of Git', text: 'API keys live in .env files locally and in Render’s environment, never in the repo.' },
+      { title: 'Deployment', text: 'The Express API runs on Render; the app runs in Expo Go on a phone and as a web build.' },
+    ],
+    terminal: `$ git branch -a
+  Preproduaction
+* main
+  remotes/origin/Preproduaction
+  remotes/origin/main
+
+$ git rev-list --count HEAD
+118`,
+  },
+  run: {
+    steps: [
+      { title: 'You need', text: 'Node.js LTS and the Expo Go app on your phone (or a browser).' },
+      { title: 'Start the app', text: 'Install and start Expo, then scan the QR code with Expo Go.' },
+      { title: 'No backend setup', text: 'The app already points at the live API on Render.' },
+      { title: 'Try it on the web', text: 'npm run web:phone opens the app inside a phone frame with live reload.' },
+    ],
+    terminal: `$ git clone https://github.com/andrevanheerden/Aquastainable
+$ cd Aquastainable/Aquastainable
+$ npm install
+$ npx expo start        # scan the QR code with Expo Go
+$ npm run web:phone     # or run it in the browser`,
+  },
+  aiTools: [
+    { title: 'Designed by me', text: 'The concept, the no-buttons interaction rules, the moodboard and the style guide.' },
+    { title: 'Coded with AI help', text: 'AI coding tools helped write parts of the app and API, and much of the redesign after hand-in.' },
+    { title: 'Tested by me', text: 'I tested every feature on my phone in Expo Go and on the web, screen by screen.' },
+    { title: 'Checked by me', text: 'I checked the parts that matter most: the login guard, tank ownership and the AI prompts.' },
+  ],
   challenges: [
     { title: 'Gestures firing by accident', text: 'I built one shared hold component with a ripple, haptics and screen-reader actions, and used it everywhere.' },
     { title: 'Email codes on Render', text: 'Render blocks email ports, so codes go through Resend’s HTTPS API instead of SMTP.' },
@@ -145,5 +260,5 @@ export const aquastainable = {
     'A constraint like “no buttons” forces clearer UX: design the interaction first, then the screen.',
     'AI is most useful when it’s short and grounded in the user’s own data.',
   ],
-  next: ['Camera test-strip reading', 'Water-change push reminders', 'Local water reports by town', 'Publish on the Play Store'],
+  next: ['Automated tests for the API and gestures', 'Camera test-strip reading', 'Water-change push reminders', 'Local water reports by town', 'Publish on the Play Store'],
 }
