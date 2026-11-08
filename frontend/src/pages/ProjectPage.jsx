@@ -11,6 +11,7 @@ import { SectionHead, Why } from '../components/CaseBits.jsx'
 import ArtifaxDv, { ARTIFAX_OVERVIEW } from './ArtifaxDv.jsx'
 import AquaDv, { AQUA_OVERVIEW } from './AquaDv.jsx'
 import TowerDv from './TowerDv.jsx'
+import { JourneyMap, Blueprint } from '../components/ServiceMaps.jsx'
 
 function Hero({ p }) {
   return (
@@ -129,6 +130,8 @@ function uxIndex(cs) {
   if (cs.survey) research.push({ id: 'survey', label: 'Survey' })
   research.push({ id: 'research', label: cs.secondary ? 'Literature & competitors' : 'Research' })
   if (cs.insights) research.push({ id: 'insights', label: 'Key insights' })
+  if (cs.journey) research.push({ id: 'journey', label: 'Journey map' })
+  if (cs.blueprints) research.push({ id: 'blueprint', label: 'Current blueprint' })
   ;(cs.boards || []).filter((b) => b.group === 'Research').forEach((b) => research.push({ id: b.id, label: b.label }))
   if (cs.strategy) research.push({ id: 'strategy', label: 'Strategy' })
   if (cs.featureMap) research.push({ id: 'featuremap', label: 'Feature mapping' })
@@ -137,6 +140,7 @@ function uxIndex(cs) {
   research.push({ id: 'problem', label: 'Problem & HMW' })
   g.push({ group: 'Research', items: research })
   const ideate = (cs.boards || []).filter((b) => b.group === 'Ideate').map((b) => ({ id: b.id, label: b.label }))
+  if (cs.blueprints) ideate.unshift({ id: 'future', label: 'Future blueprint' })
   if (cs.opportunities) ideate.push({ id: 'opportunities', label: 'Opportunities' })
   if (ideate.length) g.push({ group: 'Ideate', items: ideate })
   const plan = (cs.boards || []).filter((b) => b.group === 'Plan').map((b) => ({ id: b.id, label: b.label }))
@@ -448,6 +452,9 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
 
       {boardsOf('Research')}
 
+      {cs.journey && <JourneyMap data={cs.journey} />}
+      {cs.blueprints && <Blueprint id="blueprint" bp={cs.blueprints.current} why={cs.blueprintWhy} />}
+
       {cs.persona && (
       <section id="persona" className="cs-section">
         <SectionHead kicker="define · who I designed for" title={`Meet ${first}`} />
@@ -497,6 +504,7 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
       </section>
 
       {boardsOf('Ideate')}
+      {cs.blueprints && <Blueprint id="future" bp={cs.blueprints.future} />}
 
       {cs.opportunities && (
         <section id="opportunities" className="cs-section">
@@ -753,9 +761,11 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
           <div className="play-cta soon">
             <div>
               <p className="hand">// see more</p>
-              <h3>{cs.links?.behance ? 'Every screen and the clickable prototype' : cs.links?.prototype2 ? 'Click through both prototypes' : 'See the full design file'}</h3>
+              <h3>{cs.links?.behance && cs.links?.prototype2 ? 'Every screen and both prototypes' : cs.links?.behance ? 'Every screen and the clickable prototype' : cs.links?.prototype2 ? 'Click through both prototypes' : 'See the full design file'}</h3>
               <p>
-                {cs.links?.behance
+                {cs.links?.behance && cs.links?.prototype2
+                  ? 'See the full presentation on Behance, or click through the FordPass add-on and the Relay Console yourself.'
+                  : cs.links?.behance
                   ? 'Try the prototype yourself, see the full presentation on Behance, or open the Figma file.'
                   : cs.links?.prototype2
                     ? 'Try the FordPass add-on and the Relay Console yourself, or open the team’s Figma file with all the research.'

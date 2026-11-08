@@ -2,6 +2,8 @@
    Tower of Arithmetic has the full write-up; the others have a short
    version until their full pages are built. */
 
+import { journey, blueprints } from './fordMaps.js'
+
 const F = '/work/ford/'
 
 export const caseStudies = {
@@ -585,37 +587,6 @@ export const caseStudies = {
     },
     boards: [
       {
-        id: 'journey',
-        group: 'Research',
-        label: 'Journey map',
-        kicker: 'define · emotion over time',
-        title: 'The customer journey',
-        text: 'We mapped a yearly service from the dashboard warning light to collecting the car. It shows where the service feels broken from the customer’s side, even when the internal process looks fine: anxious at check-in, sceptical at payment.',
-        img: F + 'journey.jpg',
-        alt: 'Customer journey map for an annual Ford service, with actions, touchpoints, thoughts and feelings per phase',
-      },
-      {
-        id: 'blueprint',
-        group: 'Research',
-        label: 'Current blueprint',
-        kicker: 'define · how it works today',
-        title: 'Current-state service blueprint',
-        text: 'The blueprint exposes the gap between what the system claims and what actually happens. Red cells are where updates die, evidence gets skipped, or three siloed systems force workarounds.',
-        why: 'A blueprint shows the backstage too: the systems and staff the customer never sees, which is exactly where this service breaks.',
-        img: F + 'bp-current.jpg',
-        alt: 'Current-state service blueprint with red failure points across eleven stages',
-      },
-      {
-        id: 'future',
-        group: 'Ideate',
-        label: 'Future blueprint',
-        kicker: 'ideate · the same journey, rewired',
-        title: 'Future-state service blueprint',
-        text: 'The same eleven stages on the same infrastructure, but every update is fired by something physical happening. No new departments, no new DMS. Relay is an integration, not an invasion.',
-        img: F + 'bp-future.jpg',
-        alt: 'Future-state service blueprint where nearly every stage is now solved by Relay',
-      },
-      {
         id: 'storyboard',
         group: 'Plan',
         label: 'Storyboard',
@@ -626,17 +597,25 @@ export const caseStudies = {
         alt: 'Twelve-panel illustrated storyboard of a driver going from warning light to collecting their serviced car',
         tall: true,
       },
-      {
-        id: 'wireframes',
-        group: 'Plan',
-        label: 'Wireframes',
-        kicker: 'plan · one backbone',
-        title: 'Shared wireframes',
-        text: 'We wireframed both surfaces together before any styling. Without one source of truth for how events become updates, the console and the app would drift into two disconnected products.',
-        img: F + 'wireframes.jpg',
-        alt: 'Greyscale wireframes of three console screens and five app screens',
-      },
     ],
+    journey,
+    blueprints,
+    blueprintWhy: 'A blueprint shows the backstage too: the systems and staff the customer never sees, which is exactly where this service breaks.',
+    wireframes: [F + 'wf-book.jpg', F + 'wf-active.jpg', F + 'wf-finding.jpg'],
+    wireframesText:
+      'We wireframed both surfaces together before any styling, starting with the customer’s three key moments: booking with a price, the live tracker and approving a finding. Without one shared structure for how events become updates, the console and the app would drift into two products.',
+    style: {
+      font: 'Ford Antenna',
+      colors: [
+        { hex: '#1E0F4F', name: 'Ford Blue' },
+        { hex: '#211E26', name: 'Grabber' },
+        { hex: '#FF8B16', name: 'Contrast' },
+        { hex: '#F3F3F3', name: 'Background' },
+        { hex: '#00E275', name: 'Success' },
+        { hex: '#FF666C', name: 'Error' },
+      ],
+      why: 'One system has to work on a greasy wall screen, a desk monitor and a phone in sunlight, so legibility beats brand flair. Both surfaces share Ford’s blue and Ford Antenna; the console uses a bigger Major Third type scale on a 12-column grid so it reads from three metres, and the app a Minor Third scale on 4 columns to fit inside FordPass.',
+    },
     opportunities: [
       { title: 'Automate the trigger', text: 'Fire updates from physical events like clocking on or entering the wash bay, not from someone remembering.' },
       { title: 'Extend digital evidence', text: 'Require a photo at every recommendation, not just intake, and block progress until it exists.' },
@@ -648,21 +627,6 @@ export const caseStudies = {
       'Despite a DMS, tablet check-in and a CRM, the dealership runs as disconnected stages. Staff juggle siloed tools, customers sit in a communication vacuum, and trust erodes at the exact moment the business needs it most: when the customer is asked to pay.',
     hmw:
       'How might we relay existing physical workshop events to customers automatically, so that transparency is guaranteed by the system rather than dependent on staff memory?',
-    styles: {
-      intro: 'One system has to work in three places: a wall-mounted screen in a greasy workshop, a desk monitor and a phone in sunlight. Legibility and density mattered more than brand expression, so both guides share Ford’s colours and Ford Antenna, with different type scales.',
-      colors: [
-        { hex: '#1E0F4F', name: 'Ford Blue' },
-        { hex: '#211E26', name: 'Ford Grabber' },
-        { hex: '#FF8B16', name: 'Contrast' },
-        { hex: '#F3F3F3', name: 'Background' },
-        { hex: '#00E275', name: 'Success' },
-        { hex: '#FF666C', name: 'Error' },
-      ],
-      items: [
-        { label: 'HMI console', note: 'Major Third scale · 12-col grid · readable from 3 m', img: F + 'style-hmi.jpg' },
-        { label: 'FordPass app', note: 'Minor Third scale · 4-col grid · fits FordPass', img: F + 'style-app.jpg' },
-      ],
-    },
     numbers: [
       { value: '12', label: 'event spine states' },
       { value: '2', label: 'surfaces, one system' },
@@ -707,7 +671,7 @@ export const caseStudies = {
     links: {
       prototype: 'https://www.figma.com/proto/9D2mwZwmg4YV3CYMjUffcz/Groupwork?node-id=764-2667&t=fn9ZYr412VpmMbZA-1&scaling=scale-down&content-scaling=fixed&page-id=764%3A2660',
       prototype2: 'https://www.figma.com/proto/9D2mwZwmg4YV3CYMjUffcz/Groupwork?node-id=659-16009&starting-point-node-id=659%3A16009&scaling=scale-down&content-scaling=fixed&page-id=448%3A4',
-      figma: 'https://www.figma.com/design/9D2mwZwmg4YV3CYMjUffcz/Groupwork?node-id=1346-8961',
+      behance: 'https://www.behance.net/gallery/258170155/Ford-Relay-Term-3-Group-Assignment-Service-Design',
     },
     conclusion:
       'Ford Relay doesn’t introduce new technology; it connects Ford’s existing systems to what really happens on the floor. Updates fire from workshop events instead of staff memory, evidence gates block a job until the photos exist, quotes are approved before work starts so the invoice always matches, and the wash bay finally has a visible queue that feeds honest ETAs.',
