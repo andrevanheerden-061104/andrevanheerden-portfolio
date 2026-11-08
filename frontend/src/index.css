@@ -7766,26 +7766,46 @@ html[data-theme='herd-link'] .nav-contact {
 /* two CTA cards side by side */
 .cta-pair {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 14px;
   margin-top: 28px;
 }
 
 .cta-pair .play-cta {
   margin-top: 0;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
-  gap: 22px;
+  gap: 18px 28px;
+}
+
+.cta-pair .play-cta > div:first-child {
+  flex: 1 1 340px;
 }
 
 .cta-pair .cta-stack {
-  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: auto;
 }
 
 .cta-pair .play-cta > .btn-accent {
-  align-self: stretch;
-  justify-content: center;
+  align-self: center;
+}
+
+@media (max-width: 620px) {
+  .cta-pair .play-cta > .btn-accent,
+  .cta-pair .cta-stack {
+    flex-direction: column;
+  }
+  .cta-pair .cta-stack,
+  .cta-pair .cta-stack > a {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .cta-stack .btn-accent {

@@ -34,7 +34,6 @@ const INDEX = [
     group: 'Wrap-up',
     items: [
       { id: 'afx-changes', label: 'After hand-in' },
-      { id: 'afx-demo', label: 'Try it' },
       { id: 'afx-reflect', label: 'Reflection' },
     ],
   },
@@ -249,16 +248,6 @@ export default function ArtifaxDv({ p }) {
             </li>
           ))}
         </ol>
-      </section>
-
-      <section id="afx-demo" className="cs-section">
-        <SectionHead kicker="try it yourself" title="A run-through of the live app" />
-        <div className="dv-qa">
-          <Steps steps={a.demo} />
-          <figure className="tab-frame">
-            <img src="/work/afx-blueprint.jpg" alt="Crafting a Control Module in Artifax" loading="lazy" />
-          </figure>
-        </div>
       </section>
 
       <section id="afx-reflect" className="cs-section">
