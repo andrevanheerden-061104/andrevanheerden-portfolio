@@ -129,6 +129,7 @@ export const projects = [
     sector: 'Pets & hobbies',
     tracks: ['dv'],
     year: '2026',
+    live: 'https://aquastainable.vercel.app',
     tags: ['React Native + Expo', 'Express', 'Firebase', 'Groq AI'],
     theme: { bg: '#2e8ca6', ink: '#ffffff', accent: '#ffffff', hi: '#9ad8ea' },
     screens: ['/work/aqua/home.jpg', '/work/aqua/tank.jpg', '/work/aqua/water.jpg'],

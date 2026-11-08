@@ -12,6 +12,7 @@ import ArtifaxDv, { ARTIFAX_OVERVIEW } from './ArtifaxDv.jsx'
 import AquaDv, { AQUA_OVERVIEW } from './AquaDv.jsx'
 import TowerDv from './TowerDv.jsx'
 import { JourneyMap, Blueprint } from '../components/ServiceMaps.jsx'
+import VideoPlayer from '../components/VideoPlayer.jsx'
 
 function Hero({ p }) {
   return (
@@ -165,18 +166,19 @@ function Videos({ videos, title }) {
   return (
     <section id="video" className="cs-section">
       <SectionHead kicker={`watch · ${main.label}`} title={more.length ? 'See it in action' : `${title} in a minute`} />
-      <figure className="cs-video is-main">
-        <video src={main.src} poster={main.poster} controls playsInline preload="none" aria-label={main.title} />
-      </figure>
+      <div className="vp-main">
+        <VideoPlayer src={main.src} poster={main.poster} title={main.title} />
+      </div>
       {more.length > 0 && (
         <div className="cs-video-more">
           {more.map((v) => (
-            <figure key={v.src} className="cs-video">
-              <video src={v.src} poster={v.poster} controls playsInline preload="none" aria-label={v.title} />
-              <figcaption>
-                <b>{v.title}</b> // {v.label}
-              </figcaption>
-            </figure>
+            <VideoPlayer
+              key={v.src}
+              src={v.src}
+              poster={v.poster}
+              title={v.title}
+              caption={<><b>{v.title}</b> // {v.label}</>}
+            />
           ))}
         </div>
       )}

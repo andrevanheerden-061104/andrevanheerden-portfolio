@@ -4,7 +4,6 @@ import CaseIndex from '../components/CaseIndex.jsx'
 import Words from '../components/Words.jsx'
 import PhoneSpread from '../components/Phones.jsx'
 import { Arrow } from '../components/Icons.jsx'
-import { Steps, Code } from './TowerDv.jsx'
 import { SiReact, SiNodedotjs, SiFirebase, SiCloudinary, SiRender, SiGithub } from 'react-icons/si'
 
 const AiIcon = () => (
@@ -36,7 +35,6 @@ const INDEX = [
     group: 'The app',
     items: [
       { id: 'aq-gestures', label: 'No buttons' },
-      { id: 'aq-style', label: 'Design & style' },
       { id: 'aq-features', label: 'Features' },
     ],
   },
@@ -45,19 +43,8 @@ const INDEX = [
     items: [
       { id: 'aq-stack', label: 'Tech stack' },
       { id: 'aq-arch', label: 'Architecture & AI' },
-      { id: 'aq-guard', label: 'AI guardrails' },
       { id: 'aq-db', label: 'Database' },
       { id: 'aq-data', label: 'Data, security & tests' },
-      { id: 'aq-code', label: 'Code structure' },
-    ],
-  },
-  {
-    group: 'Process',
-    items: [
-      { id: 'aq-mvp', label: 'MVP vs delivered' },
-      { id: 'aq-git', label: 'Git & deployment' },
-      { id: 'aq-run', label: 'Run it yourself' },
-      { id: 'aq-aitools', label: 'AI coding tools' },
     ],
   },
   {
@@ -102,8 +89,8 @@ export default function AquaDv({ p }) {
           <div>
             <p className="cs-lead"><Words>{a.intro.text}</Words></p>
             <div className="dv-links">
-              <a className="btn-accent" href={a.links.video} target="_blank" rel="noreferrer">
-                Watch the demo <Arrow />
+              <a className="btn-accent" href={a.links.live} target="_blank" rel="noreferrer">
+                Open the live app <Arrow />
               </a>
               <a className="btn-ghost dv-link" href={a.links.repo} target="_blank" rel="noreferrer">
                 <SiGithub aria-hidden="true" /> Source code
@@ -152,28 +139,6 @@ export default function AquaDv({ p }) {
           ))}
         </ol>
         <Why label="why it mattered">A constraint like this forces you to design the interaction before the screen. A hold with a ripple and haptics is slower than a tap on purpose, so deleting a tank can never happen by accident.</Why>
-      </section>
-
-      <section id="aq-style" className="cs-section">
-        <SectionHead kicker={`design · style guide · ${a.style.font}`} title="Teal water, orange fish" />
-        <div className="cs-two">
-          <div className="style-block">
-            <ul className="swatches">
-              {a.style.colors.map((c) => (
-                <li key={c.hex}>
-                  <span className="swatch" style={{ background: c.hex }} />
-                  <b>{c.name}</b>
-                  <small>{c.hex}</small>
-                </li>
-              ))}
-            </ul>
-            <div className="afx-tools">
-              <span className="why-label">// one design kit</span>
-              <ul className="cs-tags">{a.style.kit.map((t) => <li key={t}>{t}</li>)}</ul>
-            </div>
-          </div>
-          <Why label="why these styles?">{a.style.why}</Why>
-        </div>
       </section>
 
       <section id="aq-features" className="cs-section">
@@ -242,18 +207,6 @@ export default function AquaDv({ p }) {
         </ol>
       </section>
 
-      <section id="aq-guard" className="cs-section">
-        <SectionHead kicker="AI safety" title="Guardrails on the fish assistant" />
-        <div className="dv-cols">
-          {a.guardrails.map((c) => (
-            <article key={c.title} className="comp-card">
-              <h3>{c.title}</h3>
-              <ul className="dv-list">{c.items.map((t) => <li key={t}>{t}</li>)}</ul>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section id="aq-db" className="cs-section">
         <SectionHead kicker="data model" title="Everything lives inside the tank" />
         <div className="erd erd-afx">
@@ -307,91 +260,6 @@ export default function AquaDv({ p }) {
         </div>
       </section>
 
-      <section id="aq-code" className="cs-section">
-        <SectionHead kicker="code quality" title="How the code is organised" />
-        <div className="dv-structure">
-          {a.structure.map((col) => (
-            <article key={col.title} className="comp-card">
-              <h3 className="mono-title">{col.title}</h3>
-              <ul className="tree">
-                {col.items.map(([dir, t]) => (
-                  <li key={dir}>
-                    <code>{dir}</code>
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
-          <div className="dv-tests">
-            <ul className="dv-list">{a.dry.map((t) => <li key={t}>{t}</li>)}</ul>
-          </div>
-        </div>
-        <Why label="testing, honestly">There’s no automated test suite yet. I tested by hand on my phone in Expo Go and on the web, and built a demo mode with a fake API so every screen can be checked without the live server. Automated tests are first on my next list.</Why>
-      </section>
-
-      <section id="aq-mvp" className="cs-section">
-        <SectionHead kicker="process & reflection" title="MVP vs what I delivered" />
-        <dl className="numbers">
-          {a.mvp.stats.map((n) => (
-            <div key={n.label}>
-              <dt className="pixel">{n.value}</dt>
-              <dd>{n.label}</dd>
-            </div>
-          ))}
-        </dl>
-        <div className="mvp-grid">
-          <article className="comp-card">
-            <h3>Must have (pitch)</h3>
-            <ul className="check-list">{a.mvp.must.map((t) => <li key={t.t} className={t.ok ? 'is-ok' : 'is-no'}>{t.t}</li>)}</ul>
-          </article>
-          <article className="comp-card">
-            <h3>Nice to have</h3>
-            <ul className="check-list">{a.mvp.nice.map((t) => <li key={t.t} className={t.ok ? 'is-ok' : 'is-no'}>{t.t}</li>)}</ul>
-          </article>
-          <article className="comp-card">
-            <h3>Changed on purpose</h3>
-            <ul className="check-list">{a.mvp.changed.map((t) => <li key={t} className="is-change">{t}</li>)}</ul>
-          </article>
-          <article className="comp-card">
-            <h3>Added</h3>
-            <ul className="check-list">{a.mvp.added.map((t) => <li key={t} className="is-ok">{t}</li>)}</ul>
-          </article>
-        </div>
-      </section>
-
-      <section id="aq-git" className="cs-section">
-        <SectionHead kicker="workflow" title="Git & deployment" />
-        <div className="dv-qa">
-          <Steps steps={a.git.steps} />
-          <Code file="Terminal · Aquastainable" code={a.git.terminal} />
-        </div>
-      </section>
-
-      <section id="aq-run" className="cs-section">
-        <SectionHead kicker="getting started" title="Run it yourself" />
-        <div className="dv-qa">
-          <Steps steps={a.run.steps} />
-          <Code file="Terminal · setup" code={a.run.terminal} />
-        </div>
-      </section>
-
-      <section id="aq-aitools" className="cs-section">
-        <SectionHead kicker="code ownership" title="Where AI coding tools helped" />
-        <p className="cs-lead narrow">
-          <Words>Honest answer: I designed it and set the rules, AI tools helped write the code, and I tested and checked it.</Words>
-        </p>
-        <ol className="dv-ai-jobs dv-owner">
-          {a.aiTools.map((j, i) => (
-            <li key={j.title}>
-              <span className="pixel">{i + 1}</span>
-              <h3>{j.title}</h3>
-              <p>{j.text}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
       <section id="aq-changes" className="cs-section">
         <SectionHead kicker="after hand-in" title="What I changed, and why" />
         <div className="aq-before">
@@ -441,12 +309,12 @@ export default function AquaDv({ p }) {
         <div className="cta-pair">
           <div className="play-cta" style={{ '--bg': p.theme.bg }}>
             <div>
-              <p className="hand">// see it working</p>
-              <h3>Watch the demo video</h3>
-              <p>A short walkthrough of every gesture: sign-in, tanks, compatibility, water tests and the assistant.</p>
+              <p className="hand">// try it yourself</p>
+              <h3>Open the live app</h3>
+              <p>Runs in any browser in a phone frame, or full screen on your phone. No download needed.</p>
             </div>
-            <a className="btn-accent" href={a.links.video} target="_blank" rel="noreferrer">
-              Play the demo <Arrow />
+            <a className="btn-accent" href={a.links.live} target="_blank" rel="noreferrer">
+              aquastainable.vercel.app <Arrow />
             </a>
           </div>
           <div className="play-cta soon">
