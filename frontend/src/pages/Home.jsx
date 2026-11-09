@@ -96,9 +96,9 @@ function Hero() {
 
 function About() {
   const stats = [
-    { value: '4', label: 'Case studies', sub: 'UX, AI, service design' },
-    { value: '1', label: 'App built & live', sub: 'Tower of Arithmetic' },
-    { value: '2nd', label: 'ABSA Hackathon 2026', sub: 'Gauteng universities' },
+    { value: String(projects.length), label: 'Case studies', sub: 'UX, DV, AI & service design' },
+    { value: String(projects.filter((p) => p.live).length), label: 'Apps built & live', sub: projects.filter((p) => p.live).map((p) => p.title).join(' · ') },
+    { value: '2nd', label: 'ABSA Hackathon 2026', sub: 'Gauteng universities', to: '/work/absa-village' },
     { value: '6 mo', label: 'UX & AI internship', sub: 'Sand Dollar Design' },
   ]
   return (
@@ -115,15 +115,25 @@ function About() {
         </p>
       </div>
       <dl className="stats">
-        {stats.map((s) => (
-          <div key={s.label} className="stat">
-            <dt className="pixel">{s.value}</dt>
-            <dd>
-              <b>{s.label}</b>
-              <span>{s.sub}</span>
-            </dd>
-          </div>
-        ))}
+        {stats.map((s) => {
+          const body = (
+            <>
+              <dt className="pixel">{s.value}</dt>
+              <dd>
+                <b>{s.label}</b>
+                <span>{s.sub}</span>
+              </dd>
+            </>
+          )
+          return s.to ? (
+            <Link key={s.label} to={s.to} className="stat stat-award" aria-label={`${s.label}: ${s.value} place. Open the Absa Village case study`}>
+              {body}
+              <span className="stat-go" aria-hidden="true"><Arrow /></span>
+            </Link>
+          ) : (
+            <div key={s.label} className="stat">{body}</div>
+          )
+        })}
       </dl>
     </section>
   )
