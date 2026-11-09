@@ -500,7 +500,11 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
           </figure>
           <div className="persona-body">
             <blockquote className="persona-quote">
-              {cs.persona.quoteLabel && <span className="why-label">// {cs.persona.quoteLabel}</span>}
+              <h3 className="persona-quote-title">
+                {cs.persona.quoteLabel
+                  ? cs.persona.quoteLabel.charAt(0).toUpperCase() + cs.persona.quoteLabel.slice(1)
+                  : 'In their words'}
+              </h3>
               <Words>{cs.persona.quoteLabel ? cs.persona.quote : `“${cs.persona.quote}”`}</Words>
             </blockquote>
             <div className="persona-lists">
