@@ -8620,3 +8620,65 @@ html[data-theme='herd-link'] .nav-contact {
   bottom: -24px;
 }
 .cs-video-more .vp-big:hover { transform: translate(-50%, -50%) scale(1.08); }
+
+/* =========================================================
+   Phone fixes: persona side-by-side, full-width buttons
+   ========================================================= */
+/* the two smaller promo videos: play button back in the middle */
+.cs-video-more .vp-big {
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+}
+
+@media (max-width: 700px) {
+  /* photo on the left, story beside it; goals and the rest underneath */
+  .persona {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 12px;
+  }
+  .persona-body { display: contents; }
+  .persona-pol { grid-column: 1; grid-row: 1; }
+  .persona-quote {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: stretch;
+    padding: 14px;
+    font-size: 0.86rem;
+    line-height: 1.45;
+  }
+  .persona-pol figcaption { padding: 10px 12px 12px; font-size: 0.88rem; }
+  .persona-pol small { font-size: 0.62rem; }
+  .persona-lists,
+  .persona-extra { grid-column: 1 / -1; margin-top: 2px; }
+
+  /* buttons in the try-it / see-more cards and the contact card fill the width */
+  .play-cta,
+  .cta-pair .play-cta { flex-direction: column; align-items: stretch; }
+  .play-cta > .btn-accent,
+  .play-cta > .btn-ghost,
+  .play-cta .cta-stack,
+  .play-cta .cta-stack > a,
+  .footer .btn,
+  .footer .btn-primary {
+    width: 100%;
+    justify-content: center;
+    white-space: normal;
+    text-align: center;
+  }
+  .play-cta .cta-stack { flex-direction: column; }
+}
+
+@media (max-width: 700px) {
+  .cta-pair .play-cta > div:first-child { flex: none; }
+  .play-cta > .btn-accent,
+  .play-cta > .btn-ghost,
+  .cta-pair .play-cta > .btn-accent,
+  .play-cta .cta-stack > a {
+    flex-direction: row;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
