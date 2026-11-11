@@ -172,7 +172,7 @@ function SkillsSection() {
     <section className="section" id="skills">
       <SectionTitle label="skills">MY TOOLKIT</SectionTitle>
       <p className="sec-intro">
-        <Words>Design and development under one roof: I can research and design an experience, then build and ship it. The tools are connected, so hover one to see what it works with.</Words>
+        <Words>Design and development under one roof: I can research and design an experience, then build and ship it. Hover a skill to trace its branch and see which projects it was used in.</Words>
       </p>
       <Skills />
     </section>
