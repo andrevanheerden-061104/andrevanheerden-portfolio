@@ -9212,3 +9212,15 @@ html[data-theme='herd-link'] .nav-contact {
 @media (max-width: 480px) {
   .st-toggle button { flex-direction: column; gap: 4px; padding: 8px 4px; font-size: 0.62rem; }
 }
+
+/* phones: cards dock right under the pinned title instead of centring in the screen */
+@media (max-width: 700px) {
+  .xp2,
+  .has-sticky-head .xp2 {
+    --xp-stick: calc(var(--xp-zone) + 12px);
+    margin-top: 12px;
+  }
+  .xp-gap {
+    height: 12vh;
+  }
+}
