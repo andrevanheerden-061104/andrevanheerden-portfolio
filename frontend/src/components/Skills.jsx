@@ -55,6 +55,33 @@ export const HERO_ICONS = [
    inner ring = core skills, outer ring = also used.
    A node is "unlocked" (lit) when it's been used in a real project.
    --------------------------------------------------------- */
+/* branch icons: pen for design, code brackets for front-end, server rack for back-end */
+const BranchIcon = ({ id }) => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+    {id === 'design' && (
+      <>
+        <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z" />
+        <path d="m14.5 5.5 3 3" />
+        <path d="M13 20h7" />
+      </>
+    )}
+    {id === 'front' && (
+      <>
+        <path d="m8 7-5 5 5 5" />
+        <path d="m16 7 5 5-5 5" />
+        <path d="m13.5 4-3 16" />
+      </>
+    )}
+    {id === 'back' && (
+      <>
+        <rect x="3.5" y="4" width="17" height="7" rx="2" />
+        <rect x="3.5" y="13" width="17" height="7" rx="2" />
+        <path d="M7.5 7.5h.01M7.5 16.5h.01M11 7.5h6M11 16.5h6" />
+      </>
+    )}
+  </svg>
+)
+
 const BRANCHES = [
   { id: 'design', label: 'Design', sub: 'UX / UI', from: 183, to: 236 },
   { id: 'front', label: 'Front-end', sub: 'web & mobile', from: 240, to: 300 },
@@ -79,7 +106,7 @@ const SKILLS = [
   { id: 'js', branch: 'front', tier: 2, name: 'JavaScript', Icon: SiJavascript, color: '#F7DF1E', note: 'The language behind my front-ends and Node back-ends.', used: ['Tower of Arithmetic', 'This portfolio'] },
   { id: 'expo', branch: 'front', tier: 2, name: 'Expo', Icon: SiExpo, color: '#ffffff', note: 'Fast mobile builds, Expo Go testing and APK exports.', used: ['Tower of Arithmetic', 'Aquastainable'] },
   { id: 'tailwind', branch: 'front', tier: 2, name: 'Tailwind', Icon: SiTailwindcss, color: '#38BDF8', note: 'Utility-first styling for fast, consistent UI.', used: ['Artifax'] },
-  { id: 'bootstrap', branch: 'front', tier: 2, name: 'Bootstrap', Icon: SiBootstrap, color: '#7952B3', note: 'Grid and components for quick responsive builds.', used: [] },
+  { id: 'bootstrap', branch: 'front', tier: 2, name: 'Bootstrap', Icon: SiBootstrap, color: '#7952B3', note: 'Grid and components for quick responsive builds.', used: [], past: 'Second-year projects' },
   // back-end & AI
   { id: 'node', branch: 'back', tier: 1, name: 'Node + Express', Icon: SiNodedotjs, color: '#5FA04E', note: 'REST APIs that keep AI and admin keys off the device.', used: ['Tower of Arithmetic', 'Aquastainable'] },
   { id: 'ai', branch: 'back', tier: 1, name: 'AI APIs (Groq)', Icon: AI, color: '#F55036', note: 'AI questions, hints, reviews and assistants, with code checks around them.', used: ['Tower of Arithmetic', 'Aquastainable'] },
@@ -87,7 +114,7 @@ const SKILLS = [
   { id: 'firebase', branch: 'back', tier: 1, name: 'Firebase', Icon: SiFirebase, color: '#FFCA28', note: 'Auth and Firestore for document-shaped app data.', used: ['Aquastainable'] },
   { id: 'dotnet', branch: 'back', tier: 2, name: 'C# / .NET', Icon: SiDotnet, color: '#9B7CF5', note: 'ASP.NET Core APIs with Entity Framework.', used: ['Artifax'] },
   { id: 'pg', branch: 'back', tier: 2, name: 'PostgreSQL', Icon: SiPostgresql, color: '#4169E1', note: 'Relational schemas, migrations and queries.', used: ['Artifax', 'Tower of Arithmetic'] },
-  { id: 'mysql', branch: 'back', tier: 2, name: 'MySQL', Icon: SiMysql, color: '#4479A1', note: 'Relational databases for coursework systems.', used: [] },
+  { id: 'mysql', branch: 'back', tier: 2, name: 'MySQL', Icon: SiMysql, color: '#4479A1', note: 'Relational databases for coursework systems.', used: [], past: 'Second-year projects' },
   { id: 'docker', branch: 'back', tier: 2, name: 'Docker', Icon: SiDocker, color: '#2496ED', note: 'Containerised API deploys.', used: ['Artifax'] },
   { id: 'git', branch: 'back', tier: 2, name: 'Git & GitHub', Icon: SiGithub, color: '#ffffff', note: 'Branching, pull requests and a preproduction branch on every build.', used: ['All builds'] },
   { id: 'vercel', branch: 'back', tier: 2, name: 'Vercel', Icon: SiVercel, color: '#ffffff', note: 'Deploying web builds, like this site.', used: ['Tower of Arithmetic', 'Artifax', 'Aquastainable', 'This portfolio'] },
@@ -133,7 +160,8 @@ function wide() {
     return { ...b, ...at(140, mid) }
   })
   parentsFor(nodes, hubs)
-  const labels = { design: { x: 100, y: 612, align: 'left' }, front: { x: 500, y: 24 }, back: { x: 900, y: 612, align: 'right' } }
+  // same spots as the first version (beside / above each branch), nudged clear of the nodes
+  const labels = { design: { x: 110, y: 215 }, front: { x: 500, y: 46 }, back: { x: 900, y: 215 } }
   const rings = [140, 305, 451].map((r) => `M ${ROOT.x - r} ${ROOT.y} A ${r} ${r} 0 0 1 ${ROOT.x + r} ${ROOT.y}`)
   const rune = `M ${ROOT.x - 530} ${ROOT.y} A 530 530 0 0 1 ${ROOT.x + 530} ${ROOT.y}`
   return { W, H, ROOT, nodes, hubs, labels, rings, rune, kind: 'wide' }
@@ -166,7 +194,7 @@ function branchLayout(bid) {
 }
 
 const LAYOUTS = { wide: wide(), design: branchLayout('design'), front: branchLayout('front'), back: branchLayout('back') }
-const lit = (s) => s.used.length > 0
+const lit = (s) => s.used.length > 0 || Boolean(s.past)
 const pct = (v, of) => `${(v / of) * 100}%`
 
 /* a quiet starfield, the same every render */
@@ -221,6 +249,8 @@ export default function Skills() {
             <p className="st-label">// used in</p>
             {active.used.length ? (
               <ul className="st-chips">{active.used.map((u) => <li key={u}>{u}</li>)}</ul>
+            ) : active.past ? (
+              <ul className="st-chips"><li>{active.past}</li></ul>
             ) : (
               <p className="st-note st-muted">Coursework only so far.</p>
             )}
@@ -229,7 +259,7 @@ export default function Skills() {
           <>
             <p className="st-kicker">Skill tree</p>
             <h3>{tallView ? 'Tap a skill' : 'Hover a skill'}</h3>
-            <p className="st-note">Core skills sit closest to the root; tools I’ve also used sit further out. Lit nodes have been used in a real project.</p>
+            <p className="st-note">Core skills sit closest to the root; tools I’ve also used sit further out. {tallView ? 'Tap' : 'Hover'} one to see where I used it.</p>
           </>
         )}
       </aside>
@@ -277,7 +307,8 @@ export default function Skills() {
           return (
             <div key={h.id}>
               <span className={`st-hub ${active && active.branch === h.id ? 'on' : ''}`} style={{ left: pct(h.x, W), top: pct(h.y, H) }} aria-hidden="true" />
-              <p className={`st-branch ${lab.align ? `is-${lab.align}` : ''}`} style={{ left: pct(lab.x, W), top: pct(lab.y, H) }}>
+              <p className="st-branch" style={{ left: pct(lab.x, W), top: pct(lab.y, H) }}>
+                <span className="st-branch-ico"><BranchIcon id={h.id} /></span>
                 {h.label}
                 <small>{h.sub}</small>
               </p>
@@ -293,7 +324,7 @@ export default function Skills() {
             style={{ left: pct(n.x, W), top: pct(n.y, H), '--c': n.color || '#c4b5fd' }}
             onMouseEnter={() => !tallView && setActiveId(n.id)}
             onFocus={() => setActiveId(n.id)}
-            onClick={() => setActiveId(tallView && n.id === activeId ? null : n.id)}
+            onClick={() => setActiveId(n.id)}
             aria-pressed={n.id === activeId}
           >
             <span className="st-ico"><n.Icon aria-hidden="true" /></span>
@@ -318,7 +349,8 @@ export default function Skills() {
               className={branch === b.id ? 'is-on' : ''}
               onClick={() => { setBranch(b.id); setActiveId(null) }}
             >
-              {b.label}
+              <BranchIcon id={b.id} />
+              <span>{b.label}</span>
             </button>
           ))}
         </div>

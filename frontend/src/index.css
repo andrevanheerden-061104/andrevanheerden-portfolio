@@ -8991,8 +8991,19 @@ html[data-theme='herd-link'] .nav-contact {
   white-space: nowrap;
 }
 
-.st-branch.is-left { transform: translate(-20%, -50%); text-align: left; }
-.st-branch.is-right { transform: translate(-80%, -50%); text-align: right; }
+.st-branch-ico {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin: 0 auto 8px;
+  border-radius: 12px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent-2), var(--accent-deep));
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12) inset, 0 8px 22px -8px var(--glow);
+}
+
+.st-branch-ico svg { width: 20px; height: 20px; }
 
 .st-branch small {
   display: block;
@@ -9098,6 +9109,7 @@ html[data-theme='herd-link'] .nav-contact {
 /* phones + narrow tablets: one branch at a time, panel above, toggle below */
 .skilltree.is-branch { padding: 18px 16px 18px; }
 .is-branch .st-panel {
+  min-height: 178px; /* stays the same height between picks so the tree doesn't jump under your finger */
   position: relative;
   top: auto;
   left: auto;
@@ -9149,6 +9161,15 @@ html[data-theme='herd-link'] .nav-contact {
   transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.st-toggle button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.st-toggle button svg { flex: none; width: 15px; height: 15px; }
+
 .st-toggle button:hover { color: #fff; }
 
 .st-toggle button.is-on {
@@ -9182,4 +9203,9 @@ html[data-theme='herd-link'] .nav-contact {
   .st-node.tier-1 .st-name { font-size: 0.54rem; }
   .st-branch { font-size: 0.6rem; }
   .st-branch small { font-size: 0.5rem; }
+}
+
+/* small phones: toggle icon sits above its label so the words don't wrap */
+@media (max-width: 480px) {
+  .st-toggle button { flex-direction: column; gap: 4px; padding: 8px 4px; font-size: 0.62rem; }
 }
