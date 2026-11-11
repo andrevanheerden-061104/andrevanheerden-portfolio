@@ -9125,7 +9125,7 @@ html[data-theme='herd-link'] .nav-contact {
   position: static;
   justify-content: center;
   transform: none;
-  margin-top: 4px;
+  margin: 8px 0 22px;
 }
 .is-branch .st-root { width: 48px; height: 48px; }
 .st-curve { fill: none; }

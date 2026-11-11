@@ -57,6 +57,8 @@ export const HERO_ICONS = [
    A node is "unlocked" (lit) when it's been used in a real project.
    --------------------------------------------------------- */
 /* branch icons: pen for design, code brackets for front-end, server rack for back-end */
+const Test = () => <L d="M9 3h6M10 3v6.5L4.8 18.2A1.8 1.8 0 0 0 6.4 21h11.2a1.8 1.8 0 0 0 1.6-2.8L14 9.5V3M7.5 15h9" />
+
 const BranchIcon = ({ id }) => (
   <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
     {id === 'design' && (
@@ -107,7 +109,7 @@ const SKILLS = [
   { id: 'js', branch: 'front', tier: 2, name: 'JavaScript', Icon: SiJavascript, color: '#F7DF1E', note: 'The language behind my front-ends and Node back-ends.', used: ['Tower of Arithmetic', 'Aquastainable', 'This portfolio'] },
   { id: 'expo', branch: 'front', tier: 2, name: 'Expo', Icon: SiExpo, color: '#ffffff', note: 'Fast mobile builds, Expo Go testing and APK exports.', used: ['Tower of Arithmetic', 'Aquastainable'] },
   { id: 'tailwind', branch: 'front', tier: 2, name: 'Tailwind', Icon: SiTailwindcss, color: '#38BDF8', note: 'Utility-first styling for fast, consistent UI.', used: ['Artifax'] },
-  { id: 'jest', branch: 'front', tier: 2, name: 'Jest testing', Icon: SiJest, color: '#C21325', note: 'Automated tests for components and hooks (plus xUnit on the C# side).', used: ['Artifax'] },
+  { id: 'jest', branch: 'front', tier: 2, name: 'Jest testing', Icon: SiJest, color: '#C21325', note: 'Automated tests for React components and hooks.', used: ['Artifax'] },
   { id: 'bootstrap', branch: 'front', tier: 2, name: 'Bootstrap', Icon: SiBootstrap, color: '#7952B3', note: 'Grid and components for quick responsive builds.', used: [], past: 'Second-year projects' },
   // back-end & AI
   { id: 'node', branch: 'back', tier: 1, name: 'Node + Express', Icon: SiNodedotjs, color: '#5FA04E', note: 'REST APIs that keep AI and admin keys off the device.', used: ['Tower of Arithmetic', 'Aquastainable'] },
@@ -116,6 +118,7 @@ const SKILLS = [
   { id: 'firebase', branch: 'back', tier: 1, name: 'Firebase', Icon: SiFirebase, color: '#FFCA28', note: 'Auth and Firestore for document-shaped app data.', used: ['Aquastainable'] },
   { id: 'dotnet', branch: 'back', tier: 2, name: 'C# / .NET', Icon: SiDotnet, color: '#9B7CF5', note: 'ASP.NET Core APIs with Entity Framework.', used: ['Artifax'] },
   { id: 'pg', branch: 'back', tier: 2, name: 'PostgreSQL', Icon: SiPostgresql, color: '#4169E1', note: 'Relational schemas, migrations and queries, on Supabase and Aiven.', used: ['Artifax', 'Tower of Arithmetic'] },
+  { id: 'apitest', branch: 'back', tier: 2, name: 'API testing', Icon: Test, color: '#9B7CF5', note: 'Unit tests on the C# API with xUnit and Moq, against an in-memory database.', used: ['Artifax'] },
   { id: 'mysql', branch: 'back', tier: 2, name: 'MySQL', Icon: SiMysql, color: '#4479A1', note: 'Relational databases for coursework systems.', used: [], past: 'Second-year projects' },
   { id: 'docker', branch: 'back', tier: 2, name: 'Docker', Icon: SiDocker, color: '#2496ED', note: 'Containerised API deploys.', used: ['Artifax'] },
   { id: 'git', branch: 'back', tier: 2, name: 'Git & GitHub', Icon: SiGithub, color: '#ffffff', note: 'Branching, pull requests and a preproduction branch on every build.', used: ['All builds'] },
@@ -171,27 +174,29 @@ function wide() {
 
 /* one branch at a time (phones + narrow tablets): the branch fans out as its own arc */
 function branchLayout(bid) {
+  // hand-tuned for a phone: nodes sit in staggered rows so no two labels share a line,
+  // with a gentle arch so it still reads as a tree growing out of the root
   const W = 600
-  const H = 650
-  const ROOT = { x: 300, y: 570 }
-  const KX = 0.49 // squeeze sideways so the fan fits a phone width
-  const at = (r, deg) => ({ x: ROOT.x + r * KX * Math.cos(rad(deg)), y: ROOT.y + r * Math.sin(rad(deg)) })
+  const H = 860
+  const ROOT = { x: 300, y: 790 }
   const b = BRANCHES.find((x) => x.id === bid)
   const nodes = []
-  ;[1, 2].forEach((tier) => {
-    const list = SKILLS.filter((s) => s.branch === bid && s.tier === tier)
-    const [from, to] = tier === 1 ? [205, 335] : [192, 348]
+  const place = (list, x0, x1, rows) =>
     list.forEach((s, i) => {
-      const deg = list.length === 1 ? 270 : from + ((to - from) * i) / (list.length - 1)
-      const r = tier === 1 ? [200, 270][i % 2] : [400, 500][i % 2]
-      nodes.push({ ...s, deg, ...at(r, deg), near: (m) => Math.abs(m.deg - deg) })
+      const x = list.length === 1 ? 300 : x0 + ((x1 - x0) * i) / (list.length - 1)
+      const row = list.length === 1 ? rows[rows.length - 1] : rows[i % rows.length]
+      const y = ROOT.y - row + Math.abs(x - 300) * 0.22
+      nodes.push({ ...s, x, y, deg: 180 + (x / W) * 180, near: (m) => Math.abs(m.x - x) })
     })
-  })
+  const pick = (tier) => SKILLS.filter((s) => s.branch === bid && s.tier === tier)
+  place(pick(1), 130, 470, [175, 295])
+  const outer = pick(2)
+  place(outer, 100, 500, outer.length > 6 ? [430, 550, 670] : [450, 590])
   const hub = { ...b, x: ROOT.x, y: ROOT.y, isRoot: true }
   parentsFor(nodes, [hub])
-  const arc = (r) => `M ${ROOT.x - r * KX} ${ROOT.y} A ${r * KX} ${r} 0 0 1 ${ROOT.x + r * KX} ${ROOT.y}`
-  const rings = [235, 450].map(arc)
-  const rune = arc(560)
+  const arc = (rx, ry) => `M ${ROOT.x - rx} ${ROOT.y} A ${rx} ${ry} 0 0 1 ${ROOT.x + rx} ${ROOT.y}`
+  const rings = [arc(200, 330), arc(270, 640)]
+  const rune = arc(290, 770)
   return { W, H, ROOT, nodes, hubs: [], labels: {}, rings, rune, kind: 'branch', curved: true }
 }
 
@@ -205,7 +210,7 @@ function stars(n, W, H) {
   const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647)
   return Array.from({ length: n }, (_, i) => ({ x: rnd() * W, y: rnd() * H * 0.95, r: rnd() < 0.15 ? 1.6 : 0.8 + rnd() * 0.6, d: (rnd() * 4).toFixed(2), tw: i % 5 === 0 }))
 }
-const STARS = { wide: stars(90, 1000, 640), branch: stars(70, 600, 650) }
+const STARS = { wide: stars(90, 1000, 640), branch: stars(80, 600, 860) }
 const RUNES = 'design() → build() → ship() ✦ const skill = learn(tool) ✦ </> { ux: true, dev: true } ✦ if (user.happy) business.grows() ✦ git commit -m "level up" ✦ '
 
 function useTall() {
@@ -266,6 +271,12 @@ export default function Skills() {
         )}
       </aside>
 
+      {tallView && (
+        <div className="st-points">
+          <span className="pixel">{`${NODES.filter(lit).length}/${NODES.length}`}</span>
+          <small>skills unlocked</small>
+        </div>
+      )}
       <div className="st-stage" style={{ aspectRatio: `${W} / ${H}` }} onMouseLeave={() => !tallView && setActiveId(null)}>
         <svg className="st-lines" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" aria-hidden="true">
           <defs>
@@ -334,10 +345,12 @@ export default function Skills() {
           </button>
         ))}
 
-        <div className="st-points">
-          <span className="pixel">{tallView ? `${NODES.filter(lit).length}/${NODES.length}` : shipped}</span>
-          <small>skills unlocked</small>
-        </div>
+        {!tallView && (
+          <div className="st-points">
+            <span className="pixel">{shipped}</span>
+            <small>skills unlocked</small>
+          </div>
+        )}
       </div>
 
       {tallView && (
