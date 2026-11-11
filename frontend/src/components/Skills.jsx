@@ -177,8 +177,8 @@ function branchLayout(bid) {
   // hand-tuned for a phone: nodes sit in staggered rows so no two labels share a line,
   // with a gentle arch so it still reads as a tree growing out of the root
   const W = 600
-  const H = 860
-  const ROOT = { x: 300, y: 790 }
+  const H = 800
+  const ROOT = { x: 300, y: 730 }
   const b = BRANCHES.find((x) => x.id === bid)
   const nodes = []
   const place = (list, x0, x1, rows) =>
@@ -191,7 +191,7 @@ function branchLayout(bid) {
   const pick = (tier) => SKILLS.filter((s) => s.branch === bid && s.tier === tier)
   place(pick(1), 130, 470, [175, 295])
   const outer = pick(2)
-  place(outer, 100, 500, outer.length > 6 ? [430, 550, 670] : [450, 590])
+  place(outer, 100, 500, outer.length > 6 ? [430, 550, 670] : [450, 670]) // every branch tops out at the same height
   const hub = { ...b, x: ROOT.x, y: ROOT.y, isRoot: true }
   parentsFor(nodes, [hub])
   const arc = (rx, ry) => `M ${ROOT.x - rx} ${ROOT.y} A ${rx} ${ry} 0 0 1 ${ROOT.x + rx} ${ROOT.y}`
@@ -210,7 +210,7 @@ function stars(n, W, H) {
   const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647)
   return Array.from({ length: n }, (_, i) => ({ x: rnd() * W, y: rnd() * H * 0.95, r: rnd() < 0.15 ? 1.6 : 0.8 + rnd() * 0.6, d: (rnd() * 4).toFixed(2), tw: i % 5 === 0 }))
 }
-const STARS = { wide: stars(90, 1000, 640), branch: stars(80, 600, 860) }
+const STARS = { wide: stars(90, 1000, 640), branch: stars(80, 600, 800) }
 const RUNES = 'design() → build() → ship() ✦ const skill = learn(tool) ✦ </> { ux: true, dev: true } ✦ if (user.happy) business.grows() ✦ git commit -m "level up" ✦ '
 
 function useTall() {
