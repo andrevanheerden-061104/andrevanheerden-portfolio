@@ -312,6 +312,9 @@ button {
   line-height: 1.7;
 }
 
+/* My Toolkit only: a bit more air under the title */
+#skills .sec-intro { margin-top: 14px; }
+
 /* ---------- Hero ---------- */
 .hero {
   position: relative;

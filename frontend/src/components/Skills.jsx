@@ -21,6 +21,7 @@ import {
   SiTypescript,
   SiPostgresql,
   SiDocker,
+  SiJest,
 } from 'react-icons/si'
 
 /* line icons for skills that have no brand logo */
@@ -90,7 +91,7 @@ const BRANCHES = [
 
 const SKILLS = [
   // design
-  { id: 'figma', branch: 'design', tier: 1, name: 'Figma', Icon: SiFigma, color: '#F24E1E', note: 'Where every project starts: flows, wireframes, style guides and clickable prototypes.', used: ['Tower of Arithmetic', 'Next Level', 'Herd Link', 'Ford Relay', 'Absa Village'] },
+  { id: 'figma', branch: 'design', tier: 1, name: 'Figma', Icon: SiFigma, color: '#F24E1E', note: 'Where every project starts: flows, wireframes, style guides and clickable prototypes.', used: ['Tower of Arithmetic', 'Next Level', 'Herd Link', 'Ford Relay', 'Absa Village', 'Artifax', 'Aquastainable'] },
   { id: 'research', branch: 'design', tier: 1, name: 'UX research', Icon: Research, note: 'Surveys, interviews, competitor analysis, affinity mapping and personas.', used: ['Tower of Arithmetic', 'Ford Relay', 'Next Level', 'Herd Link'] },
   { id: 'ui', branch: 'design', tier: 1, name: 'UI design', Icon: UI, note: 'Accessible, consistent interfaces built on a clear style guide.', used: ['All projects'] },
   { id: 'proto', branch: 'design', tier: 1, name: 'Prototyping', Icon: Proto, note: 'Interactive Figma prototypes for testing flows with real users.', used: ['Ford Relay', 'Next Level', 'Herd Link'] },
@@ -103,9 +104,10 @@ const SKILLS = [
   { id: 'ts', branch: 'front', tier: 1, name: 'TypeScript', Icon: SiTypescript, color: '#3178C6', note: 'Typed front-ends that catch bugs before they ship.', used: ['Artifax', 'Aquastainable'] },
   { id: 'css', branch: 'front', tier: 1, name: 'CSS', Icon: SiCss, color: '#663399', note: 'Responsive layouts, animation and design tokens, like this site.', used: ['This portfolio'] },
   { id: 'html', branch: 'front', tier: 2, name: 'HTML', Icon: SiHtml5, color: '#E34F26', note: 'Semantic, accessible markup.', used: ['This portfolio'] },
-  { id: 'js', branch: 'front', tier: 2, name: 'JavaScript', Icon: SiJavascript, color: '#F7DF1E', note: 'The language behind my front-ends and Node back-ends.', used: ['Tower of Arithmetic', 'This portfolio'] },
+  { id: 'js', branch: 'front', tier: 2, name: 'JavaScript', Icon: SiJavascript, color: '#F7DF1E', note: 'The language behind my front-ends and Node back-ends.', used: ['Tower of Arithmetic', 'Aquastainable', 'This portfolio'] },
   { id: 'expo', branch: 'front', tier: 2, name: 'Expo', Icon: SiExpo, color: '#ffffff', note: 'Fast mobile builds, Expo Go testing and APK exports.', used: ['Tower of Arithmetic', 'Aquastainable'] },
   { id: 'tailwind', branch: 'front', tier: 2, name: 'Tailwind', Icon: SiTailwindcss, color: '#38BDF8', note: 'Utility-first styling for fast, consistent UI.', used: ['Artifax'] },
+  { id: 'jest', branch: 'front', tier: 2, name: 'Jest testing', Icon: SiJest, color: '#C21325', note: 'Automated tests for components and hooks (plus xUnit on the C# side).', used: ['Artifax'] },
   { id: 'bootstrap', branch: 'front', tier: 2, name: 'Bootstrap', Icon: SiBootstrap, color: '#7952B3', note: 'Grid and components for quick responsive builds.', used: [], past: 'Second-year projects' },
   // back-end & AI
   { id: 'node', branch: 'back', tier: 1, name: 'Node + Express', Icon: SiNodedotjs, color: '#5FA04E', note: 'REST APIs that keep AI and admin keys off the device.', used: ['Tower of Arithmetic', 'Aquastainable'] },
@@ -113,11 +115,11 @@ const SKILLS = [
   { id: 'supabase', branch: 'back', tier: 1, name: 'Supabase', Icon: SiSupabase, color: '#3ECF8E', note: 'Postgres, auth, email codes and row-level security.', used: ['Tower of Arithmetic', 'Artifax'] },
   { id: 'firebase', branch: 'back', tier: 1, name: 'Firebase', Icon: SiFirebase, color: '#FFCA28', note: 'Auth and Firestore for document-shaped app data.', used: ['Aquastainable'] },
   { id: 'dotnet', branch: 'back', tier: 2, name: 'C# / .NET', Icon: SiDotnet, color: '#9B7CF5', note: 'ASP.NET Core APIs with Entity Framework.', used: ['Artifax'] },
-  { id: 'pg', branch: 'back', tier: 2, name: 'PostgreSQL', Icon: SiPostgresql, color: '#4169E1', note: 'Relational schemas, migrations and queries.', used: ['Artifax', 'Tower of Arithmetic'] },
+  { id: 'pg', branch: 'back', tier: 2, name: 'PostgreSQL', Icon: SiPostgresql, color: '#4169E1', note: 'Relational schemas, migrations and queries, on Supabase and Aiven.', used: ['Artifax', 'Tower of Arithmetic'] },
   { id: 'mysql', branch: 'back', tier: 2, name: 'MySQL', Icon: SiMysql, color: '#4479A1', note: 'Relational databases for coursework systems.', used: [], past: 'Second-year projects' },
   { id: 'docker', branch: 'back', tier: 2, name: 'Docker', Icon: SiDocker, color: '#2496ED', note: 'Containerised API deploys.', used: ['Artifax'] },
   { id: 'git', branch: 'back', tier: 2, name: 'Git & GitHub', Icon: SiGithub, color: '#ffffff', note: 'Branching, pull requests and a preproduction branch on every build.', used: ['All builds'] },
-  { id: 'vercel', branch: 'back', tier: 2, name: 'Vercel', Icon: SiVercel, color: '#ffffff', note: 'Deploying web builds, like this site.', used: ['Tower of Arithmetic', 'Artifax', 'Aquastainable', 'This portfolio'] },
+  { id: 'vercel', branch: 'back', tier: 2, name: 'Vercel + Render', Icon: SiVercel, color: '#ffffff', note: 'Websites on Vercel, APIs on Render.', used: ['Tower of Arithmetic', 'Artifax', 'Aquastainable', 'This portfolio'] },
 ]
 
 /* ---------- layouts ----------
