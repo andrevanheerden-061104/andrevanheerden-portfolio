@@ -166,7 +166,11 @@ export default function Experience() {
               className={`xp-card2 xp-${it.type} ${i < active ? 'is-behind' : ''}`}
               style={{ '--i': i }}
             >
-              <div className="xp-bar">
+              <div
+                className="xp-bar"
+                onClick={i < active ? () => jump(i) : undefined}
+                title={i < active ? 'Back to this card' : undefined}
+              >
                 <span className="dots" aria-hidden="true"><i /><i /><i /></span>
                 <span className="xp-path">~/{it.path}</span>
                 <span className="xp-badge">[{LABEL[it.type]}]</span>

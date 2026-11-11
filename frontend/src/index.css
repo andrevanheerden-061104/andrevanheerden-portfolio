@@ -9224,3 +9224,67 @@ html[data-theme='herd-link'] .nav-contact {
     height: 12vh;
   }
 }
+
+/* Work experience: docked cards leave their title bar showing, like stacked file tabs */
+.xp2,
+.has-sticky-head .xp2 { --xp-tab: 43px; } /* 40px bar + 3px coloured top edge */
+
+.xp-card2,
+.has-sticky-head .xp-card2 {
+  top: calc(var(--xp-stick) + var(--i) * var(--xp-tab));
+  box-shadow: 0 -6px 18px -10px rgba(0, 0, 0, 0.9);
+}
+
+.xp-card2.is-behind {
+  transform: scale(0.97);
+  filter: brightness(0.6) saturate(0.8);
+}
+
+.xp-card2.is-behind .xp-bar { cursor: pointer; }
+.xp-card2.is-behind .xp-bar:hover { background: rgba(255, 255, 255, 0.06); }
+
+@media (max-width: 700px) {
+  .xp2,
+  .has-sticky-head .xp2 { --xp-tab: 33px; } /* slimmer 30px bars on phones */
+  .xp-bar {
+    height: 30px;
+    gap: 10px;
+    padding: 0 12px;
+    font-size: 0.64rem;
+  }
+  .xp-bar .dots i { width: 8px; height: 8px; }
+}
+
+/* a taller card behind never pokes out under a shorter one: only its tab stays visible */
+.xp-card2 { clip-path: inset(0 0 0 0 round 18px); transition: transform 0.4s ease, filter 0.4s ease, border-color 0.3s ease, clip-path 0.4s ease; }
+.xp-card2.is-behind { clip-path: inset(0 0 calc(100% - var(--xp-tab) - 8px) 0 round 18px 18px 0 0); }
+
+/* Who I am: inline link to the Tower of Arithmetic case study */
+.about-link {
+  position: relative;
+  font-weight: 700;
+  color: var(--accent-2);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+.about-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent-2), var(--accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.about-link:hover,
+.about-link:focus-visible {
+  color: #fff;
+  text-shadow: 0 0 14px var(--glow);
+}
+.about-link:hover::after,
+.about-link:focus-visible::after { transform: scaleX(1); }

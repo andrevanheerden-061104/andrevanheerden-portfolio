@@ -111,7 +111,9 @@ function About() {
           <Words>when a product genuinely makes life easier for the people using it, they keep coming back, and that’s what makes it work for the business too. No dark patterns, no tricks.</Words>
         </p>
         <p>
-          <Words>I love designing interfaces that look good and feel effortless, then building them so they work just as well in the browser as they did in Figma. Outside of work you’ll find me gaming and watching anime, which is where projects like a maths RPG come from.</Words>
+          <Words>I love designing interfaces that look good and feel effortless, then building them so they work just as well in the browser as they did in Figma. Outside of work you’ll find me gaming and watching anime, which is where projects like</Words>{' '}
+          <Link to="/work/tower-of-arithmetic" className="about-link">Tower of Arithmetic</Link>{' '}
+          <Words>come from.</Words>
         </p>
       </div>
       <dl className="stats">
