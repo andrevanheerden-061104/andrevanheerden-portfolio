@@ -76,13 +76,13 @@ export default function Nav() {
           ))}
         </nav>
         <div className="nav-right">
-          <a className="nav-icon" href={LINKS.github} target="_blank" rel="noreferrer" aria-label="GitHub">
+          <a className="nav-icon is-github" href={LINKS.github} target="_blank" rel="noreferrer" aria-label="GitHub">
             <GitHub />
           </a>
-          <a className="nav-icon" href={LINKS.behance} target="_blank" rel="noreferrer" aria-label="Behance">
+          <a className="nav-icon is-behance" href={LINKS.behance} target="_blank" rel="noreferrer" aria-label="Behance">
             <Behance />
           </a>
-          <a className="nav-icon" href={LINKS.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          <a className="nav-icon is-linkedin" href={LINKS.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
             <LinkedIn />
           </a>
           <a className="btn btn-primary btn-sm" href={`mailto:${LINKS.email}`}>

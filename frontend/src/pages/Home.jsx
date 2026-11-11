@@ -69,7 +69,7 @@ function Hero() {
           <Link className="btn btn-primary" to="/#work">
             View my work <Arrow />
           </Link>
-          <a className="btn btn-outline" href={`mailto:${LINKS.email}`}>
+          <a className="btn btn-outline btn-email" href={`mailto:${LINKS.email}`}>
             <Mail /> Email me
           </a>
         </div>

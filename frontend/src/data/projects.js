@@ -2,6 +2,7 @@
   All portfolio projects live here.
   - tracks: which filter a project shows under ('ux', 'dv' or both)
   - kind:   the plain-language category shown on the card
+  - blurb:  one short sentence on what the product is, shown under the card title
   - theme:  card colours (bg = folder colour, ink = text colour)
   To add a project, copy one object and change the values.
 */
@@ -25,9 +26,10 @@ export const projects = [
     glance: { problem: 'Learners freeze when they practise maths alone', built: 'A maths RPG where every spell is a sum, with AI hints', role: 'Research, UI design & full build', status: 'Live on Vercel' },
     title: 'Tower of Arithmetic',
     tagline: 'Every spell is an equation.',
+    blurb: 'An AI-powered maths learning game where every move in a turn-based RPG is a sum to solve.',
     summary:
       'A turn-based fantasy RPG for Grades 1–11 where every action is powered by solving a maths problem, with AI hints instead of penalties and no countdown timers.',
-    kind: 'AI learning app',
+    kind: 'AI maths learning app',
     sector: 'EdTech',
     tracks: ['ux', 'dv'],
     featured: true,
@@ -43,9 +45,10 @@ export const projects = [
     glance: { problem: 'Banks compete for young customers at 18, when loyalty is already set', built: 'Sprout family account, #ABSAVillage events and TeenSprout', role: 'UX strategy & UI (team of 5)', status: '2nd place · Absa Hackathon' },
     title: 'Absa Village',
     tagline: 'It takes a village.',
+    blurb: 'A banking concept for young parents: a Sprout account that grows with the child, plus community events.',
     summary:
       'Our Absa Design Hackathon solution: win the 0–30 market by reaching parents first, with a Sprout account that grows with the child, #ABSAVillage parenting events, and a TeenSprout account that teaches money skills.',
-    kind: 'Hackathon · banking strategy',
+    kind: 'Banking concept · hackathon',
     sector: 'FinTech',
     tracks: ['ux'],
     year: '2026',
@@ -59,9 +62,10 @@ export const projects = [
     glance: { problem: 'Fitness apps overwhelm users with dyspraxia', built: 'Calm, self-paced workouts with speech-to-text', role: 'UX research & UI design', status: 'Prototype' },
     title: 'Next Level',
     tagline: 'Fitness at your own pace.',
+    blurb: 'A fitness app that builds workouts around each user’s physical disabilities, with calm, timer-free screens.',
     summary:
       'An adaptive fitness app that builds workouts around each user’s physical disabilities, with calm single-focus screens, no countdown timers and speech-to-text.',
-    kind: 'Accessibility app',
+    kind: 'Accessible fitness app',
     sector: 'Health & fitness',
     tracks: ['ux'],
     year: '2026',
@@ -74,9 +78,10 @@ export const projects = [
     glance: { problem: 'Farmers can’t spot sick animals in huge herds', built: 'AI smart collar + high-contrast, offline-ready app', role: 'AI feature mapping & UI design', status: 'Prototype' },
     title: 'Herd Link',
     tagline: 'Every animal, at a glance.',
+    blurb: 'A smart collar and app that spot early signs of illness in cattle and keep working with no signal.',
     summary:
       'An AI-assisted smart collar and high-contrast app that spots early signs of illness, flags broken water points and keeps working in signal dead zones.',
-    kind: 'AI-assisted wearable',
+    kind: 'Smart livestock collar + app',
     sector: 'AgriTech',
     tracks: ['ux'],
     year: '2026',
@@ -89,9 +94,10 @@ export const projects = [
     glance: { problem: 'Customers hear nothing once the keys are handed over', built: 'Workshop console + FordPass add-on on one event spine', role: 'Service design & UI (team of 4)', status: 'Two prototypes' },
     title: 'Ford Relay',
     tagline: 'Service without the hassle.',
+    blurb: 'A service system that gives Ford owners live workshop updates, so nobody has to remember to call.',
     summary:
       'An event-driven service design system for Ford dealerships: a workshop HMI console and a customer app that read from the same live timeline, so updates never depend on staff memory.',
-    kind: 'Service design',
+    kind: 'Service design system',
     sector: 'Automotive',
     tracks: ['ux'],
     year: '2026',
@@ -105,10 +111,11 @@ export const projects = [
     glance: { problem: 'Two warehouses tracking stock and crafting by hand', built: 'React + ASP.NET Core inventory & crafting web app', role: 'Frontend dev (team of 5)', status: 'Live web app' },
     title: 'Artifax',
     tagline: 'Craft it, track it, restock it.',
+    blurb: 'An inventory and crafting web app that keeps stock right across two warehouses.',
     summary:
       'An inventory and crafting manager for a business with two warehouses: track base materials and crafted items, run timed crafting jobs, and give admins and employees different access. Built as a team with a React frontend and an ASP.NET Core API.',
-    kind: 'Web app · .NET API',
-    sector: 'Inventory & operations',
+    kind: 'Inventory & crafting web app',
+    sector: 'Operations',
     tracks: ['dv'],
     year: '2026',
     group: true,
@@ -123,9 +130,10 @@ export const projects = [
     glance: { problem: 'Beginners can’t read their tank water', built: 'Buttonless React Native app with an AI fish assistant', role: 'Solo: design & full-stack dev', status: 'Working app' },
     title: 'Aquastainable',
     tagline: 'Healthier tanks, happier fish.',
+    blurb: 'A buttonless aquarium-care app with an AI assistant that helps keep your fish healthy.',
     summary:
       'A buttonless aquarium-care app: manage tanks, log water tests, check fish compatibility and ask an AI assistant when something goes wrong. Every action is a hold, a swipe or the camera.',
-    kind: 'Mobile app · AI assistant',
+    kind: 'Aquarium-care app',
     sector: 'Pets & hobbies',
     tracks: ['dv'],
     year: '2026',

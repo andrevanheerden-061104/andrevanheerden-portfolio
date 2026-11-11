@@ -76,8 +76,9 @@ function PassCard({ p, to, external, cta, badge, index, line, tags }) {
         </div>
 
         <div className="pass-body">
+          {p.sector && <span className="pass-sector">{p.sector}</span>}
           <h3>{p.title}</h3>
-          <p className="pass-line">{line || (p.glance ? p.glance.problem : p.summary)}</p>
+          <p className="pass-line">{line || p.blurb || p.summary}</p>
           <ul className="pass-tags">
             {(tags || p.tags).slice(0, 3).map((t) => (
               <li key={t}>{t}</li>

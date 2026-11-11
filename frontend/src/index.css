@@ -8738,3 +8738,89 @@ html[data-theme='herd-link'] .nav-contact {
   margin: 0;
 }
 .stat-go svg { width: 12px; height: 12px; }
+
+/* =========================================================
+   Project card: sector tag + blurb
+   ========================================================= */
+.pass-sector {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--pc) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--pc) 55%, transparent);
+  font: 400 0.64rem var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--ph, var(--pc)) 75%, #fff);
+}
+
+/* =========================================================
+   Nav social icons: brand colour on hover
+   ========================================================= */
+.nav-icon {
+  --brand: var(--accent-3);
+  border: 1px solid transparent;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-icon.is-github { --brand: #f0f6fc; --brand-rgb: 240, 246, 252; }
+.nav-icon.is-behance { --brand: #4d8dff; --brand-rgb: 23, 105, 255; }
+.nav-icon.is-linkedin { --brand: #3d95e6; --brand-rgb: 10, 102, 194; }
+
+.nav-icon:hover,
+.nav-icon:focus-visible {
+  color: var(--brand);
+  background: rgba(var(--brand-rgb, 255, 255, 255), 0.12);
+  border-color: rgba(var(--brand-rgb, 255, 255, 255), 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -10px rgba(var(--brand-rgb, 255, 255, 255), 0.8);
+}
+
+.nav-icon svg { transition: transform 0.2s ease; }
+.nav-icon:hover svg { transform: scale(1.1); }
+
+/* =========================================================
+   "Email me" button
+   ========================================================= */
+.btn-email {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-email::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(135deg, rgba(var(--acc-rgb), 0.35), rgba(var(--acc2-rgb, var(--acc-rgb)), 0.15));
+  transform: translateX(-101%);
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.btn-email:hover,
+.btn-email:focus-visible {
+  color: #fff;
+  border-color: rgba(var(--acc-rgb), 0.8);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -12px var(--glow);
+}
+
+.btn-email:hover::before,
+.btn-email:focus-visible::before { transform: none; }
+
+.btn-email svg { transition: transform 0.3s ease; }
+.btn-email:hover svg { animation: mail-wiggle 0.5s ease; }
+
+@keyframes mail-wiggle {
+  0%, 100% { transform: rotate(0); }
+  30% { transform: rotate(-12deg) translateY(-1px); }
+  60% { transform: rotate(8deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-email:hover svg { animation: none; }
+  .nav-icon:hover, .btn-email:hover { transform: none; }
+}
