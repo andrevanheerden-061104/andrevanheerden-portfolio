@@ -24,13 +24,10 @@ export default function CertViewer({ pdf, img, title = 'Certificate', className 
       </button>
       {open && (
         <div className="cert-modal" role="dialog" aria-modal="true" aria-label={title} onClick={() => setOpen(false)}>
-          <div className="cert-modal-box" onClick={(e) => e.stopPropagation()}>
+          <div className="cert-modal-box" onClick={(e) => e.stopPropagation()} onContextMenu={(e) => e.preventDefault()}>
             <div className="cert-modal-bar">
               <span>{title}</span>
-              <div>
-                <a href={pdf} download>Download PDF</a>
-                <button type="button" onClick={() => setOpen(false)} aria-label="Close">✕</button>
-              </div>
+              <button type="button" onClick={() => setOpen(false)} aria-label="Close">✕</button>
             </div>
             <object data={`${pdf}#toolbar=0&navpanes=0&view=Fit`} type="application/pdf" className="cert-modal-pdf" aria-label={title}>
               <img src={img} alt={title} className="cert-modal-img" />
