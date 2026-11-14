@@ -9288,3 +9288,104 @@ html[data-theme='herd-link'] .nav-contact {
 }
 .about-link:hover::after,
 .about-link:focus-visible::after { transform: scaleX(1); }
+
+/* Absa Village: app audit + existing rewards */
+.audit-screens {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  margin: 32px 0 48px;
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: radial-gradient(120% 90% at 50% 0%, rgba(220, 0, 55, 0.12), transparent 60%), var(--bg-2);
+}
+.audit-phone { margin: 0; text-align: center; }
+.audit-phone img {
+  width: 100%;
+  border-radius: 22px;
+  border: 6px solid #1c1c26;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 20px 40px -20px rgba(0, 0, 0, 0.8);
+  transition: transform 0.3s ease;
+}
+.audit-phone:hover img { transform: translateY(-6px); }
+.audit-phone figcaption { margin-top: 12px; font: 400 0.75rem var(--mono); color: var(--soft); }
+.audit-rewards-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+.audit-rewards-head h3 { margin: 0; font-size: 1.15rem; }
+.audit-tag {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(220, 0, 55, 0.14);
+  color: #ff4d6d;
+  font: 400 0.7rem var(--mono);
+}
+.audit-rewards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.reward-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.reward-card:hover { transform: translateY(-4px); border-color: rgba(220, 0, 55, 0.5); }
+.reward-img { position: relative; aspect-ratio: 16 / 8; overflow: hidden; }
+.reward-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.reward-card:hover .reward-img img { transform: scale(1.06); }
+.reward-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(9, 9, 13, 0.85)); }
+.reward-chip {
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+  z-index: 1;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: #dc0037;
+  color: #fff;
+  font: 500 0.66rem var(--mono);
+}
+.reward-body { padding: 16px 18px 18px; }
+.reward-body h4 { margin: 0 0 6px; font-size: 1rem; }
+.reward-body p { margin: 0; color: var(--muted); font-size: 0.88rem; line-height: 1.55; }
+
+@media (max-width: 900px) {
+  .audit-screens { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 20px; }
+  .audit-rewards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) {
+  .audit-screens { gap: 14px; padding: 14px; }
+  .audit-rewards { gap: 12px; }
+  .reward-body { padding: 12px 12px 14px; }
+  .reward-body h4 { font-size: 0.9rem; }
+  .reward-body p { font-size: 0.78rem; }
+  .reward-chip { left: 8px; bottom: 8px; font-size: 0.58rem; }
+}
+
+/* Absa: certificate thumbnail inside the award banner */
+.award-cert {
+  margin-left: auto;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+.award-cert img {
+  width: 92px;
+  border-radius: 8px;
+  box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(242, 234, 121, 0.35);
+  transform: rotate(3deg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.award-cert span { font: 400 0.68rem var(--mono); color: #f2ea79; }
+.award-cert:hover img { transform: rotate(0) scale(1.06); box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.9), 0 0 0 1px #f2ea79; }
+@media (max-width: 560px) {
+  .award-banner { flex-wrap: wrap; }
+  .award-cert { margin-left: 0; flex-direction: row; gap: 10px; }
+  .award-cert img { width: 64px; }
+}

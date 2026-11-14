@@ -141,6 +141,7 @@ export const caseStudies = {
     award: {
       title: '2nd place among Gauteng university teams',
       text: 'Absa Design Hackathon: Team Challenge 2026, hosted by the Africa Design Office on 16 September 2026.',
+      cert: '/work/abs-certificate.jpg',
     },
     brief: [
       {
@@ -174,6 +175,25 @@ export const caseStudies = {
         { value: '0', title: 'Banks supporting parents', text: 'Banks offer products to families, but none act as a real support system through parenthood.' },
       ],
       why: 'Waiting until a learner is 16 means competing with years of familiarity and brand loyalty. Working backwards showed us the real starting point is before the child is even born.',
+    },
+    audit: {
+      title: 'What Absa’s app already offers',
+      intro:
+        'Before designing anything we went through Absa’s current sign-up flow and rewards. Account types were split into personal, business and student, with nothing for the family stage, but Absa already ran partner rewards we could build on.',
+      screens: [
+        { src: '/screens/abs-audit-1.jpg', alt: 'Absa app onboarding screen', caption: 'Onboarding: verify with selfies' },
+        { src: '/screens/abs-audit-2.jpg', alt: 'Absa choose your account screen', caption: 'Only personal, business or student' },
+        { src: '/screens/abs-audit-3.jpg', alt: 'Absa account bundles screen', caption: 'Bundles, none for families' },
+        { src: '/screens/abs-audit-4.jpg', alt: 'Absa transact account screen', caption: 'Transact account: R7,50 pm' },
+      ],
+      rewardsTitle: 'Existing partner rewards we built on',
+      rewards: [
+        { img: '/screens/abs-reward-bite.jpg', chip: 'Absa Advantage', title: 'Grab a free bite', text: 'Meal vouchers for completing easy challenges.' },
+        { img: '/screens/abs-reward-movies.jpg', chip: 'Nu Metro', title: '50% off movies', text: 'Half-price movie tickets at Nu Metro.' },
+        { img: '/screens/abs-reward-travel.jpg', chip: 'Rewards Travel', title: 'Cheaper flights', text: 'Up to 100% off local and international flights booked in the app.' },
+        { img: '/screens/abs-reward-friday.jpg', chip: 'Cashback Fridays', title: 'Cash back on Fridays', text: 'Cash back at participating Absa small businesses.' },
+      ],
+      why: 'The rewards model already worked, it just wasn’t pointed at families. Sprout reuses the same sign-up pattern as a fourth account type and aims partner deals at what parents actually buy: nappies, baby essentials, pharmacy and formula.',
     },
     team: {
       label: 'Open Window team',

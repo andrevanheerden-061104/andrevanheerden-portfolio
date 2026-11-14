@@ -131,6 +131,7 @@ function uxIndex(cs) {
   const research = []
   if (cs.survey) research.push({ id: 'survey', label: 'Survey' })
   research.push({ id: 'research', label: cs.secondary ? 'Literature & competitors' : 'Research' })
+  if (cs.audit) research.push({ id: 'audit', label: 'App audit' })
   if (cs.insights) research.push({ id: 'insights', label: 'Key insights' })
   if (cs.journey) research.push({ id: 'journey', label: 'Journey map' })
   if (cs.blueprints) research.push({ id: 'blueprint', label: 'Current blueprint' })
@@ -254,6 +255,12 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
                 <b>{cs.award.title}</b>
                 <p>{cs.award.text}</p>
               </div>
+              {cs.award.cert && (
+                <a className="award-cert" href={cs.award.cert} target="_blank" rel="noreferrer" title="View my certificate">
+                  <img src={cs.award.cert} alt="My certificate of recognition for 2nd place" loading="lazy" />
+                  <span>View certificate ↗</span>
+                </a>
+              )}
             </div>
           )}
           <div className="brief-grid">
@@ -405,6 +412,40 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
               </article>
             ))}
           </div>
+        </section>
+      )}
+
+      {cs.audit && (
+        <section id="audit" className="cs-section">
+          <SectionHead kicker="discover · app audit" title={cs.audit.title} />
+          <p className="cs-lead narrow"><Words>{cs.audit.intro}</Words></p>
+          <div className="audit-screens">
+            {cs.audit.screens.map((sc) => (
+              <figure key={sc.src} className="audit-phone">
+                <img src={sc.src} alt={sc.alt} loading="lazy" />
+                <figcaption>{sc.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+          <div className="audit-rewards-head">
+            <span className="audit-tag">Absa app today</span>
+            <h3>{cs.audit.rewardsTitle}</h3>
+          </div>
+          <div className="audit-rewards">
+            {cs.audit.rewards.map((r) => (
+              <article key={r.title} className="reward-card">
+                <div className="reward-img">
+                  <img src={r.img} alt="" loading="lazy" />
+                  <span className="reward-chip">{r.chip}</span>
+                </div>
+                <div className="reward-body">
+                  <h4>{r.title}</h4>
+                  <p>{r.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <Why label="what we took from it">{cs.audit.why}</Why>
         </section>
       )}
 
