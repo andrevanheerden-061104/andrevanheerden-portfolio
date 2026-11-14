@@ -142,6 +142,12 @@ export const caseStudies = {
       title: '2nd place among Gauteng university teams',
       text: 'Absa Design Hackathon: Team Challenge 2026, hosted by the Africa Design Office on 16 September 2026.',
       cert: '/work/abs-certificate.jpg',
+      pdf: '/work/abs-certificate.pdf',
+    },
+    outcome: {
+      title: 'Second place',
+      text: 'Sprout, #AbsaVillage and TeenSprout took 2nd place at the Absa Design Hackathon: Team Challenge 2026, hosted by the Africa Design Office on 16 September 2026.',
+      sub: 'Every team member received a certificate of recognition from Absa’s design director.',
     },
     brief: [
       {

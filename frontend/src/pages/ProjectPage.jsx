@@ -8,6 +8,7 @@ import Words from '../components/Words.jsx'
 import CaseIndex from '../components/CaseIndex.jsx'
 import { SiFigma } from 'react-icons/si'
 import { SectionHead, Why } from '../components/CaseBits.jsx'
+import CertViewer from '../components/CertViewer.jsx'
 import ArtifaxDv, { ARTIFAX_OVERVIEW } from './ArtifaxDv.jsx'
 import AquaDv, { AQUA_OVERVIEW } from './AquaDv.jsx'
 import TowerDv from './TowerDv.jsx'
@@ -157,7 +158,7 @@ function uxIndex(cs) {
     group: cs.posters ? 'Solution' : 'Design',
     items: cs.featureGroups ? cs.featureGroups.map((fg) => ({ id: fg.id, label: fg.title })) : [{ id: 'features', label: 'Features' }],
   })
-  g.push({ group: 'Wrap-up', items: [{ id: 'conclusion', label: 'Conclusion' }] })
+  g.push({ group: 'Wrap-up', items: [...(cs.outcome ? [{ id: 'outcome', label: 'Outcome' }] : []), { id: 'conclusion', label: 'Conclusion' }] })
   return g
 }
 
@@ -256,10 +257,9 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
                 <p>{cs.award.text}</p>
               </div>
               {cs.award.cert && (
-                <a className="award-cert" href={cs.award.cert} target="_blank" rel="noreferrer" title="View my certificate">
-                  <img src={cs.award.cert} alt="My certificate of recognition for 2nd place" loading="lazy" />
-                  <span>View certificate ↗</span>
-                </a>
+                <CertViewer pdf={cs.award.pdf} img={cs.award.cert} title="My certificate of recognition" className="award-cert">
+                  View certificate
+                </CertViewer>
               )}
             </div>
           )}
@@ -764,6 +764,28 @@ function UxCaseStudy({ cs, p, slug, onSwitch }) {
           ))}
         </div>
       </section>
+      )}
+
+      {cs.outcome && (
+        <section id="outcome" className="cs-section">
+          <SectionHead kicker="wrapping up · outcome" title={cs.outcome.title} />
+          <div className="outcome-grid">
+            <CertViewer pdf={cs.award.pdf} img={cs.award.cert} title="My certificate of recognition" className="outcome-cert">
+              <img src={cs.award.cert} alt="My certificate of recognition for 2nd place" loading="lazy" />
+              <span>View certificate</span>
+            </CertViewer>
+            <div className="outcome-copy">
+              <p className="outcome-lead">{cs.outcome.text}</p>
+              <p className="outcome-sub">{cs.outcome.sub}</p>
+              <div className="outcome-team">
+                <span>{cs.team.label}</span>
+                {cs.team.names.map((n) => (
+                  <b key={n} className={n === 'Andre' ? 'is-me' : ''}>{n === 'Andre' ? 'Andre (me)' : n}</b>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
       )}
 
       <section id="conclusion" className="cs-section">

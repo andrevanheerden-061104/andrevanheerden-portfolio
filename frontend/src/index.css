@@ -9365,27 +9365,116 @@ html[data-theme='herd-link'] .nav-contact {
   .reward-chip { left: 8px; bottom: 8px; font-size: 0.58rem; }
 }
 
-/* Absa: certificate thumbnail inside the award banner */
+/* Absa: certificate button + pop-up viewer + outcome */
 .award-cert {
   margin-left: auto;
   flex: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(242, 234, 121, 0.5);
+  background: rgba(242, 234, 121, 0.08);
+  color: #f2ea79;
+  font: 500 0.78rem var(--mono);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.award-cert:hover { background: rgba(242, 234, 121, 0.18); transform: translateY(-1px); }
+@media (max-width: 560px) {
+  .award-banner { flex-wrap: wrap; }
+  .award-cert { margin-left: 0; width: 100%; }
+}
+
+.cert-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(5, 5, 8, 0.82);
+  backdrop-filter: blur(6px);
+  animation: certFade 0.2s ease;
+}
+@keyframes certFade { from { opacity: 0; } to { opacity: 1; } }
+.cert-modal-box {
+  display: flex;
+  flex-direction: column;
+  width: min(760px, 100%);
+  height: min(92vh, 1040px);
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--line-2);
+  background: var(--surface);
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.9);
+}
+.cert-modal-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  font: 400 0.78rem var(--mono);
+  color: var(--muted);
+}
+.cert-modal-bar div { display: flex; align-items: center; gap: 12px; }
+.cert-modal-bar a { color: var(--accent-2); text-decoration: none; }
+.cert-modal-bar button {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+}
+.cert-modal-bar button:hover { background: #dc0037; }
+.cert-modal-pdf { flex: 1; width: 100%; border: 0; background: #fff; }
+.cert-modal-img { display: block; width: 100%; height: 100%; object-fit: contain; background: var(--bg-2); }
+
+.outcome-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 40px;
+  align-items: center;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: linear-gradient(120deg, rgba(242, 234, 121, 0.07), var(--surface) 55%);
+}
+.outcome-cert {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  text-decoration: none;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: #f2ea79;
+  font: 400 0.72rem var(--mono);
 }
-.award-cert img {
-  width: 92px;
-  border-radius: 8px;
-  box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(242, 234, 121, 0.35);
-  transform: rotate(3deg);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.outcome-cert img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 18px 40px -16px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(242, 234, 121, 0.3);
+  transition: transform 0.3s ease;
 }
-.award-cert span { font: 400 0.68rem var(--mono); color: #f2ea79; }
-.award-cert:hover img { transform: rotate(0) scale(1.06); box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.9), 0 0 0 1px #f2ea79; }
-@media (max-width: 560px) {
-  .award-banner { flex-wrap: wrap; }
-  .award-cert { margin-left: 0; flex-direction: row; gap: 10px; }
-  .award-cert img { width: 64px; }
+.outcome-cert:hover img { transform: translateY(-4px) rotate(-1deg); }
+.outcome-lead { margin: 0 0 12px; font-size: 1.25rem; line-height: 1.5; font-weight: 500; }
+.outcome-sub { margin: 0 0 18px; color: var(--muted); }
+.outcome-team { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.outcome-team span { margin-right: 4px; font: 400 0.72rem var(--mono); color: var(--soft); }
+.outcome-team b {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line-2);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+.outcome-team b.is-me { background: #dc0037; border-color: #dc0037; color: #fff; }
+@media (max-width: 760px) {
+  .outcome-grid { grid-template-columns: 1fr; gap: 24px; padding: 20px; }
+  .outcome-cert { max-width: 220px; margin: 0 auto; }
+  .outcome-lead { font-size: 1.05rem; }
 }
